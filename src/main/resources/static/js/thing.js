@@ -47,15 +47,7 @@ function createThing() {
     }
 
     loc = $('#locations option:selected').attr('data-value');
-    /*
-    var options = document.getElementById('locations').childNodes;
-    for (i = 0; i < options.length; i++) {
-        if (options[i].value === $('#location').val()) {
-            loc = options[i].getAttribute('data-value');
-            break;
-        }
-    }
-    */
+    
     if (loc == null) {
         addToLog("Invalid Location (Must exist on the server)");
         alert("Invalid Location (Must exist on the server)");

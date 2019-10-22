@@ -6,23 +6,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ServerApplication {
+	
+	private static final String DEFAULT_CONFIG_PATH = "/data";
 
     /**
      * @param args start up arguments
      */
     public static void main(String[] args) {
-    	/*
-        String value = System.getenv("serverurl");
-        if (value == null) {
-            System.out.println("Server url was not specified. Peacefully aborting.");
-            return;
-        }
-        FileManager.setServerURLOnStartup(value);
-        */
-        String confvalue = System.getenv("basepath");
+        String confvalue = System.getenv("configPath");
         if (confvalue == null) {
-            System.out.println("Config path was not specified. Peacefully aborting.");
-            return;
+        	confvalue = DEFAULT_CONFIG_PATH;
+            System.out.println("Config path was not specified. Using default:" + DEFAULT_CONFIG_PATH);
         }
         FileManager.setPathsOnStartup(confvalue);
         String username = FileManager.readFromFile("username.cfg");

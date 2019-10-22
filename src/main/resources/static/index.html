@@ -156,12 +156,27 @@
   	                   		<div class="tooltiptext">Specify the url of the FROSTServer.</div>
        	                </div>
            	            <br>
-             	        <input size="60" type="text" id="frostserverurl" value=""  onblur="openurldialog()">
+           	            
+           	            <div class="column" style="width: 60%">
+                 			<input size="60" type="text" id="frostserverurl" value="" style="margin-top: 2px">
+                 		</div>
+                 		<div class="column" style="width: 25%">
+                 			<div class="column" style="width: 70px">
+                 				<button id="okurl" onclick="urlconfirmed()" class="btn btn-default"
+                                        style="height: 30px;width: 60px;" >OK
+                 				</button> 
+                 			</div>
+                 			<div class="column" id="loader" style="width: 50%; display: none">
+                 				<div class="loader" style="margin: 5px"></div> 
+                 			</div>
+                 		</div>
+             	        
+             	         
                  	</div>
                  	
-                 	<button id="okurl" class="btn btn-default"
-                                        style="height: 30px;width: 60px;" >OK
-                 	</button>   
+                 	
+                 	
+                 	
                  	
                  	<div class="topspace" style="height: 20px"></div>
 					

@@ -368,49 +368,52 @@ function loadConfig(id) {
             configId: id
         },
         success: function (response) {
+        	
+        	
+        	
             mappingData = response.mapOfMagicNumbers;
             $('#frostserverurl').val(response.frostURL);
             
-            openurldialog();
-            
-            
-            $('#delimiter').val(response.delimiter);
-            $('#headerlines').val(response.numberOfHeaderlines);
-            currentDelimiter = response.delimiter;
-            currentHeaderLines = response.numberOfHeaderlines;
-            preview();
+            urlconfirmed(function() {
+            	$('#delimiter').val(response.delimiter);
+                $('#headerlines').val(response.numberOfHeaderlines);
+                currentDelimiter = response.delimiter;
+                currentHeaderLines = response.numberOfHeaderlines;
+                preview();
 
 
-            $('#selecttime').find('option').each(function () {
-                if ($(this).attr('data-value') === response.timezone) {
-                    $('#selecttime').val($(this).val()).trigger('change');
+                $('#selecttime').find('option').each(function () {
+                    if ($(this).attr('data-value') === response.timezone) {
+                        $('#selecttime').val($(this).val()).trigger('change');
+                    }
+                });
+
+                var table = $('#timeTable');
+                var lines = response.dateTime.length;
+                var rows = document.getElementById('timeTable').rows.length - 1;
+                while (lines > rows) {
+                    addRow(table, '2', '20');
+                    rows++;
+                }
+                while (lines < rows) {
+                    delLastRow('timeTable');
+                    rows--;
+                }
+
+                var i = 0;
+                table.find('tbody tr').each(function () {
+                    var $td = $(this).find('td');
+                    $td.eq(0).find("input").val(response.dateTime[i].column);
+                    $td.eq(1).find("input").val(response.dateTime[i++].string);
+                });
+
+
+                lines = response.streamData.length;
+                if (lines > 0) {
+                    thingConfig(response.streamData, response.frostURL);
                 }
             });
-
-            var table = $('#timeTable');
-            var lines = response.dateTime.length;
-            var rows = document.getElementById('timeTable').rows.length - 1;
-            while (lines > rows) {
-                addRow(table, '2', '20');
-                rows++;
-            }
-            while (lines < rows) {
-                delLastRow('timeTable');
-                rows--;
-            }
-
-            var i = 0;
-            table.find('tbody tr').each(function () {
-                var $td = $(this).find('td');
-                $td.eq(0).find("input").val(response.dateTime[i].column);
-                $td.eq(1).find("input").val(response.dateTime[i++].string);
-            });
-
-
-            lines = response.streamData.length;
-            if (lines > 0) {
-                thingConfig(response.streamData, response.frostURL);
-            }
+           
         },
         error: function (e) {
             addToLog(e.responseText);
@@ -494,7 +497,7 @@ function resetConfig() {
 /**
  * gets all things from the frost-server
  */
-function getThings() {
+function getThings(fnSuccess) {
 	
     var listTh = $('#things');
     var list2 = $('#datastreams');
@@ -513,8 +516,7 @@ function getThings() {
     $.ajax({
         type: "GET",
         url: "thing/all",
-        data: mydata, 
-        async: false,
+        data: mydata,
         success: function (response) {
             var json = JSON.stringify(response, null, 4);
             var jsonparsed = JSON.parse(json);
@@ -528,6 +530,10 @@ function getThings() {
             }
             list.trigger('change');
             addToLog("Things loaded.");
+            
+            if (!(fnSuccess == null)) {
+        		fnSuccess(); 
+        	}
         },
         error: function (e) {
             addToLog(e.responseText);
@@ -1043,25 +1049,72 @@ function check(string, done) {
 function main() {
     loadConfigs();
     document.getElementById("log").value = "";
-    //getThings();
-    //showFrostURL();
+
 }
 
 /**
  * loads the data from the frost-server
+ * @param fnSucess Called after successfully confirmed URL
  * @returns
  */
-function urlconfirmed() {
+function urlconfirmed(fnSuccess) {
+	//show loader
+	document.getElementById("loader").style.display = "block";
 	
-    var bool = showFrostURL();
-    if (bool) {
-    	addToLog("Try to load things ...");
-    	getThings();
-    } 
-    
+	var url = document.querySelector("#frostserverurl").value;
+	var mydata = {
+		frostUrl: url
+	};
+	
+	var res;
+	var message;
+	
+    $.ajax({
+        type: 'GET',
+        url: "server-check",
+        data: mydata,
+        success: function (response) {
+        	message = response;
+        	if (response === "Server reachable") {  
+        		document.getElementById("serverurlbox").innerText = url;
+                document.getElementById("serverurlbox").href = url;
+                
+                addToLog("FROST-Server: " + url);
+                
+                addToLog("Try to load things ...");
+            	getThings(function() {
+            		//hide loader
+                	document.getElementById("loader").style.display = "none";
+                	if (!(fnSuccess == null)) {
+                		fnSuccess(); 
+                	}
+            	});
+            	
+            	           	
+        	} else {
+        		r = confirm("Can't connect to: " + url  + "\nDetails: " + message);
+            	document.querySelector("#frostserverurl").value = "";
+            	document.getElementById("serverurlbox").innerText = "";
+                document.getElementById("serverurlbox").href = "";
+              //hide loader
+            	document.getElementById("loader").style.display = "none";
+        	}
+        	
+            
+        },
+        error: function (e) {
+            addToLog(e.responseText);
+            document.querySelector("#frostserverurl").value = "";
+            document.getElementById("serverurlbox").innerText = "";
+            document.getElementById("serverurlbox").href = "";
+            //hide loader
+        	document.getElementById("loader").style.display = "none";
+        }
+
+    });
 }
 
-
+/*
 function openurldialog() {
 	var url = document.querySelector("#frostserverurl").value;
 	var mydata = {
@@ -1079,7 +1132,7 @@ function openurldialog() {
         success: function (response) {
         	message = response;
         	if (response === "Server reachable") {  
-                res = true;
+        		res = true;
         	} else {
         		res = false;
         	}
@@ -1114,7 +1167,7 @@ function openurldialog() {
 	
 }
 
-
+*/
 
 
 
@@ -1257,46 +1310,6 @@ $('#things').on('select2:select', function (e) {
     }
 });
 
-
-/**
- * checks if  url is valid and shows it
- * returns true if server is reachable otherwise false
- */
-function showFrostURL() {
-	var url = document.querySelector("#frostserverurl").value;
-	var mydata = {
-		frostUrl: url
-	};
-	
-	var res;
-    $.ajax({
-    	async: false,
-        type: 'GET',
-        url: "server-check",
-        data: mydata,
-        success: function (response) {
-        	if (response === "Server reachable") {
-        		document.getElementById("serverurlbox").innerText = url;
-                document.getElementById("serverurlbox").href = url;
-                
-                addToLog("FROST-Server: " + url);
-                
-                res = true;
-        	} else {
-        		addToLog(response);
-        		res = false;
-        	}
-            
-        },
-        error: function (e) {
-            addToLog(e.responseText);
-            res = false;
-        }
-
-    });
-    
-    return res;
-}
 
 /**
  * function performed after choosing a sourcefile. Uploads file (and triggers preview afterwards), and opens next part of the accordion (choice of configuration)
