@@ -2,12 +2,21 @@ package com.chillimport.server.controller;
 
 import com.chillimport.server.FileManager;
 import com.chillimport.server.FrostSetup;
+import com.chillimport.server.TestSetup;
+import com.chillimport.server.errors.LogManager;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +30,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Paths;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -39,10 +49,23 @@ public class HTMLControllerTest {
     
     private static String url;
     
+    private static String testpath;
+    private static String sep = File.separator;
+    
+
+   
+    
     @BeforeClass 
-    public static void beforeClass() {
+    public static void beforeClass() throws Exception {
     	//FileManager.setServerURLOnStartup(FrostSetup.getFrostURL());
     	url = FrostSetup.getFrostURL();
+    	TestSetup.setup();
+    }
+    
+    @Before
+    public void setUp() {
+    	//testpath = "src" + sep + "test" + sep + "resources";
+    	//FileManager.setPathsOnStartup(testpath);
     }
     
     @Ignore //IOexception no content?

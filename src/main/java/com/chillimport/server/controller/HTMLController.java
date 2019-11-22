@@ -13,6 +13,7 @@ import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
@@ -36,7 +37,7 @@ public class HTMLController {
     private SensorThingsServiceFactory sensorThingsServiceFactory;
 
     @RequestMapping(value = "/websitepreview", method = RequestMethod.POST)
-    public ResponseEntity<?> websitePreview(@RequestParam String s) throws MalformedURLException {
+    public ResponseEntity<?> websitePreview(@RequestParam String s) throws MalformedURLException, InvalidFormatException {
         FileManager fm = new FileManager();
         File file = fm.storeFromURL(s);
         //möglicherweise instabil

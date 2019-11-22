@@ -1,10 +1,13 @@
 package com.chillimport.server.config;
 
+import com.chillimport.server.FileManager;
+import com.chillimport.server.TestSetup;
 import com.chillimport.server.converter.ConverterException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,10 +28,16 @@ public class ConfigurationTest {
     String obj1string;
     String obj2string;
     String obj3string;
-
+    
+    private String testpath;
+    private String sep = File.separator;
 
     @Before
-    public void create() throws JsonProcessingException, ConverterException, MalformedURLException {
+    public void create() throws Exception {
+    	testpath = "src" + sep + "test" + sep + "resources";
+    	//FileManager.setPathsOnStartup(testpath);
+    	TestSetup.setup();
+    	
         String zidc1 = "EAT";
         StringColumn[] dateTime1 = {new StringColumn("TT-HH", 10), new StringColumn("MM-SS", 12)};
         int[] arr1 = {2, 8, 5};

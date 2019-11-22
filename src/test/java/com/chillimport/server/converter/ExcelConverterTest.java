@@ -2,6 +2,8 @@ package com.chillimport.server.converter;
 
 import com.chillimport.server.Table;
 import com.chillimport.server.config.*;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -45,7 +47,7 @@ public class ExcelConverterTest {
 
         try {
             t = ExcelConverter.convert(file, obj1);
-        } catch (IOException e) {
+        } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
         }
 

@@ -57,8 +57,9 @@ public class UploadHandler {
      * @return A 2-dim List of Strings containing all values
      *
      * @throws IOException if the file is not of type excel or CSV
+     * @throws InvalidFormatException 
      */
-    public static ArrayList<ArrayList<String>> preview(File file, Configuration sampleConfig) throws IOException {
+    public static ArrayList<ArrayList<String>> preview(File file, Configuration sampleConfig) throws IOException, InvalidFormatException {
         ArrayList<ArrayList<String>> firstThreeRowsOfTable;
 
         switch (sampleConfig.getDataType()) {
@@ -81,7 +82,7 @@ public class UploadHandler {
             case EXCEL:
                 try {
                     table = ExcelConverter.convert(file, cfg);
-                } catch (IOException e) {
+                } catch (IOException | InvalidFormatException e) {
                     throw new ConverterException();
                 }
                 break;
@@ -203,6 +204,7 @@ public class UploadHandler {
      * @param service the SensorThingsService
      * @param cfg     the configuration
      * @param table   the table
+     * @throws InvalidFormatException 
      */
     private void processTable(SensorThingsService service, Configuration cfg, Table table, int displacement) throws ServiceFailureException, InvalidFormatException {
 

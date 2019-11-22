@@ -1,7 +1,13 @@
 package com.chillimport.server.controller;
 
+import com.chillimport.server.FileManager;
+import com.chillimport.server.FrostSetup;
+import com.chillimport.server.TestSetup;
 import com.chillimport.server.config.Configuration;
 import com.chillimport.server.config.DataType;
+
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.File;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,6 +31,20 @@ public class ConfigControllerTest {
 
     @Autowired
     private MockMvc mvc;
+    
+    private static String testpath;
+    private static String sep = File.separator;
+    
+    @BeforeClass 
+    public static void beforeClass() throws Exception {
+    	
+    	
+    	testpath = "src" + sep + "test" + sep + "resources";
+    	//FileManager.setPathsOnStartup(testpath);
+    	
+    	TestSetup.setup();
+    }
+    
 
     @Test
     public void createAndSaveConfiguration() throws Exception {
@@ -36,6 +58,7 @@ public class ConfigControllerTest {
     }
 
     @Test
+    
     public void getConfiguration() throws Exception {
 
         this.mvc.perform(get("/config/single").param("configId", "25857854")).andDo(print()).andExpect(status().isOk());

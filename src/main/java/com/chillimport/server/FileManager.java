@@ -28,7 +28,6 @@ public class FileManager {
     private static Path BASE_PATH = null;
     private static Path LOG_PATH = null;
     private static Path FILES_PATH = null;
-    private static String SERVER_URL = "https://pse-frost.cluster.pilleslife.de/v1.0";
     private static String USER_NAME_PASSWORD = null;
     private static String sep = File.separator;
 
@@ -224,10 +223,11 @@ public class FileManager {
      * @return the path as a Path
      */
     public static Path getConfigPath() {
+    	/*
         if (CONFIG_PATH == null) {
             FileManager.setPathsOnStartup("src" + sep + "main" + sep + "resources" + sep +"static" + sep + "files"); //TODO /configurations
         }
-
+    	 */
         return CONFIG_PATH;
     }
 
@@ -238,10 +238,11 @@ public class FileManager {
      * @return the path as a Path
      */
     public static Path getLogPath() {
+    	/*
         if (LOG_PATH == null) {
             FileManager.setPathsOnStartup("src" + sep + "main" + sep + "resources" + sep +"static" + sep + "files"); //TODO /Error-Logs
         }
-
+		*/
         return LOG_PATH;
     }
 

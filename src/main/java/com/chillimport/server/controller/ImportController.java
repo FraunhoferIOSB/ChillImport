@@ -9,6 +9,8 @@ import com.chillimport.server.errors.ErrorHandler;
 import com.chillimport.server.errors.LogManager;
 import com.chillimport.server.utility.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -120,7 +122,10 @@ public class ImportController {
         } catch (NoSuchElementException e) {
             ErrorHandler.getInstance().addRows(-1,e);
             return new ResponseEntity<>("Too many header lines. File is not that large.", HttpStatus.NOT_FOUND);
-        }
+        } catch (InvalidFormatException e) {
+        	ErrorHandler.getInstance().addRows(-1,e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
         return new ResponseEntity<>(firstThreeRowsOfTable, HttpStatus.OK);
     }

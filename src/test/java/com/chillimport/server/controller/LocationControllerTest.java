@@ -2,6 +2,7 @@ package com.chillimport.server.controller;
 
 import com.chillimport.server.FileManager;
 import com.chillimport.server.FrostSetup;
+import com.chillimport.server.TestSetup;
 import com.chillimport.server.builders.LocationBuilder;
 import com.chillimport.server.utility.SensorThingsServiceFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,6 +28,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -54,6 +56,9 @@ public class LocationControllerTest {
     private String locUrlString;
     
     private static String url;
+    
+    private static String testpath;
+    private static String sep = File.separator;
 
     @Mock
     private SensorThingsServiceFactory sensorThingsServiceFactory;
@@ -62,8 +67,12 @@ public class LocationControllerTest {
     private LocationController locationController;
     
     @BeforeClass 
-    public static void beforeClass() {
+    public static void beforeClass() throws Exception {
     	url = FrostSetup.getFrostURL();
+    	
+    	testpath = "src" + sep + "test" + sep + "resources";
+    	//FileManager.setPathsOnStartup(testpath);
+    	TestSetup.setup();
     }
     
     @Before

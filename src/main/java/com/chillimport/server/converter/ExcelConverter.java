@@ -31,15 +31,10 @@ public class ExcelConverter implements Converter {
      *
      * @throws IOException when the File has not been found or is corrupt
      */
-    public static Table convert(File file, Configuration cfg) throws IOException {
+    public static Table convert(File file, Configuration cfg) throws IOException, InvalidFormatException {
 
         Sheet sheet = null;
-        try {
-            sheet = WorkbookFactory.create(file).sheetIterator().next(); //get only the first sheet of every excel file
-        } catch (InvalidFormatException e1) {
-            LogManager.getInstance().writeToLog("The file is not an Excel file", false);
-            return null;
-        }
+        sheet = WorkbookFactory.create(file).sheetIterator().next(); //get only the first sheet of every excel file
 
 
         Iterator<Row> rowIterator = sheet.iterator();
@@ -219,8 +214,9 @@ public class ExcelConverter implements Converter {
      * @return the first x rows as a ArrayList of ArrayLists
      *
      * @throws IOException when the file is not found
+     * @throws InvalidFormatException 
      */
-    public static ArrayList<ArrayList<String>> filePreview(File file, Configuration cfg, int rownum) throws IOException {
+    public static ArrayList<ArrayList<String>> filePreview(File file, Configuration cfg, int rownum) throws IOException, InvalidFormatException {
         Table table = convert(file, cfg);
         ArrayList<ArrayList<String>> firstThreeRowsOfTable = new ArrayList<>();
         Iterator<ArrayList<com.chillimport.server.Cell>> rowIterator = table.rowIterator();

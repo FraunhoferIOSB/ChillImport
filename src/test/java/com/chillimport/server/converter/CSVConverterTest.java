@@ -3,19 +3,27 @@ package com.chillimport.server.converter;
 import com.chillimport.server.FileManager;
 import com.chillimport.server.Table;
 import com.chillimport.server.config.*;
+import com.chillimport.server.errors.LogManager;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.File;
 import java.io.IOException;
 
 import java.net.URL;
-
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({FileManager.class, LogManager.class})
 public class CSVConverterTest {
 
 
@@ -24,6 +32,9 @@ public class CSVConverterTest {
 
     Configuration obj1;
     Table t;
+    private static String testpath;
+    private String sep = File.separator;
+    
 
     @Before
     public void setUp() throws Exception {
@@ -40,14 +51,23 @@ public class CSVConverterTest {
         URL dummyURL = new URL("https://www.google.de/");
 
         obj1 = new Configuration(10, "aConfiguration", ";", 2, zidc1, dateTime1, streamData1, map1, DataType.CSV, dummyURL);
+        
+        
+      
+
+        testpath = "src" + sep + "test" + sep + "resources";
+
+        PowerMockito.mockStatic(FileManager.class);
+        PowerMockito.when(FileManager.getConfigPath()).thenReturn(Paths.get(testpath + sep + "configurations"));
+        PowerMockito.when(FileManager.getLogPath()).thenReturn(Paths.get(testpath + sep + "Log-Error"));
     }
 
     @Test
     public void convert() {
-        File file = new File("src/test/java/com/chillimport/server/converter/files/testcsv.csv");
+        File csvfile = new File(testpath + sep + "testcsv.csv");
 
         try {
-            t = CSVConverter.convert(file, obj1);
+            t = CSVConverter.convert(csvfile, obj1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +79,7 @@ public class CSVConverterTest {
     public void convertBack() {
         convert();
         try {
-            CSVConverter.convertBack(t, obj1, "src/test/java/com/chillimport/server/converter/files/exportcsv.csv");
+            CSVConverter.convertBack(t, obj1, "testpath" + sep + "exportcsv.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,7 +89,7 @@ public class CSVConverterTest {
     @Test
     public void filePreview() throws IOException {
         FileManager fm = new FileManager();
-        ArrayList<ArrayList<String>> ll = CSVConverter.filePreview(new File(fm.getLogPath() + "/returnRows/2018-08-27T15-18-42--skippedRows.csv"),
+        ArrayList<ArrayList<String>> ll = CSVConverter.filePreview(new File(fm.getLogPath() + sep +"returnRows" + sep + "2018-08-27T15-18-42--skippedRows.csv"),
                                                                      ConfigurationManager.loadConfig(-1365040327),
                                                                      4);
         String[] content = new String[8];

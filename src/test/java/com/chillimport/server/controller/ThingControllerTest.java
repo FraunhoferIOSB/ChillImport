@@ -2,6 +2,7 @@ package com.chillimport.server.controller;
 
 import com.chillimport.server.FileManager;
 import com.chillimport.server.FrostSetup;
+import com.chillimport.server.TestSetup;
 import com.chillimport.server.builders.ThingBuilder;
 import com.chillimport.server.utility.SensorThingsServiceFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,6 +31,7 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.wait.strategy.Wait;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -60,6 +62,9 @@ public class ThingControllerTest {
     private String thingString;
     private String entityString;
     private static String url;
+    
+    private static String testpath;
+    private static String sep = File.separator;
 
     @Mock
     private SensorThingsServiceFactory sensorThingsServiceFactory;
@@ -68,8 +73,12 @@ public class ThingControllerTest {
     private ThingController thingController;
    
     @BeforeClass 
-    public static void beforeClass() {
+    public static void beforeClass() throws Exception {
     	url = FrostSetup.getFrostURL();
+    	
+    	testpath = "src" + sep + "test" + sep + "resources";
+    	//FileManager.setPathsOnStartup(testpath);
+    	TestSetup.setup();
     }
     
     @Before

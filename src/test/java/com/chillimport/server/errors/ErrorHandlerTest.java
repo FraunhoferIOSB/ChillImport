@@ -4,6 +4,8 @@ import com.chillimport.server.*;
 import com.chillimport.server.config.ConfigurationManager;
 import com.chillimport.server.converter.ExcelConverter;
 import com.chillimport.server.utility.UnsupportedDataTypeException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.*;
 
 import java.io.*;
@@ -15,9 +17,16 @@ import static org.junit.Assert.*;
 public class ErrorHandlerTest {
 
     ErrorHandler eh;
+    
+    private static String testpath;
+    private static String sep = File.separator;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
+    	testpath = "src" + sep + "test" + sep + "resources";
+    	//FileManager.setPathsOnStartup(testpath);
+    	TestSetup.setup();
+    	
         eh = ErrorHandler.getInstance();
     }
 
@@ -26,7 +35,7 @@ public class ErrorHandlerTest {
         eh.clear();
     }
 
-
+    
     @Test
     public void write() {
         assertNotNull(eh);
@@ -58,7 +67,8 @@ public class ErrorHandlerTest {
         assertTrue(string.equals(
                 "Row : 24 Occured Error : com.chillimport.server.utility.UnsupportedDataTypeException"));
     }
-
+    
+    
     @Test
     public void returnRowsCSV() throws IOException {
         Table t = new Table();
@@ -102,7 +112,8 @@ public class ErrorHandlerTest {
         string = br.readLine();
         assertTrue(string.equals("Rosen sind rott;Veilchen sind Blauu;Ich hasse Gedichtee;Klopapierr;null"));
     }
-
+    
+    
     @Test
     public void returnRowsExcel () throws IOException {
         Table t = new Table();
@@ -129,12 +140,18 @@ public class ErrorHandlerTest {
             e.printStackTrace();
         }
         File file = new File(FileManager.getLogPath() + "/returnRows/" + LogManager.getInstance().getDate() + "--skippedRows.xls");
-        Table t2 = ExcelConverter.convert(file,x.loadConfig(48573894));
+        Table t2;
+		try {
+			t2 = ExcelConverter.convert(file,x.loadConfig(48573894));
+		} catch (InvalidFormatException e) {
+			throw new IOException();
+		}
         assertEquals(t2.getRow(0).toString(),"[Rosen sind rot, Veilchen sind Blau, Ich hasse Gedichte, Klopapier, null, null]");
         assertEquals(t2.getRow(1).toString(),"[Rosen sind rott, Veilchen sind Blauu, Ich hasse Gedichtee, Klopapierr, null, null]");
 
 
     }
+    
     @Test
     public void returnFiles() {
         String x = eh.returnFiles();
