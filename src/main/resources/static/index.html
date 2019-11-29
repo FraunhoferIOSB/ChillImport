@@ -4,12 +4,16 @@
     <title>CHILLImport</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-    <script type="text/javascript" src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </head>
 <body onload="main()" style="overflow-x: hidden">
@@ -37,7 +41,6 @@
     </div>
 </div>
 
-
 <!--Start-->
 <div align="center">
     <div class="row" style="height: 30px"></div>
@@ -53,7 +56,7 @@
                 <div class="panel" align="left" style="height: 150px; display: block">
                     <div class="panelpadding">
                         <div>
-                            <h4>Choose the source:</h4>
+                        <div id="chooseSource" class="topspace"></div>
                             <form autocomplete="off">
                                 <input type="radio" name="source" value="uploadFile()" onclick="sourcefile()"
                                        checked="checked">File
@@ -63,7 +66,7 @@
                         <div id="chooseSource" class="topspace">
                             <div class="column" style="width: 80%">
                                 <label id="sourcetext"/>Choose sourcefile:</label><br>
-                                <input id="sourceinput" type='text' style="display:none"
+                                <input id="sourceinput" type='text' style="display:none" 
                                        onkeyup="checkinputurl()">
                                 <form id="uploader" method='post' enctype="multipart/form-data">
                                     <input type="file" name="file" id="file" onchange="checkinputfile()"/>
@@ -71,8 +74,8 @@
                                 </form>
                             </div>
 
-                            <div class="column" style="width: 20%; margin-top: 40px;">
-                                <button id="oksource" disabled="true" class="btn btn-default"
+                            <div class="column" style="width: 20%; margin-top: 60px;">
+                                <button id="oksource" disabled="true" class="btn btn-outline-secondary"
                                         style="height: 30px;width: 100%;" onclick="fileConfirmed()">OK
                                 </button>
                             </div>
@@ -148,48 +151,52 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-left: 8px; margin-top: 8px">
+                <div class="row" style="margin-left: 8px; margin-top: 8px; width: 100%">
                 
-					<div>
+					
      	  	       		<label>1: Choose Frost-Server:</label>
-         	           	<div class="righttooltip"><span class="glyphicon glyphicon-question-sign"></span>
-  	                   		<div class="tooltiptext">Specify the url of the FROSTServer.</div>
-       	                </div>
+         	           
+       	                <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify 
+       	                the url of the FROSTServer."></div>
            	            <br>
-           	            
-           	            <div class="column" style="width: 60%">
-                 			<input size="60" type="text" id="frostserverurl" value="" style="margin-top: 2px" 
-                 			placeholder="https://frost.server.de/v1.0/">
+           	            <div style="width:100%">
+           	            <div class="column" style="width: 70%">
+                 			<input type="text" id="frostserverurl" value="" style="margin-top: 2px; width: 95%" 
+                 			placeholder="https://frost.server.de/v1.0/"></input>
                  		</div>
-                 		<div class="column" style="width: 25%">
-                 			<div class="column" style="width: 70px">
-                 				<button id="okurl" onclick="urlconfirmed()" class="btn btn-default"
-                                        style="height: 30px;width: 60px;" >OK
+                 		
+                 		<div class="column" style="width: 30%">
+                 			<div class="column" style="width: 45%">
+                 				<button id="okurl" onclick="urlconfirmed()" class="btn btn-outline-secondary"
+                                        style="height: 35px;width: 100%;" >OK
                  				</button> 
                  			</div>
-                 			<div class="column" id="loader" style="width: 50%; display: none">
+                 			<div class="column" id="loader" style="width: 45%; display: none">
                  				<div class="loader" style="margin: 5px"></div> 
                  			</div>
                  		</div>
+                 		</div>
              	        
              	         
-                 	</div>
+                 	
+                 </div>
                  	
                  	
                  	
                  	
                  	
-                 	<div class="topspace" style="height: 20px"></div>
+                 <div class="topspace" style="height: 20px"></div>
 					
-					             
+					<div class="row" style="margin-left: 8px; margin-top: 8px">            
                 
                     <div class="column" style="width: 50%">
                         <!-- Delimiter-->
                         <div>
                             <label>2: Delimiter:</label>
-                            <div class="righttooltip"><span class="glyphicon glyphicon-question-sign"></span>
-                                <div class="tooltiptext">Specify the character(s) seperating the columns in your file. Can be any alphanumeric character or valid regular expression. If field is empty or invalid, '\n' is used as delimiter.</div>
-                            </div>
+                            
+                            <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify 
+                            the character(s) seperating the columns in your file. Can be any alphanumeric character or valid 
+                            regular expression. If field is empty or invalid, '\n' is used as delimiter."></div>
                             <br>
                             <input size="4" type="text" id="delimiter" name="delimiter" value=";" onkeyup="changedDelimiter(this.value)">
                         </div>
@@ -199,9 +206,10 @@
                         <!--headerlines-->
                         <div class="topspace">
                             <label>3: Number of header lines:</label>
-                            <div class="righttooltip"><span class="glyphicon glyphicon-question-sign"></span>
-                                <div class="tooltiptext">Number of lines at the beginning of your file to be ignored. Can be any non-negative number up to 9999. If field is empty or contains invalid string, software uses 0.</div>
-                            </div>
+                         
+                            <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Number 
+                            of lines at the beginning of your file to be ignored. Can be any non-negative number up to 9999. 
+                            If field is empty or contains invalid string, software uses 0."></div>
                             <br>
                             <input size="4" type="text" id="headerlines" name="headerlines" value="0" onkeyup="changedHeaderLines(this.value)">
                         </div>
@@ -210,14 +218,12 @@
 
                         <!-- current mapping-->
                         <div class="topspace">
-                            <label>4: Current mapping:</label>
-                            <div class="righttooltip"><span class="glyphicon glyphicon-question-sign"></span>
-                                <div class="tooltiptext">Here you can save if a value should be replaced with an other
-                                    value
-                                </div>
-                            </div>
+                            <label>4: Current mapping:</label> 
+                            <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Here you can
+                             save if a value should be replaced with an other
+                                    value."></div>
                             <br>
-                            <button class="btn btn-default" value="mapping.html"
+                            <button class="btn btn-outline-secondary" value="mapping.html"
                                     onclick="showMappingModal()"> Show Mapping
                             </button>
                         </div>
@@ -226,7 +232,8 @@
 
                         <!-- DateTime -->
                         <div class="row" style="padding: 10px">
-                            <label>5: DateTime:</label><br>
+                            <label>5: DateTime:</label>
+                            <br>
                             <label>Timezone:</label>
 
                             <br>
@@ -340,13 +347,9 @@
                                                 <div>
                                                     <label>
                                                         Column
-                                                    </label>
-                                                    <div class="righttooltip questionmark"><span
-                                                            class="glyphicon glyphicon-question-sign"></span>
-                                                        <div class="tooltiptext">Specify the column/columns containing
-                                                            the
-                                                            date and time of the observations
-                                                        </div>
+                                                    </label> 
+                                                    <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify the column/columns containing
+                                                            the date and time of the observations.">
                                                     </div>
                                                 </div>
 
@@ -356,14 +359,12 @@
                                                     <label>
                                                         Format
                                                     </label>
-                                                    <div class="righttooltip questionmark"><span
-                                                            class="glyphicon glyphicon-question-sign"></span>
-                                                        <div class="tooltiptext">Specify the format of the date and time
+                                          
+                                                    <div class="far fa-question-circle" data-toggle="tooltip" data-placement="right" title="Specify the format of the date and time
                                                             in
                                                             this column as regular expression. (y - Year, M - Month, d -
                                                             Day, H - Hour, m - Minute, s - Second,
-                                                            [, VV - Timezone mandatory]) <br> For example: <br> dd.MM.yyyy HH:mm:ss
-                                                        </div>
+                                                            [, VV - Timezone mandatory]) For example: dd.MM.yyyy HH:mm:ss">
                                                     </div>
                                                 </div>
                                             </th>
@@ -401,8 +402,8 @@
                     <label>6: Thing:</label><br>
                     <select class="select2" id="things" style="width: 200px">
                     </select>
-                    <button class="btn btn-default" value="thing.html" onclick="showThingModal()">
-                        <span class="glyphicon glyphicon-file"></span>
+                    <button class="btn btn-outline-secondary" value="thing.html" onclick="showThingModal()">
+                        <span class="far fa-file"></span>
                         Create Thing
                     </button>
                 </div>
@@ -423,14 +424,14 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" style="padding: 10px">
                         <div align="right" style="padding-right: 20px">
-                            <button class="btn btn-default" value="datastream.html"
+                            <button class="btn btn-outline-secondary" value="datastream.html"
                                     onclick="if($('#things').val()) {showStreamModal()} else {addToLog('Choose a Thing first.')}">
-                                <span class="glyphicon glyphicon-file"></span>
+                                <span class="far fa-file"></span>
                                 Create DS
                             </button>
-                            <button class="btn btn-default" onclick="addDatastream()">Add DS</button>
+                            <button class="btn btn-outline-secondary" onclick="addDatastream()">Add DS</button>
                         </div>
 
                     </div>
@@ -457,13 +458,13 @@
                 <div class="panelpadding" style="padding-top: 18px">
                     <div class="row">
                         <div class="column" style="width: 70%">
-                            <button id="savebtn" class="btn btn-default" onclick="saveConfig()" style="display: none">
+                            <button id="savebtn" class="btn btn-secondary" onclick="saveConfig()" style="display: none">
                                 Save Config
                             </button>
-                            <button id="nextbtn" class="btn btn-default" onclick="shownext()">Next</button>
+                            <button id="nextbtn" class="btn btn-secondary" onclick="shownext()">Next</button>
                         </div>
                         <div class="column" style="width: 30%" align="left">
-                            <button id="resetbtn" class="btn btn-default" onclick="resetConfig()"
+                            <button id="resetbtn" class="btn btn-secondary" onclick="resetConfig()"
                                     style="margin-left: 30px">
                                 Reset Config
                             </button>
@@ -493,10 +494,10 @@
             <div class="row" style="height: 10px"></div>
             <div class="row" style="padding-left: 20px; width: 100%">
                 <div class="column" align="left" style="width: 50%;">
-                    <button id="importbutton" class="btn btn-default" onclick="importData()" style="margin-right: 20px"
+                    <button id="importbutton" class="btn btn-outline-secondary" onclick="importData()" style="margin-right: 20px"
                             disabled="true">Import Data
                     </button>
-                    <button class="btn btn-default"
+                    <button class="btn btn-outline-secondary"
                             onclick="showReturnModal()"
                             style="margin-right: 20px">Get Skipped Rows
                     </button>
@@ -516,7 +517,7 @@
 <div class="logbuttonbox">
     <button id="logbutton" class="navbutton" onclick="togglelog()">
         LOG
-        <span class="glyphicon glyphicon-triangle-right"></span>
+        <i class="fa fa-arrow-right"></i>
     </button>
 </div>
 
@@ -526,13 +527,13 @@
     </textarea>
     </div>
     <div class="column" style="width: 20%">
-		<button id="scrollDown" class="btn btn-default" onclick="toggleScroll()" style="margin: 20px">Scroll to bottom</button>
+		<button id="scrollDown" class="btn btn-secondary" onclick="toggleScroll()" style="margin: 20px">Scroll to bottom</button>
     </div>
 </div>
 
 
 <div class="modal modal-wide fade" id="dialog" role="dialog">
-    <div class="modal-dialog" style="width: 1400px">
+    <div class="modal-dialog modal-xl" style="width: 1400px">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #00AAFF">
                 <b class="headertext" style="color: white; font-size: 20px"></b>
@@ -540,8 +541,8 @@
             <div class="modal-body">
             </div>
             <div class="modal-footer" id="indexfooter">
-                <button type="button" class="btn btn-default" onclick="createThing()"></button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="createThing()"></button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

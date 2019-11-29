@@ -86,11 +86,11 @@ function togglelog() {
     if (document.getElementById("logbox").style.visibility === "hidden") {
         //show log
         document.getElementById("logbox").style.visibility = "visible";
-        document.getElementById("logbutton").innerHTML = "LOG <span class=\"glyphicon glyphicon-triangle-left\"></span>";
+        document.getElementById("logbutton").innerHTML = "LOG <i class=\"fa fa-arrow-left\"></i>";
     } else {
         //hide log
         document.getElementById("logbox").style.visibility = "hidden";
-        document.getElementById("logbutton").innerHTML = "LOG <span class=\"glyphicon glyphicon-triangle-right\"></span>";
+        document.getElementById("logbutton").innerHTML = "LOG <i class=\"fa fa-arrow-right\"></i>";
     }
 }
 
@@ -101,10 +101,10 @@ function togglelog() {
 function showmessagetag() {
     if (document.getElementById("logbox").style.visibility === "hidden") {
         document.getElementById("logbutton").innerHTML = "<div id=\"newmessagetoken\" class=\"loginfo\" style=\"left:135px; bottom: 60px;\">\n" +
-            "            <span class=\"glyphicon glyphicon-info-sign\" style=\"font-size: 20px\"></span>\n" +
+            "            <i class=\"fas fa-info-circle\" style=\"font-size: 20px\"></i>\n" +
             "        </div>\n" +
             "        LOG\n" +
-            "        <span class=\"glyphicon glyphicon-triangle-right\"></span>";
+            "        <i class=\"fa fa-arrow-right\"></i>";
     }
 }
 

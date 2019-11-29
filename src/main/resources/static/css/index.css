@@ -6,6 +6,10 @@ button {
     width: 140px;
 }
 
+.modal-xl {
+    max-width: 150% !important;
+}
+
 .bigbutton {
     background-color: #00AAFF;
     border: none;

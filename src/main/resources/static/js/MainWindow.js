@@ -617,10 +617,10 @@ function addDatastream() {
                 .attr('class', 'selectStreams')
             )
             .append($('<button>')
-                .attr('class', 'btn btn-default')
+                .attr('class', 'btn btn-outline-secondary')
                 .attr('onclick', 'removeDatastream(this.parentNode.parentNode)')
                 .attr('style', 'width:auto; margin-left:10px')
-                .html('<span class="glyphicon glyphicon-minus" ></span>')
+                .html('<span class="fas fa-minus" ></span>')
             )
         )
         .append($('<div>')
@@ -1319,3 +1319,7 @@ function fileConfirmed() {
     optimzeforsource();
     openaccordion('chooseConfigAcc');
 }
+
+$(document).ready(function(){
+	  $('[data-toggle="tooltip"]').tooltip();   
+	});
