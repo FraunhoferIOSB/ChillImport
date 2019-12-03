@@ -25,6 +25,7 @@ jobs:
           - mvn install
           - mvn dockerfile:build
           after_success:
+          - bash <(curl -s https://codecov.io/bash)
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"; fi'
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:tag@tag-version; fi'
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:tag@tag-hash; fi'
@@ -32,7 +33,7 @@ jobs:
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:push@push-version; fi'
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:push@push-hash; fi'
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:push@push-latest; fi'
-          
+
 cache:
   directories:
   - '$HOME/.m2/repository'

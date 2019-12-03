@@ -1,4 +1,4 @@
-# ChillImport [![Build Status](https://travis-ci.org/FraunhoferIOSB/ChillImport.svg?branch=master)](https://travis-ci.org/FraunhoferIOSB/ChillImport)
+# ChillImport [![Build Status](https://travis-ci.org/FraunhoferIOSB/ChillImport.svg?branch=master)](https://travis-ci.org/FraunhoferIOSB/ChillImport) [![codecov](https://codecov.io/gh/FraunhoferIOSB/ChillImport/branch/master/graph/badge.svg)](https://codecov.io/gh/FraunhoferIOSB/ChillImport) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6810ee95249341248d1e696a3b177101)](https://www.codacy.com/gh/FraunhoferIOSB/ChillImport?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FraunhoferIOSB/ChillImport&amp;utm_campaign=Badge_Grade)
 Starting the Server :
 
 Either run the available Docker-Image or the maven-generated WAR-File.
