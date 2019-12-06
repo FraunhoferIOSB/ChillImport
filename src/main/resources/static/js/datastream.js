@@ -240,7 +240,7 @@ function addUnit() {
             )
             .append($('<td>')
                 .append($('<button>')
-                    .attr('class', 'btn btn-outline-secondary')
+                    .attr('class', 'btn btn-secondary')
                     .attr('onclick', 'delRow($(this))')
                     .attr('style', 'width: auto;')
                     .html('<span class="fas fa-minus" ></span>')

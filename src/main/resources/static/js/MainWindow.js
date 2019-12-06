@@ -617,7 +617,7 @@ function addDatastream() {
                 .attr('class', 'selectStreams')
             )
             .append($('<button>')
-                .attr('class', 'btn btn-outline-secondary')
+                .attr('class', 'btn btn-secondary')
                 .attr('onclick', 'removeDatastream(this.parentNode.parentNode)')
                 .attr('style', 'width:auto; margin-left:10px')
                 .html('<span class="fas fa-minus" ></span>')

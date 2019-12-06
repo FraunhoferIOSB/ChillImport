@@ -98,10 +98,10 @@ function mapAddRow(tableId, size1, size2, size3) {
             )
 
             .append($('<button>')
-                .attr('class', 'btn btn-default')
+                .attr('class', 'btn btn-secondary')
                 .attr('onclick', 'removeMapping(this.parentNode)')
                 .attr('style', 'width:auto')
-                .html('<span class="glyphicon glyphicon-minus" ></span>')
+                .html('<span class="fas fa-minus" ></span>')
             )
         );
 }

@@ -75,8 +75,8 @@
                             </div>
 
                             <div class="column" style="width: 20%; margin-top: 60px;">
-                                <button id="oksource" disabled="true" class="btn btn-outline-secondary"
-                                        style="height: 30px;width: 100%;" onclick="fileConfirmed()">OK
+                                <button id="oksource" disabled="true" class="btn btn-secondary"
+                                        style="height: 35px;width: 100%;" onclick="fileConfirmed()">OK
                                 </button>
                             </div>
                         </div>
@@ -96,9 +96,11 @@
                 </div>
                 <div class="panel" style="height: 150px; padding-top: 10px">
                     <div class="panelpadding">
-                        <button class="bigbutton" onclick="chooseConfig()">Choose Configuration</button>
+                        <button class="btn btn-secondary" onclick="chooseConfig()" style="cursor: pointer; width: 48%; 
+                        height: 50px; float: left; padding-top: 0px">Choose Configuration</button>
                         <div class="column" style="width: 4%; height: 20px"></div>
-                        <button class="bigbutton" onclick="createConfig()">Create Configuration</button>
+                        <button class="btn btn-secondary" onclick="createConfig()"  style="cursor: pointer; width: 48%; 
+                        height: 50px; float: left; padding-top: 0px">Create Configuration</button>
                         <!--choose config dialog-->
 
                         <div class="column" id="chooseConfigDialog" style="display: none; width: 100%" align="left">
@@ -168,7 +170,7 @@
                  		
                  		<div class="column" style="width: 30%">
                  			<div class="column" style="width: 45%">
-                 				<button id="okurl" onclick="urlconfirmed()" class="btn btn-outline-secondary"
+                 				<button id="okurl" onclick="urlconfirmed()" class="btn btn-secondary"
                                         style="height: 35px;width: 100%;" >OK
                  				</button> 
                  			</div>
@@ -224,7 +226,7 @@
                              save if a value should be replaced with an other
                                     value."></div>
                             <br>
-                            <button class="btn btn-outline-secondary" value="mapping.html"
+                            <button class="btn btn-secondary" value="mapping.html"
                                     onclick="showMappingModal()"> Show Mapping
                             </button>
                         </div>
@@ -338,30 +340,30 @@
                         </div>
 
                         <div class="row topspace">
-                            <div class="col-sm-10">
-                                <div class="table-container">
-                                    <div></div>
-                                    <table class="table fixed_header" id="timeTable">
+                                <div class="table-responsive">
+                                    <table class="table fixed_header" id="timeTable" style="width: 400px;">
                                         <thead>
                                         <tr>
-                                            <th style="min-width: 90px">
-                                                <div>
+                                            <th>
+                                                
+                                                <div>  
                                                     <label>
-                                                        Column
-                                                    </label> 
+                                                    	Column
+                                                    </label>
+                                                    
                                                     <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify the column/columns containing
                                                             the date and time of the observations.">
                                                     </div>
-                                                </div>
-
+                                                
+												</div>
                                             </th>
-                                            <th style="min-width: 120px">
+                                            <th style="min-width: 135px">
                                                 <div>
                                                     <label>
                                                         Format
                                                     </label>
                                           
-                                                    <div class="far fa-question-circle" data-toggle="tooltip" data-placement="right" title="Specify the format of the date and time
+                                                    <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify the format of the date and time
                                                             in
                                                             this column as regular expression. (y - Year, M - Month, d -
                                                             Day, H - Hour, m - Minute, s - Second,
@@ -369,28 +371,28 @@
                                                     </div>
                                                 </div>
                                             </th>
-                                            <th>
+                                            <th style="width: 60px; padding:0px">
                                                 <div>
-                                                    <button class="btn btn-default" style="width: auto"
+                                                    <button class="btn btn-secondary" style="width: auto"
                                                             onclick="addRow($('#timeTable'),'2','20'); optimzeforsource();"><span
-                                                            class="glyphicon glyphicon-plus"></span></button>
+                                                            class="fas fa-plus"></span></button>
                                                 </div>
                                             </th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="height:200px;">
                                         <tr>
                                             <td><input size="2" type="text"></td>
                                             <td><input size="20" type="text"></td>
                                             <td>
-                                                <button class="btn btn-default" style="width: auto"
+                                                <button class="btn btn-secondary" style="width: auto"
                                                         onclick="delRow($(this))"><span
-                                                        class="glyphicon glyphicon-minus"></span></button>
+                                                        class="fas fa-minus"></span></button>
                                             </td>
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            
                         </div>
 
                         <!-- END OF DATETIME -->
@@ -403,7 +405,7 @@
                     <label>6: Thing:</label><br>
                     <select class="select2" id="things" style="width: 200px">
                     </select>
-                    <button class="btn btn-outline-secondary" value="thing.html" onclick="showThingModal()">
+                    <button class="btn btn-secondary" value="thing.html" onclick="showThingModal()">
                         <span class="far fa-file"></span>
                         Create Thing
                     </button>
@@ -427,31 +429,18 @@
 
                     <div class="row" style="padding: 10px">
                         <div align="right" style="padding-right: 20px">
-                            <button class="btn btn-outline-secondary" value="datastream.html"
+                            <button class="btn btn-secondary" value="datastream.html"
                                     onclick="if($('#things').val()) {showStreamModal()} else {addToLog('Choose a Thing first.')}">
                                 <span class="far fa-file"></span>
                                 Create DS
                             </button>
-                            <button class="btn btn-outline-secondary" onclick="addDatastream()">Add DS</button>
+                            <button class="btn btn-secondary" onclick="addDatastream()">Add DS</button>
                         </div>
 
                     </div>
                 </div>
 
-                <!--
-                <div class="row"></div>
-
-                <div class="row"
-                     style="padding-left: 40px; padding-right: 20px; padding-top: 1px; padding-bottom: 10px">
-                    <div class="row">
-                        <button class="btn btn-default" onclick="saveConfig()">Save Config</button>
-                    </div>
-
-                    <div class="row">
-                        <button class="btn btn-default" onclick="resetConfig()">Reset Config</button>
-                    </div>
-                </div>
-                -->
+               
 
             </div>  <!-- end of panelpadding -->
 
@@ -495,10 +484,10 @@
             <div class="row" style="height: 10px"></div>
             <div class="row" style="padding-left: 20px; width: 100%">
                 <div class="column" align="left" style="width: 50%;">
-                    <button id="importbutton" class="btn btn-outline-secondary" onclick="importData()" style="margin-right: 20px"
+                    <button id="importbutton" class="btn btn-secondary" onclick="importData()" style="margin-right: 20px"
                             disabled="true">Import Data
                     </button>
-                    <button class="btn btn-outline-secondary"
+                    <button class="btn btn-secondary"
                             onclick="showReturnModal()"
                             style="margin-right: 20px">Get Skipped Rows
                     </button>
@@ -539,11 +528,11 @@
             <div class="modal-header" style="background-color: #00AAFF">
                 <b class="headertext" style="color: white; font-size: 20px"></b>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="overflow: hidden">
             </div>
             <div class="modal-footer" id="indexfooter">
-                <button type="button" class="btn btn-outline-secondary" onclick="createThing()"></button>
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" onclick="createThing()"></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

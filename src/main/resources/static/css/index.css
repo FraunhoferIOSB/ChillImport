@@ -170,27 +170,27 @@ body {
     visibility: visible;
 }
 
-.table-container {
-    display: inline-block;
-    padding-top: 3em;
-    position: relative;
+.fixed_header{
+    
+    table-layout: fixed;
+    border-collapse: collapse;
 }
 
-.table-container > div {
-    position: absolute;
-    top: 0;
+.fixed_header tbody{
+  	display:block;
+  	overflow:auto;
+  	width:100%;
 }
 
-.fixed_header {
-    display: block;
-    height: 150px;
-    overflow-y: auto;
+.fixed_header th, .fixed_header td {
+  	padding: 5px;
+  	text-align: left;
 }
 
-.fixed_header th > div {
-    position: absolute;
-    top: 10px;
+.fixed_header thead tr{
+  	display:block;
 }
+
 
 .leftlogbox {
     width: 300px;

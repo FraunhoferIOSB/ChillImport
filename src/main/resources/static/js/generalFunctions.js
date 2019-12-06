@@ -15,10 +15,10 @@ function addRow(tableId, size1, size2) {
             )
             .append($('<td>')
                 .append($('<button>')
-                    .attr('class', 'btn btn-default')
+                    .attr('class', 'btn btn-secondary')
                     .attr('onclick', 'delRow($(this))')
                     .attr('style', 'width:auto')
-                    .html('<span class="glyphicon glyphicon-minus" ></span>')
+                    .html('<span class="fas fa-minus" ></span>')
                 )
             )
         );

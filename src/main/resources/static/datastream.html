@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a new Datastream.</title>
 </head>
-<body>
-<div class="container-fluid">
+<body style="overflow: hidden">
+<div>
     <div class="row">
         <div class="col-sm-3">
             Thing:
@@ -40,7 +40,7 @@
             </select>
         </div>
         <div class="col-sm-3">
-            <button type="button" class="btn btn-outline-secondary" style="width: auto" value="sensor.html"
+            <button type="button" class="btn btn-secondary" style="width: auto" value="sensor.html"
                     onclick="showSensorModal(this.value)">
                 <span class="far fa-file"></span> Create a new Sensor
             </button>
@@ -58,36 +58,36 @@
                 <table class="table fixed_header" id="streamUnits">
                     <thead>
                     <tr>
-                        <th>
+                        <th style="width:160px">
                             <div>Observed Property</div>
                         </th>
-                        <th>
+                        <th style="width:160px">
                             <div>Observation Type</div>
                         </th>
-                        <th>
+                        <th style="width:153px">
                             <div>Unit name</div>
                         </th>
-                        <th>
+                        <th style="width:153px">
                             <div>Unit symbol</div>
                         </th>
-                        <th>
+                        <th style="width:153px">
                             <div>Unit definition</div>
                         </th>
                         <th>
                             <div>
-                                <button class="btn btn-outline-secondary" style="width: auto" onclick="addUnit()"><span
+                                <button class="btn btn-secondary" style="width: auto" onclick="addUnit()"><span
                                         class="fas fa-plus"></span></button>
                             </div>
                         </th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height:150px;">
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="col-sm-4" style="padding-left: 50px">
-            <button type="button" class="btn btn-outline-secondary" value="obsprop.html" style="width: auto"
+            <button type="button" class="btn btn-secondary" value="obsprop.html" style="width: auto"
                     onclick="showObsPropModal(this.value)">
                 <span class="far fa-file"></span> Create a new Observed Property
             </button>
@@ -103,8 +103,8 @@
                 <div class="modal-body">
                 </div>
                 <div class="modal-footer" id="dsfooter">
-                    <button type="button" class="btn btn-outline-secondary" onclick="createSensor()">Create Sensor</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="$('#dsdialog').modal('hide');">Close</button>
+                    <button type="button" class="btn btn-secondary" onclick="createSensor()">Create Sensor</button>
+                    <button type="button" class="btn btn-secondary" onclick="$('#dsdialog').modal('hide');">Close</button>
                 </div>
             </div>
         </div>
