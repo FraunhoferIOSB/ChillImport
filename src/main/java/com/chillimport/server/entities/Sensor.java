@@ -2,7 +2,6 @@ package com.chillimport.server.entities;
 
 import java.net.URL;
 
-import com.chillimport.server.FileManager;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
 
 
@@ -88,14 +87,11 @@ public class Sensor extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Sensor) {
-            if (super.equals(obj)) {
-                if (this.metadata.equals(((Sensor) obj).getMetadata())) {
-                    if (this.encoding_TYPE.equals(((Sensor) obj).getEncoding_TYPE())) {
-                        return true;
-                    }
-                }
-            }
+        if (obj instanceof Sensor && 
+        	super.equals(obj) && 
+        	this.metadata.equals(((Sensor) obj).getMetadata()) && 
+        	this.encoding_TYPE.equals(((Sensor) obj).getEncoding_TYPE())) {
+            return true;
         }
         return false;
     }

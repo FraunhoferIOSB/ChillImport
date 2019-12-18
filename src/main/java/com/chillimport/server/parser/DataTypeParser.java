@@ -1,12 +1,10 @@
 package com.chillimport.server.parser;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import com.chillimport.server.Cell;
 import com.chillimport.server.TableDataTypes;
-import de.fraunhofer.iosb.ilt.sta.ServiceFailureException;
-
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.util.*;
 
 
 /**

@@ -2,8 +2,6 @@ package com.chillimport.server.controller;
 
 import com.chillimport.server.entities.Entity;
 
-import java.net.URL;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 

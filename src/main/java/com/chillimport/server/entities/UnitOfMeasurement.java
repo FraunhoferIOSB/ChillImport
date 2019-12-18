@@ -83,14 +83,11 @@ public class UnitOfMeasurement {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof UnitOfMeasurement) {
-            if (this.name.equals(((UnitOfMeasurement) obj).getName())) {
-                if (this.symbol.equals(((UnitOfMeasurement) obj).getSymbol())) {
-                    if (this.definition.equals(((UnitOfMeasurement) obj).getDefinition())) {
-                        return true;
-                    }
-                }
-            }
+        if (obj instanceof UnitOfMeasurement &&
+        	this.name.equals(((UnitOfMeasurement) obj).getName()) && 
+        	this.symbol.equals(((UnitOfMeasurement) obj).getSymbol()) && 
+        	this.definition.equals(((UnitOfMeasurement) obj).getDefinition())) {
+            return true;
         }
         return false;
     }

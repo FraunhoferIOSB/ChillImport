@@ -1,7 +1,5 @@
 package com.chillimport.server.entities;
 
-
-import com.chillimport.server.FileManager;
 import com.chillimport.server.errors.LogManager;
 import de.fraunhofer.iosb.ilt.sta.ServiceFailureException;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
@@ -123,14 +121,11 @@ public class Thing extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Thing) {
-            if (super.equals(obj)) {
-                if (this.location.equals(((Thing) obj).getLocation())) {
-                    if (this.properties.equals(((Thing) obj).getProperties())) {
-                        return true;
-                    }
-                }
-            }
+        if (obj instanceof Thing && 
+        	super.equals(obj) && 
+        	this.location.equals(((Thing) obj).getLocation()) && 
+        	this.properties.equals(((Thing) obj).getProperties())) {
+            return true;
         }
         return false;
     }

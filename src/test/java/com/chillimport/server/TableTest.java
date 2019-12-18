@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 public class TableTest {
 
-    Table table = null;
+    private Table table = null;
 
     @Before
     public void setUp() throws Exception {

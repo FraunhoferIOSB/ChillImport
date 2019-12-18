@@ -4,7 +4,6 @@ public class SkippedRows {
 
     private int row;
     private Exception error;
-    private String where;
 
 
     /**

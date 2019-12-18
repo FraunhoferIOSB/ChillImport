@@ -1,6 +1,5 @@
 package com.chillimport.server.controller;
 
-import com.chillimport.server.FileManager;
 import com.chillimport.server.FrostSetup;
 import com.chillimport.server.TestSetup;
 import com.chillimport.server.builders.LocationBuilder;
@@ -16,9 +15,18 @@ import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
 import de.fraunhofer.iosb.ilt.sta.query.Query;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
 import org.geojson.GeoJsonObject;
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +36,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -52,13 +59,9 @@ public class LocationControllerTest {
 
     private MockMvc mvc;
 
-    private String locationString;
     private String locUrlString;
     
     private static String url;
-    
-    private static String testpath;
-    private static String sep = File.separator;
 
     @Mock
     private SensorThingsServiceFactory sensorThingsServiceFactory;
@@ -69,20 +72,14 @@ public class LocationControllerTest {
     @BeforeClass 
     public static void beforeClass() throws Exception {
     	url = FrostSetup.getFrostURL();
-    	
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
+
     	TestSetup.setup();
     }
     
     @Before
-    public void setup() throws JsonProcessingException {
+    public void before() throws JsonProcessingException {
         MockitoAnnotations.initMocks(this);
         mvc = MockMvcBuilders.standaloneSetup(locationController).build();
-
-        locationString = "{\"name\":\"UofC CCIT\",\"description\":\"University of Calgary, CCIT building\",\"encoding_TYPE\":\"application/vnd" +
-                ".geo+json\"," +
-                "\"location\":\"{\\\"type\\\": \\\"Point\\\", \\\"coordinates\\\": [-114.133, 51.08]}\"}";
         
         com.chillimport.server.entities.Location loc = new com.chillimport.server.entities.Location("UofC CCIT","University of Calgary, CCIT building","application/vndgeo+json","{\"type\": \"Point\", \"coordinates\": [-114.133, 51.08]}");
         ObjectMapper mapper = new ObjectMapper();

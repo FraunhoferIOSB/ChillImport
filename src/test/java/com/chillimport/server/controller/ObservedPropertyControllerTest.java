@@ -1,6 +1,5 @@
 package com.chillimport.server.controller;
 
-import com.chillimport.server.FileManager;
 import com.chillimport.server.FrostSetup;
 import com.chillimport.server.TestSetup;
 import com.chillimport.server.builders.ObservedPropertyBuilder;
@@ -15,9 +14,18 @@ import de.fraunhofer.iosb.ilt.sta.model.ObservedProperty;
 import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
 import de.fraunhofer.iosb.ilt.sta.query.Query;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +35,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -50,14 +57,9 @@ public class ObservedPropertyControllerTest {
     private WebApplicationContext context;
 
     private MockMvc mvc;
-
-    private String observedPropertyString;
     
     private static String url;
     private String opUrlString;
-    
-    private static String testpath;
-    private static String sep = File.separator;
 
     @Mock
     private SensorThingsServiceFactory sensorThingsServiceFactory;
@@ -68,17 +70,15 @@ public class ObservedPropertyControllerTest {
     @BeforeClass 
     public static void beforeClass() throws Exception {
     	url = FrostSetup.getFrostURL();
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
+
     	TestSetup.setup();
     }
     
     @Before
-    public void setup() throws JsonProcessingException {
+    public void before() throws JsonProcessingException {
         MockitoAnnotations.initMocks(this);
         mvc = MockMvcBuilders.standaloneSetup(observedPropertyController).build();
 
-        observedPropertyString = "{\"entity\":{\"name\":\"TestObsProp\",\"description\":\"testing ops props\",\"definition\":\"https://www.test.de\"},\"string\":\"https://chillimport-frost.docker01.ilt-dmz.iosb.fraunhofer.de/v1.0/\"}";
         ObjectMapper mapper = new ObjectMapper();
         
         com.chillimport.server.entities.ObservedProperty op = new com.chillimport.server.entities.ObservedProperty("TestObsProp", "testing ops props", "https://www.test.de");

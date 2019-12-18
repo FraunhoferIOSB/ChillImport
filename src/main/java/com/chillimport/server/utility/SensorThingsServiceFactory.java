@@ -1,6 +1,5 @@
 package com.chillimport.server.utility;
 
-import com.chillimport.server.FileManager;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
 import org.springframework.stereotype.Service;
 

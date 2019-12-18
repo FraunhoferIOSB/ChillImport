@@ -1,7 +1,11 @@
 package com.chillimport.server.converter;
 
 import com.chillimport.server.Table;
-import com.chillimport.server.config.*;
+import com.chillimport.server.config.Configuration;
+import com.chillimport.server.config.DataType;
+import com.chillimport.server.config.MagicNumberMap;
+import com.chillimport.server.config.StreamObservation;
+import com.chillimport.server.config.StringColumn;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Before;
@@ -12,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 
@@ -23,7 +26,6 @@ public class ExcelConverterTest {
 
     @Before
     public void setUp() throws Exception {
-        ZoneOffset zone = ZoneOffset.of("+1");
         String zidc1 = "ETC";
         StringColumn[] dateTime1 = {new StringColumn("TT-HH", 10), new StringColumn("MM-SS", 12)};
         int[] arr1 = {2, 8, 5};

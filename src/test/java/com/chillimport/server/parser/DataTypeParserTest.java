@@ -13,9 +13,7 @@ public class DataTypeParserTest {
 
     @Test
     public void convertTable() throws URISyntaxException, ServiceFailureException, MalformedURLException {
-
-
-        DataTypeParser dtp = new DataTypeParser();
+    	new DataTypeParser();
 
     }
 

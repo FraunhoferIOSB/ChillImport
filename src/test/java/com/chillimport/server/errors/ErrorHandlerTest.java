@@ -1,14 +1,24 @@
 package com.chillimport.server.errors;
 
-import com.chillimport.server.*;
+import com.chillimport.server.Cell;
+import com.chillimport.server.FileManager;
+import com.chillimport.server.Table;
+import com.chillimport.server.TestSetup;
 import com.chillimport.server.config.ConfigurationManager;
 import com.chillimport.server.converter.ExcelConverter;
 import com.chillimport.server.utility.UnsupportedDataTypeException;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -17,14 +27,9 @@ import static org.junit.Assert.*;
 public class ErrorHandlerTest {
 
     ErrorHandler eh;
-    
-    private static String testpath;
-    private static String sep = File.separator;
 
     @Before
-    public void setup() throws Exception {
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
+    public void before() throws Exception {
     	TestSetup.setup();
     	
         eh = ErrorHandler.getInstance();
@@ -84,11 +89,10 @@ public class ErrorHandlerTest {
         list2.add(new Cell("Ich hasse Gedichtee"));
         list2.add(new Cell("Klopapierr"));
         t.appendRow(list2);
-        ConfigurationManager x = new ConfigurationManager();
         eh.addRows(0, new IOException());
         eh.addRows(1, new IOException());
         try {
-            eh.returnRows(t, x.loadConfig(-1365040327));
+            eh.returnRows(t, ConfigurationManager.loadConfig(-1365040327));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (UnsupportedDataTypeException e) {
@@ -129,11 +133,10 @@ public class ErrorHandlerTest {
         list2.add(new Cell("Ich hasse Gedichtee"));
         list2.add(new Cell("Klopapierr"));
         t.appendRow(list2);
-        ConfigurationManager x = new ConfigurationManager();
         eh.addRows(0, new IOException());
         eh.addRows(1, new IOException());
         try {
-            eh.returnRows(t, x.loadConfig(48573894));
+            eh.returnRows(t, ConfigurationManager.loadConfig(48573894));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (UnsupportedDataTypeException e) {
@@ -142,7 +145,7 @@ public class ErrorHandlerTest {
         File file = new File(FileManager.getLogPath() + "/returnRows/" + LogManager.getInstance().getDate() + "--skippedRows.xls");
         Table t2;
 		try {
-			t2 = ExcelConverter.convert(file,x.loadConfig(48573894));
+			t2 = ExcelConverter.convert(file,ConfigurationManager.loadConfig(48573894));
 		} catch (InvalidFormatException e) {
 			throw new IOException();
 		}

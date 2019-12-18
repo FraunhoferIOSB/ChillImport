@@ -53,7 +53,6 @@ public class ImportControllerTest {
     @Test
     public void uploadFileFromWebsite() throws Exception {
 
-        MediaType ct = MediaType.TEXT_PLAIN;
         String content = "https://raw.githubusercontent.com/uzkns/beispielcsv/master/Messergebnisse.xlsx";
 
         MvcResult result = this.mvc.perform(post("/uploadFromUrl").param("url", content))
@@ -70,7 +69,6 @@ public class ImportControllerTest {
     public void importData() throws Exception {
 
         //Dateien vorbereiten
-        MediaType ct = MediaType.TEXT_PLAIN;
         String content = "https://raw.githubusercontent.com/uzkns/beispielcsv/master/Messergebnisse.xlsx";
 
         MvcResult fileresult = this.mvc.perform(post("/uploadFromUrl").param("url", content))

@@ -1,14 +1,10 @@
 package com.chillimport.server.config;
 
-import com.chillimport.server.FileManager;
 import com.chillimport.server.TestSetup;
 import com.chillimport.server.converter.ConverterException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -18,24 +14,19 @@ import static org.junit.Assert.assertNotEquals;
 
 public class ConfigurationTest {
 
-    Configuration obj1;
-    Configuration obj2;
-    Configuration obj3;
-    Configuration obj4;
-    Configuration obj5;
-    Configuration obj6;
+    private Configuration obj1;
+    private Configuration obj2;
+    private Configuration obj3;
+    private Configuration obj4;
+    private Configuration obj5;
+    private Configuration obj6;
 
-    String obj1string;
-    String obj2string;
-    String obj3string;
-    
-    private String testpath;
-    private String sep = File.separator;
+    private String obj1string;
+    private String obj2string;
+    private String obj3string;
 
     @Before
     public void create() throws Exception {
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
     	TestSetup.setup();
     	
         String zidc1 = "EAT";

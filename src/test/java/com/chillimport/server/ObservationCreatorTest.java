@@ -1,7 +1,11 @@
 package com.chillimport.server;
 
-import de.fraunhofer.iosb.ilt.sta.model.*;
+
 import org.junit.Test;
+
+import de.fraunhofer.iosb.ilt.sta.model.Datastream;
+import de.fraunhofer.iosb.ilt.sta.model.MultiDatastream;
+import de.fraunhofer.iosb.ilt.sta.model.Observation;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;

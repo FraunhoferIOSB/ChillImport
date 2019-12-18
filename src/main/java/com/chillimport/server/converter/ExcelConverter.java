@@ -5,7 +5,14 @@ import com.chillimport.server.TableDataTypes;
 import com.chillimport.server.config.Configuration;
 import com.chillimport.server.errors.LogManager;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
@@ -51,7 +58,7 @@ public class ExcelConverter implements Converter {
             ArrayList<com.chillimport.server.Cell> rowList = new ArrayList<>();
 
             int lastColumn = row.getLastCellNum();
-            if (firstRow == true) {
+            if (firstRow) {
 
                 firstRow = false;
 

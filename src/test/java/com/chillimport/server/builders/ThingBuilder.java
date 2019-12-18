@@ -1,13 +1,16 @@
 package com.chillimport.server.builders;
 
-import de.fraunhofer.iosb.ilt.sta.model.*;
-import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
+
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import de.fraunhofer.iosb.ilt.sta.model.IdLong;
+import de.fraunhofer.iosb.ilt.sta.model.Location;
+import de.fraunhofer.iosb.ilt.sta.model.Thing;
 
 
 public class ThingBuilder {

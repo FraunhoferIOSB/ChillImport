@@ -2,7 +2,10 @@ package com.chillimport.server;
 
 import de.fraunhofer.iosb.ilt.sta.ServiceFailureException;
 import de.fraunhofer.iosb.ilt.sta.dao.ObservationDao;
-import de.fraunhofer.iosb.ilt.sta.model.*;
+import de.fraunhofer.iosb.ilt.sta.model.Datastream;
+import de.fraunhofer.iosb.ilt.sta.model.EntityType;
+import de.fraunhofer.iosb.ilt.sta.model.MultiDatastream;
+import de.fraunhofer.iosb.ilt.sta.model.Observation;
 import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
 import de.fraunhofer.iosb.ilt.sta.query.Query;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;

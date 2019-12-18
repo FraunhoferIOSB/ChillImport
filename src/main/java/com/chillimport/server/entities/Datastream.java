@@ -1,11 +1,7 @@
 package com.chillimport.server.entities;
 
-
-import com.chillimport.server.FileManager;
 import de.fraunhofer.iosb.ilt.sta.ServiceFailureException;
-import de.fraunhofer.iosb.ilt.sta.model.EntityType;
 import de.fraunhofer.iosb.ilt.sta.model.MultiDatastream;
-import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
 
 import java.io.IOException;
@@ -254,20 +250,14 @@ public class Datastream extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Datastream) {
-            if (super.equals(obj)) {
-                if (this.observation_types.equals(((Datastream) obj).getObservation_types())) {
-                    if (this.units_of_measurement.equals(((Datastream) obj).getUnits_of_measurement())) {
-                        if (this.observedProperties.equals(((Datastream) obj).getObservedProperties())) {
-                            if (this.thing.equals(((Datastream) obj).getThing())) {
-                                if (this.sensor.equals(((Datastream) obj).getSensor())) {
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if (obj instanceof Datastream &&
+        	super.equals(obj) && 
+            this.observation_types.equals(((Datastream) obj).getObservation_types()) &&
+            this.units_of_measurement.equals(((Datastream) obj).getUnits_of_measurement()) && 
+            this.observedProperties.equals(((Datastream) obj).getObservedProperties()) && 
+            this.thing.equals(((Datastream) obj).getThing()) && 
+            this.sensor.equals(((Datastream) obj).getSensor())) {
+            	return true;
         }
         return false;
     }

@@ -1,8 +1,11 @@
 package com.chillimport.server.parser;
 
 import com.chillimport.server.Cell;
-import com.chillimport.server.config.*;
-import org.junit.*;
+import com.chillimport.server.config.Configuration;
+import com.chillimport.server.config.DataType;
+import com.chillimport.server.config.StringColumn;
+
+
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,6 +14,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

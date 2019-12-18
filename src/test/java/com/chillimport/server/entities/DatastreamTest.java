@@ -1,8 +1,9 @@
 package com.chillimport.server.entities;
 
 import de.fraunhofer.iosb.ilt.sta.ServiceFailureException;
-import de.fraunhofer.iosb.ilt.sta.model.*;
-import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
+import de.fraunhofer.iosb.ilt.sta.model.IdLong;
+import de.fraunhofer.iosb.ilt.sta.model.MultiDatastream;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,8 +17,10 @@ import java.net.URL;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertTrue;
 
 
 public class DatastreamTest {

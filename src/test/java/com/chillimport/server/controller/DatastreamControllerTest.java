@@ -1,22 +1,36 @@
 package com.chillimport.server.controller;
 
-import com.chillimport.server.FileManager;
 import com.chillimport.server.FrostSetup;
 import com.chillimport.server.TestSetup;
 import com.chillimport.server.builders.DatastreamBuilder;
 import com.chillimport.server.builders.MultiDatastreamBuilder;
 import com.chillimport.server.utility.SensorThingsServiceFactory;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import de.fraunhofer.iosb.ilt.sta.ServiceFailureException;
-import de.fraunhofer.iosb.ilt.sta.dao.*;
-import de.fraunhofer.iosb.ilt.sta.model.*;
+import de.fraunhofer.iosb.ilt.sta.dao.DatastreamDao;
+import de.fraunhofer.iosb.ilt.sta.dao.MultiDatastreamDao;
+import de.fraunhofer.iosb.ilt.sta.dao.ThingDao;
+import de.fraunhofer.iosb.ilt.sta.model.Datastream;
+import de.fraunhofer.iosb.ilt.sta.model.EntityType;
+import de.fraunhofer.iosb.ilt.sta.model.MultiDatastream;
+import de.fraunhofer.iosb.ilt.sta.model.Thing;
 import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
 import de.fraunhofer.iosb.ilt.sta.query.Query;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,14 +40,18 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -48,9 +66,6 @@ public class DatastreamControllerTest {
 
     @Autowired
     private WebApplicationContext context;
-    
-    private static String testpath;
-    private static String sep = File.separator;
 
     private MockMvc mvc;
     
@@ -87,11 +102,7 @@ public class DatastreamControllerTest {
     }
 
     @Before
-    public void setup() throws Exception {
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
-    	
-    	
+    public void before() throws Exception {  	
         MockitoAnnotations.initMocks(this);
         mvc = MockMvcBuilders.standaloneSetup(datastreamController).build();
         

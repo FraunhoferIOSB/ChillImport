@@ -1,13 +1,10 @@
 package com.chillimport.server.controller;
 
-import com.chillimport.server.FileManager;
-import com.chillimport.server.FrostSetup;
 import com.chillimport.server.TestSetup;
 import com.chillimport.server.config.Configuration;
 import com.chillimport.server.config.DataType;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +29,10 @@ public class ConfigControllerTest {
     @Autowired
     private MockMvc mvc;
     
-    private static String testpath;
     private static String sep = File.separator;
     
     @BeforeClass 
-    public static void beforeClass() throws Exception {
-    	
-    	
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
-    	
+    public static void beforeClass() throws Exception {    	
     	TestSetup.setup();
     }
     

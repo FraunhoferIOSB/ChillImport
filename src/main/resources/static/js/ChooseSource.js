@@ -9,6 +9,43 @@ function getCurrentFileName() {
     return currentFileName;
 }
 
+/**
+ * checks the input file (must be .csv or .xlsx)
+ */
+function checkinputfile() {
+    var name = $('#file').val().split(/(\\|\/)/g).pop();
+    if (name.match(".*\.csv$")) {
+        $('#oksource').attr('disabled', false);
+        isCsv = true;
+        isExcel = false;
+    } else if (name.match(".*\.xlsx?$")) {
+        $('#oksource').attr('disabled', false);
+        isCsv = false;
+        isExcel = true;
+    } else {
+        isExcel = false;
+        isCsv = false;
+        $('#oksource').attr('disabled', true);
+    }
+}
+
+/**
+ * checks the url of the source
+ */
+function checkinputurl() {
+    var url = $('#sourceinput').val().toString();
+    var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+
+    if (pattern.test(url)) {
+        isExcel = false;
+        isCsv = false;
+        $('#oksource').attr('disabled', false);
+    } else {
+        isExcel = false;
+        isCsv = false;
+        $('#oksource').attr('disabled', true);
+    }
+}
 
 function sourcefile() {
     document.getElementById("sourcetext").innerText = "Choose sourcefile:";
@@ -194,46 +231,6 @@ function loadPreview(values) {
             .text('Column ' + k)
         );
     }
-
-}
-
-/**
- * checks the input file (must be .csv or .xlsx)
- */
-function checkinputfile() {
-    var name = $('#file').val().split(/(\\|\/)/g).pop();
-    if (name.match(".*\.csv$")) {
-        $('#oksource').attr('disabled', false);
-        isCsv = true;
-        isExcel = false;
-    } else if (name.match(".*\.xlsx?$")) {
-        $('#oksource').attr('disabled', false);
-        isCsv = false;
-        isExcel = true;
-    } else {
-        isExcel = false;
-        isCsv = false;
-        $('#oksource').attr('disabled', true);
-    }
-}
-
-/**
- * checks the url of the source
- */
-function checkinputurl() {
-    var url = $('#sourceinput').val().toString();
-    var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-
-    if (pattern.test(url)) {
-        isExcel = false;
-        isCsv = false;
-        $('#oksource').attr('disabled', false);
-    } else {
-        isExcel = false;
-        isCsv = false;
-        $('#oksource').attr('disabled', true);
-    }
-
 
 }
 

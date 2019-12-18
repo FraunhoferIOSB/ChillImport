@@ -3,7 +3,6 @@ package com.chillimport.server.errors;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.chillimport.server.FileManager;
 import com.chillimport.server.TestSetup;
 
 import javax.script.ScriptException;
@@ -15,13 +14,9 @@ import static org.junit.Assert.assertTrue;
 public class LogManagerTest {
 
     LogManager log;
-    private static String testpath;
-    private static String sep = File.separator;
 
     @Before
     public void setUp() throws Exception {
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
     	TestSetup.setup();
     	
         log = LogManager.getInstance();

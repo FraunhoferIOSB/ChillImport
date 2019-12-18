@@ -7,7 +7,7 @@ button {
 }
 
 .modal-xl {
-    max-width: 150% !important;
+    max-width: 150%;
 }
 
 .bigbutton {

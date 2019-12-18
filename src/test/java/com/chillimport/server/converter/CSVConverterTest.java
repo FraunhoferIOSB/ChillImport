@@ -2,11 +2,15 @@ package com.chillimport.server.converter;
 
 import com.chillimport.server.FileManager;
 import com.chillimport.server.Table;
-import com.chillimport.server.config.*;
+import com.chillimport.server.config.Configuration;
+import com.chillimport.server.config.ConfigurationManager;
+import com.chillimport.server.config.DataType;
+import com.chillimport.server.config.MagicNumberMap;
+import com.chillimport.server.config.StreamObservation;
+import com.chillimport.server.config.StringColumn;
 import com.chillimport.server.errors.LogManager;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -30,8 +34,8 @@ public class CSVConverterTest {
     //http://hamcrest.org/JavaHamcrest/
 
 
-    Configuration obj1;
-    Table t;
+    private Configuration obj1;
+    private Table t;
     private static String testpath;
     private String sep = File.separator;
     

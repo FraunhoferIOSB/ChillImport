@@ -3,7 +3,9 @@ package com.chillimport.server.config;
 import com.chillimport.server.FileManager;
 import com.chillimport.server.errors.LogManager;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -15,7 +17,9 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 
@@ -89,7 +93,7 @@ public class ConfigurationManagerTest {
 
     @Test(expected = IOException.class)
     public void load2() throws IOException {
-        Configuration tempConfig1 = ConfigurationManager.loadConfig(010101);
+        ConfigurationManager.loadConfig(010101);
     }
 
     @Test

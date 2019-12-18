@@ -6,26 +6,18 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 
 
 public class FileManagerTest {
 
-    FileManager fm = new FileManager();
-    private static String testpath;
-    private static String sep = File.separator;
+    private FileManager fm = new FileManager();
     
     @BeforeClass 
     public static void beforeClass() throws Exception {
-    	//FileManager.setServerURLOnStartup(FrostSetup.getFrostURL());
     	FrostSetup.getFrostURL();
-    	
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
+
     	TestSetup.setup();
     }
     

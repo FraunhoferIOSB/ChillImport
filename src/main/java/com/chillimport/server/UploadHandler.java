@@ -1,6 +1,8 @@
 package com.chillimport.server;
 
-import com.chillimport.server.config.*;
+import com.chillimport.server.config.Configuration;
+import com.chillimport.server.config.MagicNumberMap;
+import com.chillimport.server.config.StreamObservation;
 import com.chillimport.server.controller.ImportController;
 import com.chillimport.server.converter.*;
 import com.chillimport.server.errors.ErrorHandler;
@@ -25,8 +27,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.DateTimeException;
 import java.time.ZonedDateTime;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Iterator;
+import java.util.concurrent.CountDownLatch;
 
 import static com.chillimport.server.parser.DataTypeParser.convertRow;
 
@@ -34,8 +38,6 @@ import static com.chillimport.server.parser.DataTypeParser.convertRow;
 public class UploadHandler {
 
     private ErrorHandler errorHandler;
-    private LogManager logManager;
-    private ImportController controller;
     private int curr = 0;
     private int size = -1;
 
@@ -43,8 +45,6 @@ public class UploadHandler {
     public UploadHandler(ImportController controller) {
 
         this.errorHandler = ErrorHandler.getInstance();
-        this.logManager = LogManager.getInstance();
-        this.controller = controller;
 
     }
 
@@ -130,7 +130,7 @@ public class UploadHandler {
         int position = 0;
         while (iterator.hasNext()) {
             if (temp >= threadsize) {
-                if (!(position == threads - 1)) {
+                if (position != threads - 1) {
                     position++;
                 }
                 temp = 0;

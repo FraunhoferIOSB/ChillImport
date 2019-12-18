@@ -1,9 +1,11 @@
 package com.chillimport.server;
 
-import de.fraunhofer.iosb.ilt.sta.model.*;
-
 import java.time.ZonedDateTime;
 import java.util.List;
+
+import de.fraunhofer.iosb.ilt.sta.model.Datastream;
+import de.fraunhofer.iosb.ilt.sta.model.MultiDatastream;
+import de.fraunhofer.iosb.ilt.sta.model.Observation;
 
 
 public class ObservationCreator {

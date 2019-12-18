@@ -315,11 +315,11 @@ function saveConfig() {
 
     var cfgName = prompt('Name of Configuration:');
     if (cfgName === null) {
-        return;
+        return false;
     }
     if (cfgName === "") {
         addToLog("A configuration needs a name");
-        return;
+        return false;
     }
 
     var formData = {

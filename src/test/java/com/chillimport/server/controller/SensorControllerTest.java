@@ -1,6 +1,5 @@
 package com.chillimport.server.controller;
 
-import com.chillimport.server.FileManager;
 import com.chillimport.server.FrostSetup;
 import com.chillimport.server.TestSetup;
 import com.chillimport.server.builders.SensorBuilder;
@@ -15,9 +14,18 @@ import de.fraunhofer.iosb.ilt.sta.model.Sensor;
 import de.fraunhofer.iosb.ilt.sta.model.ext.EntityList;
 import de.fraunhofer.iosb.ilt.sta.query.Query;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -51,11 +59,9 @@ public class SensorControllerTest {
 
     private MockMvc mvc;
 
-    private String sensorString;
     private String sensorUrlString;
     private static String url;
     
-    private static String testpath;
     private static String sep = File.separator;
 
     @Mock
@@ -67,17 +73,14 @@ public class SensorControllerTest {
     @BeforeClass 
     public static void beforeClass() throws Exception {
     	url = FrostSetup.getFrostURL();
-    	testpath = "src" + sep + "test" + sep + "resources";
-    	//FileManager.setPathsOnStartup(testpath);
     	TestSetup.setup();
     }
 
     @Before
-    public void setup() throws JsonProcessingException {
+    public void before() throws JsonProcessingException {
         MockitoAnnotations.initMocks(this);
         mvc = MockMvcBuilders.standaloneSetup(sensorController).build();
 
-        sensorString = "{\"name\":\"KITSensorMax\",\"description\":\"Max Sensor am KIT\",\"encoding_TYPE\":\"application/json\",\"metadata\":\"\"}";
         com.chillimport.server.entities.Sensor sensor = new com.chillimport.server.entities.Sensor("KITSensorMax", "Max Sensor am KIT", "application/json", "");
         ObjectMapper mapper = new ObjectMapper();
         

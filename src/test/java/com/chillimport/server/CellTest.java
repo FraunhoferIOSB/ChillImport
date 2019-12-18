@@ -13,23 +13,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CellTest {
 
-    Cell dbl = new Cell(0.0);
-    Cell dbl2 = new Cell(1.0);
-    Cell str = new Cell("true");
-    Cell str2 = new Cell("false");
-    Cell flt = new Cell(0.0f);
-    Cell flt2 = new Cell(1.0f);
-    Cell in = new Cell(1);
-    Cell in2 = new Cell(0);
-    Date date = new Date();
-    Cell dt = new Cell(date);
-    URI x = new URI("ftp://ftp.is.co.za/rfc/rfc1808.txt");
-    Cell uri = new Cell(x);
-    Cell url = new Cell(new URL("https://lol.com"));
-    Cell bl = new Cell(true);
-    Cell bl2 = new Cell(false);
-    Cell istr = new Cell("0");
-    Cell istr2 = new Cell("1");
+    private Cell dbl = new Cell(0.0);
+    private Cell dbl2 = new Cell(1.0);
+    private Cell str = new Cell("true");
+    private Cell str2 = new Cell("false");
+    private Cell flt = new Cell(0.0f);
+    private Cell flt2 = new Cell(1.0f);
+    private Cell in = new Cell(1);
+    private Cell in2 = new Cell(0);
+    private Date date = new Date();
+    private Cell dt = new Cell(date);
+    private URI x = new URI("ftp://ftp.is.co.za/rfc/rfc1808.txt");
+    private Cell uri = new Cell(x);
+    private Cell url = new Cell(new URL("https://lol.com"));
+    private Cell bl = new Cell(true);
+    private Cell bl2 = new Cell(false);
+    private Cell istr = new Cell("0");
+    private Cell istr2 = new Cell("1");
 
     public CellTest() throws URISyntaxException, MalformedURLException {
     }
