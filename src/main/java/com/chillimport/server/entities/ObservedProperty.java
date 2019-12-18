@@ -77,10 +77,7 @@ public class ObservedProperty extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof ObservedProperty && 
-        	super.equals(obj)) {
-                return this.definition.equals(((ObservedProperty) obj).getDefinition());
-        }
-        return false;
+        return (obj instanceof ObservedProperty && 
+        	super.equals(obj) && this.definition.equals(((ObservedProperty) obj).getDefinition()));
     }
 }

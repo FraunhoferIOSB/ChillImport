@@ -116,13 +116,10 @@ public class Location extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Location && 
+        return (obj instanceof Location && 
         	super.equals(obj) && 
         	this.encoding_TYPE.equals(((Location) obj).getEncoding_TYPE()) && 
-        	this.location.equals(((Location) obj).getLocation())) {
-        		return true;
-        }
-        return false;
+        	this.location.equals(((Location) obj).getLocation()));
     }
 }
 

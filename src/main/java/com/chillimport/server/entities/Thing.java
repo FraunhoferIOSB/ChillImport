@@ -121,12 +121,9 @@ public class Thing extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Thing && 
+        return (obj instanceof Thing && 
         	super.equals(obj) && 
         	this.location.equals(((Thing) obj).getLocation()) && 
-        	this.properties.equals(((Thing) obj).getProperties())) {
-            return true;
-        }
-        return false;
+        	this.properties.equals(((Thing) obj).getProperties()));
     }
 }

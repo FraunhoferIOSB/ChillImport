@@ -250,16 +250,13 @@ public class Datastream extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Datastream &&
+        return (obj instanceof Datastream &&
         	super.equals(obj) && 
             this.observation_types.equals(((Datastream) obj).getObservation_types()) &&
             this.units_of_measurement.equals(((Datastream) obj).getUnits_of_measurement()) && 
             this.observedProperties.equals(((Datastream) obj).getObservedProperties()) && 
             this.thing.equals(((Datastream) obj).getThing()) && 
-            this.sensor.equals(((Datastream) obj).getSensor())) {
-            	return true;
-        }
-        return false;
+            this.sensor.equals(((Datastream) obj).getSensor()));
     }
 
 }

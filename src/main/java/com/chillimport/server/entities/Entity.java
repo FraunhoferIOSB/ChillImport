@@ -76,9 +76,6 @@ public class Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Entity) {
-            return (this.name.equals(((Entity) obj).getName()) && this.description.equals(((Entity) obj).getDescription()));
-        }
-        return false;
+        return (obj instanceof Entity && this.name.equals(((Entity) obj).getName()) && this.description.equals(((Entity) obj).getDescription()));
     }
 }

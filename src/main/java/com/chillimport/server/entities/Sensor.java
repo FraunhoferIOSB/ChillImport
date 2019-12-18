@@ -87,12 +87,9 @@ public class Sensor extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Sensor && 
+        return (obj instanceof Sensor && 
         	super.equals(obj) && 
         	this.metadata.equals(((Sensor) obj).getMetadata()) && 
-        	this.encoding_TYPE.equals(((Sensor) obj).getEncoding_TYPE())) {
-            return true;
-        }
-        return false;
+        	this.encoding_TYPE.equals(((Sensor) obj).getEncoding_TYPE()));
     }
 }
