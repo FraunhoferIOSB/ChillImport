@@ -6,11 +6,11 @@ function returnRows() {
         url: "errors/returnFiles",
         success: function (response) {
             var files = JSON.parse(response);
-            var $x = $('#select');
+            var $x = $("#select");
             path = files[files.length - 1];
             for (var i = 0; i < files.length; i++) {
                 var lul = files[i];
-                $x.append("<option value =" + lul + ">" + lul + '</option>');
+                $x.append("<option value =" + lul + ">" + lul + "</option>");
             }
         },
         error: function (e) {
@@ -20,7 +20,7 @@ function returnRows() {
 }
 
 function delFile() {
-    var file = $('#select').val();
+    var file = $("#select").val();
     if (file == null) {
         addToLog("Select a File first");
     }
@@ -37,7 +37,7 @@ function delFile() {
             for (var i = 0; i < selectobject.length; i++) {
                 if (selectobject.options[i].value == file) {
                     selectobject.remove(i);
-                    selectobject.selectedIndex = '0';
+                    selectobject.selectedIndex = "0";
                     return;
                 }
             }
@@ -50,7 +50,7 @@ function delFile() {
 
 
 function dl() {
-    var x = $('#select').val();
+    var x = $("#select").val();
     return "/returnRows/" + x;
 
 }

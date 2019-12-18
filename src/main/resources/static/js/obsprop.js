@@ -22,22 +22,22 @@ function createObsprop() {
     $.ajax({
         type: "POST",
         url: "observedProperty/create",
-        datatype: 'json',
-        contentType: 'application/json',
+        datatype: "json",
+        contentType: "application/json",
         data: JSON.stringify(mydata),
         error: function (e) {
             $.notify({
-                message: 'Observed Property could not be created, check the Log for errors'
+                message: "Observed Property could not be created, check the Log for errors"
             }, {
                 allow_dismiss: true,
-                type: 'danger',
+                type: "danger",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
@@ -45,22 +45,22 @@ function createObsprop() {
         },
         success: function (e) {
             $.notify({
-                message: 'Observed Property created.'
+                message: "Observed Property created."
             },{
                 allow_dismiss:true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
-            addToLog('Observed Property created.');
-            closeModal('dsdialog');
+            addToLog("Observed Property created.");
+            closeModal("dsdialog");
             getOprops();
         }
     });

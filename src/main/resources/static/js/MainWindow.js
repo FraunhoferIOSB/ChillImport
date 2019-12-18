@@ -2,41 +2,41 @@
  * shows the popup to create a new Thing
  */
 function showThingModal() {
-    var $modal = $('#indexfooter').find('button:eq(0)');
-    $modal.attr('onclick', 'createThing()');
-    $modal.html('Create Thing');
+    var $modal = $("#indexfooter").find("button:eq(0)");
+    $modal.attr("onclick", "createThing()");
+    $modal.html("Create Thing");
     $modal.show();
-    modal('dialog', 'thing.html', getLocations, 'Create a Thing');
+    modal("dialog", "thing.html", getLocations, "Create a Thing");
 }
 
 /**
  * opens the popup to create a new datastream
  */
 function showStreamModal() {
-    var $modal = $('#indexfooter').find('button:eq(0)');
-    $modal.attr('onclick', 'createDS()');
-    $modal.html('Create Datastream');
+    var $modal = $("#indexfooter").find("button:eq(0)");
+    $modal.attr("onclick", "createDS()");
+    $modal.html("Create Datastream");
     $modal.show();
-    modal('dialog', 'datastream.html', initDatastream, 'Create a Datastream');
+    modal("dialog", "datastream.html", initDatastream, "Create a Datastream");
 }
 
 /**
  * opens the popup to edit the mapping
  */
 function showMappingModal() {
-    var $modal = $('#indexfooter').find('button:eq(0)');
-    $modal.attr('onclick', 'saveMapping()');
-    $modal.html('Save Mapping');
+    var $modal = $("#indexfooter").find("button:eq(0)");
+    $modal.attr("onclick", "saveMapping()");
+    $modal.html("Save Mapping");
     $modal.show();
-    modal("dialog", "mapping.html", loadMapping, 'Current\xa0Mapping');
+    modal("dialog", "mapping.html", loadMapping, "Current\xa0Mapping");
 }
 
 /**
  * opens the popup to show the failed rows
  */
 function showReturnModal() {
-    $('#indexfooter').find('button:eq(0)').hide();
-    modal('dialog', 'returnRows.html', returnRows, 'Skipped Rows');
+    $("#indexfooter").find("button:eq(0)").hide();
+    modal("dialog", "returnRows.html", returnRows, "Skipped Rows");
 }
 
 /**
@@ -50,14 +50,14 @@ function loadConfigs() {
             var json = JSON.stringify(response, null, 4);
             var jsonparsed = JSON.parse(json);
 
-            var list = $('#configs');
-            list.empty().append(new Option('', '', null, null));
+            var list = $("#configs");
+            list.empty().append(new Option("", "", null, null));
             for (var i = 0; i < jsonparsed.length; i++) {
                 var option = new Option(jsonparsed[i].name, jsonparsed[i].name, null, null);
-                option.setAttribute('data-value', JSON.stringify(jsonparsed[i], null, 4));
+                option.setAttribute("data-value", JSON.stringify(jsonparsed[i], null, 4));
                 list.append(option);
             }
-            list.trigger('change');
+            list.trigger("change");
             addToLog("Loaded configurations");
         },
         error: function (e) {
@@ -79,10 +79,10 @@ function saveConfig() {
     try {
         new RegExp(currentDelimiter);
         if (currentDelimiter === null || currentDelimiter === "") {
-            currentDelimiter = '\n';
+            currentDelimiter = "\n";
         }
     } catch(e) {
-        currentDelimiter = '\n';
+        currentDelimiter = "\n";
     }
 
     if (!/^0*[0-9]{1,4}$/.test(currentHeaderLines)){
@@ -91,23 +91,23 @@ function saveConfig() {
 
 
     var date = [];
-    $('#timeTable').find('tbody tr').each(function () {
+    $("#timeTable").find("tbody tr").each(function () {
         var obj = {},
-            $td = $(this).find('td');
+            $td = $(this).find("td");
         currentInput = $td.eq(1).find("input").val();
         if ((currentInput === null || currentInput === "") && isExcel === false) {
             $.notify({
-                message: 'Please specify the date format (no empty strings allowed).'
+                message: "Please specify the date format (no empty strings allowed)."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
@@ -117,17 +117,17 @@ function saveConfig() {
         currentInput = $td.eq(0).find("input").val();
         if (currentInput === null || currentInput === "") {
             $.notify({
-                message: 'Please specify the column where the date can be found (no empty field allowed) before saving the configuration.'
+                message: "Please specify the column where the date can be found (no empty field allowed) before saving the configuration."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
@@ -137,17 +137,17 @@ function saveConfig() {
 
         if (!(currentInput == parsed) || parsed < 0) {
             $.notify({
-                message: 'Please specify the column where the date can be found (must be a non-negative number) before saving the configuration.'
+                message: "Please specify the column where the date can be found (must be a non-negative number) before saving the configuration."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
@@ -162,44 +162,44 @@ function saveConfig() {
     }
 
     var streams = [];
-    $('#datastreams').find('.datastream').each(function () {
+    $("#datastreams").find(".datastream").each(function () {
         var obj = {},
             obs = [];
-        currentInput = $(this).find('select option:selected').val();
+        currentInput = $(this).find("select option:selected").val();
         if (currentInput === null || currentInput === "") {
             $.notify({
-                message: 'Please leave no datastream empty.'
+                message: "Please leave no datastream empty."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
             return false;
         }
-        obj['dsID'] = JSON.parse($(this).find('select option:selected').attr('data-value')).frostId;
-        $(this).find('tbody tr').each(function () {
-            currentInput = $(this).find('td:eq(1) input').val();
+        obj["dsID"] = JSON.parse($(this).find("select option:selected").attr("data-value")).frostId;
+        $(this).find("tbody tr").each(function () {
+            currentInput = $(this).find("td:eq(1) input").val();
             if (currentInput === null || currentInput === "") {
                 $.notify({
-                    message: 'Please specify the column where the observations of each datastream can be found (no empty field allowed) before saving the configuration.'
+                    message: "Please specify the column where the observations of each datastream can be found (no empty field allowed) before saving the configuration."
                 },{
                     allow_dismiss: true,
-                    type: 'info',
+                    type: "info",
                     placement: {
                         from: "top",
                         align: "left"
                     },
                     animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp"
                     }
                 });
                 stop = true;
@@ -211,17 +211,17 @@ function saveConfig() {
 
             if (!(currentInput == parsed) || parsed < 0) {
                 $.notify({
-                    message: 'Please specify the column where the observations of each datastream can be found (must be a non-negative number) before saving the configuration.'
+                    message: "Please specify the column where the observations of each datastream can be found (must be a non-negative number) before saving the configuration."
                 }, {
                     allow_dismiss: true,
-                    type: 'info',
+                    type: "info",
                     placement: {
                         from: "top",
                         align: "left"
                     },
                     animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp"
                     }
                 });
                 stop = true;
@@ -233,8 +233,8 @@ function saveConfig() {
             return false;
         }
 
-        obj['observations'] = obs;
-        obj['multiStream'] = (obs.length > 1);
+        obj["observations"] = obs;
+        obj["multiStream"] = (obs.length > 1);
         streams.push(obj);
     });
 
@@ -243,69 +243,69 @@ function saveConfig() {
     }
 
     var filetype = null;
-    if ($('input[name=source]:eq(0)').is(':checked')) {
-        filetype = $('#file').val();
-    } else if ($('input[name=source]:eq(1)').is(':checked')) {
-        filetype = $('#sourceinput').val();
+    if ($("input[name=source]:eq(0)").is(":checked")) {
+        filetype = $("#file").val();
+    } else if ($("input[name=source]:eq(1)").is(":checked")) {
+        filetype = $("#sourceinput").val();
     }
     if (!(filetype) || filetype === "") {
         addToLog("No File specified.");
     } else {
-        filetype = filetype.split('.').pop().toUpperCase();
-        if (filetype === 'XLSX' || filetype === 'XLS') {
-            filetype = 'EXCEL';
-        } else if (filetype !== 'CSV') {
+        filetype = filetype.split(".").pop().toUpperCase();
+        if (filetype === "XLSX" || filetype === "XLS") {
+            filetype = "EXCEL";
+        } else if (filetype !== "CSV") {
             addToLog("Unknown file type.");
             return;
         }
     }
 
 
-    if ($('#selecttime option:selected').attr('data-value') == null) {
+    if ($("#selecttime option:selected").attr("data-value") == null) {
         $.notify({
-            message: 'Please choose a time zone before saving the configuration.'
+            message: "Please choose a time zone before saving the configuration."
         },{
             allow_dismiss: true,
-            type: 'info',
+            type: "info",
             placement: {
                 from: "top",
                 align: "left"
             },
             animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
             }
         });
         return false;
     } else if (date.length === 0) {
         $.notify({
-            message: 'Please specify where to find the date in your file before saving the configuration.'
+            message: "Please specify where to find the date in your file before saving the configuration."
         },{
             allow_dismiss: true,
-            type: 'info',
+            type: "info",
             placement: {
                 from: "top",
                 align: "left"
             },
             animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
             }
         });
         return false;
     } else if (streams.length === 0) {
         $.notify({
-            message: 'Please add a datastream before saving the configuration.'
+            message: "Please add a datastream before saving the configuration."
         },{
             allow_dismiss: true,
-            type: 'info',
+            type: "info",
             placement: {
                 from: "top",
                 align: "left"
             },
             animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
             }
         });
         return false;
@@ -313,7 +313,7 @@ function saveConfig() {
 
     var map = mappingData;
 
-    var cfgName = prompt('Name of Configuration:');
+    var cfgName = prompt("Name of Configuration:");
     if (cfgName === null) {
         return false;
     }
@@ -326,7 +326,7 @@ function saveConfig() {
         name: cfgName,
         delimiter: currentDelimiter,
         numberOfHeaderlines: parseInt(currentHeaderLines),
-        timezone: $('#selecttime option:selected').attr('data-value'),
+        timezone: $("#selecttime option:selected").attr("data-value"),
         dateTime: date,
         streamData: streams,
         mapOfMagicNumbers: map,
@@ -341,14 +341,14 @@ function saveConfig() {
             url: "config/create",
             contentType: "application/json",
             data: jsoncfg,
-            dataType: 'json',
+            dataType: "json",
             error: function (e) {
                 addToLog(e.responseText);
             },
             success: function (e) {
                 var option = new Option(e.name, e.name, null, null);
-                option.setAttribute('data-value', JSON.stringify(e, null, 4));
-                $('#configs').append(option).val(e.name).trigger('change');
+                option.setAttribute("data-value", JSON.stringify(e, null, 4));
+                $("#configs").append(option).val(e.name).trigger("change");
                 addToLog("Configuration saved.");
             }
         }
@@ -372,37 +372,37 @@ function loadConfig(id) {
         	
         	
             mappingData = response.mapOfMagicNumbers;
-            $('#frostserverurl').val(response.frostURL);
+            $("#frostserverurl").val(response.frostURL);
             
             urlconfirmed(function() {
-            	$('#delimiter').val(response.delimiter);
-                $('#headerlines').val(response.numberOfHeaderlines);
+            	$("#delimiter").val(response.delimiter);
+                $("#headerlines").val(response.numberOfHeaderlines);
                 currentDelimiter = response.delimiter;
                 currentHeaderLines = response.numberOfHeaderlines;
                 preview();
 
 
-                $('#selecttime').find('option').each(function () {
-                    if ($(this).attr('data-value') === response.timezone) {
-                        $('#selecttime').val($(this).val()).trigger('change');
+                $("#selecttime").find("option").each(function () {
+                    if ($(this).attr("data-value") === response.timezone) {
+                        $("#selecttime").val($(this).val()).trigger("change");
                     }
                 });
 
-                var table = $('#timeTable');
+                var table = $("#timeTable");
                 var lines = response.dateTime.length;
-                var rows = document.getElementById('timeTable').rows.length - 1;
+                var rows = document.getElementById("timeTable").rows.length - 1;
                 while (lines > rows) {
-                    addRow(table, '2', '20');
+                    addRow(table, "2", "20");
                     rows++;
                 }
                 while (lines < rows) {
-                    delLastRow('timeTable');
+                    delLastRow("timeTable");
                     rows--;
                 }
 
                 var i = 0;
-                table.find('tbody tr').each(function () {
-                    var $td = $(this).find('td');
+                table.find("tbody tr").each(function () {
+                    var $td = $(this).find("td");
                     $td.eq(0).find("input").val(response.dateTime[i].column);
                     $td.eq(1).find("input").val(response.dateTime[i++].string);
                 });
@@ -424,8 +424,8 @@ function loadConfig(id) {
 function thingConfig(streams, url) {
 
     $.ajax({
-        type: 'GET',
-        url: 'datastream/single',
+        type: "GET",
+        url: "datastream/single",
         data: {
             id: parseInt(streams[0].dsID),
             isMulti: streams[0].multiStream,
@@ -444,16 +444,16 @@ function thingConfig(streams, url) {
 function loadStreamConfig(stream, div) {
 	var url = document.getElementById("serverurlbox").innerText;
     $.ajax({
-        type: 'GET',
-        url: 'datastream/single',
+        type: "GET",
+        url: "datastream/single",
         data: {
             id: parseInt(stream.dsID),
             isMulti: stream.multiStream,
             url: url
         },
         success: function (result) {
-            div.find('select').val(result.name + ' (' + result.frostId + ')').trigger('change');
-            div.find('select option:selected').attr('data-value', JSON.stringify(result));
+            div.find("select").val(result.name + " (" + result.frostId + ")").trigger("change");
+            div.find("select option:selected").attr("data-value", JSON.stringify(result));
             loadStream(result, div);
             loadStreamCol(stream.observations, div);
         },
@@ -467,7 +467,7 @@ function fillStreams(streams) {
     var child;
     for (var i = 0; i < streams.length; i++) {
         addDatastream();
-        child = $('#datastreams > div').last();
+        child = $("#datastreams > div").last();
         loadStreamConfig(streams[i], child);
     }
 
@@ -479,14 +479,14 @@ function fillStreams(streams) {
 function resetConfig() {
     document.getElementById("delimiter").value = ";";
     document.getElementById("headerlines").value = "0";
-    $('#things').val(null).trigger('change');
-    $('#selecttime').val(null).trigger('change');
-    $('#timeTable').find('tbody').find('tr').each(function () {
+    $("#things").val(null).trigger("change");
+    $("#selecttime").val(null).trigger("change");
+    $("#timeTable").find("tbody").find("tr").each(function () {
         this.remove();
     });
-    addRow($('#timeTable'), '2', '20');
+    addRow($("#timeTable"), "2", "20");
     document.getElementById("datastreams").innerHTML = "";
-    $('#configs').val(null).trigger('change');
+    $("#configs").val(null).trigger("change");
     resetMapping();
 
     optimzeforsource(); //disables the delimiter and time format if the source file is an excel file
@@ -499,14 +499,14 @@ function resetConfig() {
  */
 function getThings(fnSuccess) {
 	
-    var listTh = $('#things');
-    var list2 = $('#datastreams');
+    var listTh = $("#things");
+    var list2 = $("#datastreams");
     
-    listTh.empty().append(new Option('', '', null, null));
-    list2.empty().append(new Option('', '', null, null));
+    listTh.empty().append(new Option("", "", null, null));
+    list2.empty().append(new Option("", "", null, null));
     
-    listTh.trigger('change');
-    list2.trigger('change');
+    listTh.trigger("change");
+    list2.trigger("change");
     
 	
 	var url = document.getElementById("serverurlbox").innerText;
@@ -521,14 +521,14 @@ function getThings(fnSuccess) {
             var json = JSON.stringify(response, null, 4);
             var jsonparsed = JSON.parse(json);
 
-            var list = $('#things');
-            list.empty().append(new Option('', '', null, null));
+            var list = $("#things");
+            list.empty().append(new Option("", "", null, null));
             for (var i = 0; i < jsonparsed.length; i++) {
-                var option = new Option(jsonparsed[i].name + ' (' + jsonparsed[i].frostId + ')', jsonparsed[i].name + ' (' + jsonparsed[i].frostId + ')', null, null);
-                option.setAttribute('data-value', JSON.stringify(jsonparsed[i], null, 4));
+                var option = new Option(jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")", jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")", null, null);
+                option.setAttribute("data-value", JSON.stringify(jsonparsed[i], null, 4));
                 list.append(option);
             }
-            list.trigger('change');
+            list.trigger("change");
             addToLog("Things loaded.");
             
             if (!(fnSuccess == null)) {
@@ -565,19 +565,19 @@ function getThingStreams(id, cfg, streams) {
 
             streamData = [];
             var stream = {};
-            stream['id'] = '';
-            stream['text'] = '';
+            stream["id"] = "";
+            stream["text"] = "";
             streamData.push(stream);
 
             for (var i = 0; i < jsonparsed.length; i++) {
                 stream = {};
-                stream['id'] = jsonparsed[i].name + ' (' + jsonparsed[i].frostId + ')';
-                stream['text'] = jsonparsed[i].name + ' (' + jsonparsed[i].frostId + ')';
-                stream['data-value'] = JSON.stringify(jsonparsed[i], null, 4);
+                stream["id"] = jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")";
+                stream["text"] = jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")";
+                stream["data-value"] = JSON.stringify(jsonparsed[i], null, 4);
                 streamData.push(stream);
             }
 
-            $('#datastreams').empty();
+            $("#datastreams").empty();
             if (cfg) {
                 fillStreams(streams);
             } else {
@@ -603,70 +603,68 @@ function removeDatastream(stream) {
  * adds an empty stream to the list in the config gui
  */
 function addDatastream() {
-    var streams = $('#datastreams');
-    streams.append($('<div>')
-        .attr('class', 'datastream')
-        .append($('<div>')
-            .append($('<label>')
-                .text('Name:')
-                .attr('style', 'margin-right:10px')
+    var streams = $("#datastreams");
+    streams.append($("<div>")
+        .attr("class", "datastream")
+        .append($("<div>")
+            .append($("<label>")
+                .text("Name:")
+                .attr("style", "margin-right:10px")
             )
-            .append($('<select>')
-                .attr('style', 'width: 200px')
-                .attr('name', 'streams')
-                .attr('class', 'selectStreams')
+            .append($("<select>")
+                .attr("style", "width: 200px")
+                .attr("name", "streams")
+                .attr("class", "selectStreams")
             )
-            .append($('<button>')
-                .attr('class', 'btn btn-secondary')
-                .attr('onclick', 'removeDatastream(this.parentNode.parentNode)')
-                .attr('style', 'width:auto; margin-left:10px')
-                .html('<span class="fas fa-minus" ></span>')
+            .append($("<button>")
+                .attr("class", "btn btn-secondary")
+                .attr("onclick", "removeDatastream(this.parentNode.parentNode)")
+                .attr("style", "width:auto; margin-left:10px")
+                .html("<span class="fas fa-minus" ></span>")
             )
         )
-        .append($('<div>')
-            .attr('class', 'streamtable')
-            .append($('<table>')
-                .attr('class', 'table')
-                .append($('<thead>')
-                    .append($('<tr>')
-                        .append($('<th>')
-                            .text('Unit')
+        .append($("<div>")
+            .attr("class", "streamtable")
+            .append($("<table>")
+                .attr("class", "table")
+                .append($("<thead>")
+                    .append($("<tr>")
+                        .append($("<th>")
+                            .text("Unit")
                         )
-                        .append($('<th>')
-                            .text('Column')
+                        .append($("<th>")
+                            .text("Column")
                         )
                     )
                 )
-                .append($('<tbody>')
+                .append($("<tbody>")
                 )
             )
         )
     );
 
-    $('.selectStreams').last().select2({
+    $(".selectStreams").last().select2({
         data: streamData,
-        placeholder: 'Choose a Datastream',
-        width: 'style',
+        placeholder: "Choose a Datastream",
+        width: "style",
         dropdownAutoWidth: true
-    }).trigger('change').on('select2:select', function (e) {
+    }).trigger("change").on("select2:select", function (e) {
         var sel = $(this);
         var parent = sel.parent().parent();
         var json;
-        if (e.params.data['data-value']) {
-            json = JSON.parse(e.params.data['data-value']);
-            sel.find('option:selected').attr('data-value', JSON.stringify(json));
+        if (e.params.data["data-value"]) {
+            json = JSON.parse(e.params.data["data-value"]);
+            sel.find("option:selected").attr("data-value", JSON.stringify(json));
         } else {
-            json = JSON.parse(sel.find('option:selected').attr('data-value'));
+            json = JSON.parse(sel.find("option:selected").attr("data-value"));
         }
-        if (json) loadStream(json, parent.find('.streamtable'));
+        if (json) loadStream(json, parent.find(".streamtable"));
     });
-    /*
-    streams.find('.datastream').last().find('input').get(0).addEventListener('input', chooseStream);
-    */
+
 }
 
 function showPreview() {
-    alert('not implemented yet')
+    alert("not implemented yet")
 }
 
 var id;
@@ -678,20 +676,20 @@ var initial = 1000;
  */
 function importData() {
     var name;
-    if ($('input[name=source]:eq(0)').is(':checked')) {
-        name = $('#file').val().split('\\').pop();
-    } else if ($('input[name=source]:eq(1)').is(':checked')) {
-        name = $('#sourceinput').val().split('/').pop();
+    if ($("input[name=source]:eq(0)").is(":checked")) {
+        name = $("#file").val().split("\\").pop();
+    } else if ($("input[name=source]:eq(1)").is(":checked")) {
+        name = $("#sourceinput").val().split("/").pop();
     }
 
 
     try {
         new RegExp(currentDelimiter);
         if (currentDelimiter === null || currentDelimiter === "") {
-            currentDelimiter = '\n';
+            currentDelimiter = "\n";
         }
     } catch(e) {
-        currentDelimiter = '\n';
+        currentDelimiter = "\n";
     }
 
     if (!/^0*[0-9]{1,4}$/.test(currentHeaderLines)){
@@ -704,23 +702,23 @@ function importData() {
     var cfgName = "temp";
     var url = document.querySelector("#frostserverurl").value;
     var date = [];
-    $('#timeTable').find('tbody tr').each(function () {
+    $("#timeTable").find("tbody tr").each(function () {
         var obj = {},
-            $td = $(this).find('td');
+            $td = $(this).find("td");
         currentInput = $td.eq(1).find("input").val();
         if ((currentInput === null || currentInput === "") && isExcel === false) {
             $.notify({
-                message: 'Please specify the date format (no empty strings allowed).'
+                message: "Please specify the date format (no empty strings allowed)."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
@@ -730,17 +728,17 @@ function importData() {
         currentInput = $td.eq(0).find("input").val();
         if (currentInput === null || currentInput === "") {
             $.notify({
-                message: 'Please specify the column where the date can be found (no empty field allowed) before importing data.'
+                message: "Please specify the column where the date can be found (no empty field allowed) before importing data."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
@@ -749,17 +747,17 @@ function importData() {
         parsed = parseInt(currentInput, 10);
         if (!(currentInput == parsed) || parsed < 0) {
             $.notify({
-                message: 'Please specify the column where the date can be found (must be a non-negative number) before importing data.'
+                message: "Please specify the column where the date can be found (must be a non-negative number) before importing data."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
@@ -772,43 +770,43 @@ function importData() {
         return false;
     }
     var streams = [];
-    $('#datastreams').find('.datastream').each(function () {
+    $("#datastreams").find(".datastream").each(function () {
         var obj = {},
             obs = [];
-        currentInput = $(this).find('select option:selected').val();
+        currentInput = $(this).find("select option:selected").val();
         if (currentInput === null || currentInput === "") {
             $.notify({
-                message: 'Please leave no datastream empty.'
+                message: "Please leave no datastream empty."
             },{
                 allow_dismiss: true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 }
             });
             stop = true;
             return false;
         }
-        obj['dsID'] = JSON.parse($(this).find('select option:selected').attr('data-value')).frostId;
-        $(this).find('tbody tr').each(function () {
-            currentInput = $(this).find('td:eq(1) input').val();
+        obj["dsID"] = JSON.parse($(this).find("select option:selected").attr("data-value")).frostId;
+        $(this).find("tbody tr").each(function () {
+            currentInput = $(this).find("td:eq(1) input").val();
             if (currentInput === null || currentInput === "") {
                 $.notify({
-                    message: 'Please specify the column where the observations of each datastream can be found (no empty field allowed) before importing data.'
+                    message: "Please specify the column where the observations of each datastream can be found (no empty field allowed) before importing data."
                 },{
-                    type: 'info',
+                    type: "info",
                     placement: {
                         from: "top",
                         align: "left"
                     },
                     animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp"
                     }
                 });
                 stop = true;
@@ -819,16 +817,16 @@ function importData() {
 
             if (!(currentInput == parsed) || parsed < 0) {
                 $.notify({
-                    message: 'Please specify the column where the observations of each datastream can be found (must be a non-negative number) before importing data.'
+                    message: "Please specify the column where the observations of each datastream can be found (must be a non-negative number) before importing data."
                 },{
-                    type: 'info',
+                    type: "info",
                     placement: {
                         from: "top",
                         align: "left"
                     },
                     animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp"
                     }
                 });
                 stop = true;
@@ -840,8 +838,8 @@ function importData() {
             return false;
         }
 
-        obj['observations'] = obs;
-        obj['multiStream'] = (obs.length > 1);
+        obj["observations"] = obs;
+        obj["multiStream"] = (obs.length > 1);
         streams.push(obj);
     });
     if (stop === true) {
@@ -849,18 +847,18 @@ function importData() {
     }
 
     var filetype = null;
-    if ($('input[name=source]:eq(0)').is(':checked')) {
-        filetype = $('#file').val();
-    } else if ($('input[name=source]:eq(1)').is(':checked')) {
-        filetype = $('#sourceinput').val();
+    if ($("input[name=source]:eq(0)").is(":checked")) {
+        filetype = $("#file").val();
+    } else if ($("input[name=source]:eq(1)").is(":checked")) {
+        filetype = $("#sourceinput").val();
     }
     if (!(filetype) || filetype === "") {
         addToLog("No File specified.");
     } else {
-        filetype = filetype.split('.').pop().toUpperCase();
-        if (filetype === 'XLSX' || filetype === 'XLS') {
-            filetype = 'EXCEL';
-        } else if (filetype !== 'CSV') {
+        filetype = filetype.split(".").pop().toUpperCase();
+        if (filetype === "XLSX" || filetype === "XLS") {
+            filetype = "EXCEL";
+        } else if (filetype !== "CSV") {
             addToLog("Unknown file type.");
             return false;
         }
@@ -872,7 +870,7 @@ function importData() {
         name: cfgName,
         delimiter: currentDelimiter,
         numberOfHeaderlines: parseInt(currentHeaderLines),
-        timezone: $('#selecttime option:selected').attr('data-value'),
+        timezone: $("#selecttime option:selected").attr("data-value"),
         dateTime: date,
         streamData: streams,
         mapOfMagicNumbers: map,
@@ -885,104 +883,104 @@ function importData() {
         config: jsoncfg,
         filename: getCurrentFileName()
     };
-    if ($('#selecttime option:selected').attr('data-value') == null) {
+    if ($("#selecttime option:selected").attr("data-value") == null) {
         $.notify({
-            message: 'Please choose a time zone before importing data.'
+            message: "Please choose a time zone before importing data."
         },{
-            type: 'info',
+            type: "info",
             placement: {
                 from: "top",
                 align: "left"
             },
             animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
             }
         });
         return false;
     } else if (date.length === 0) {
         $.notify({
-            message: 'Please specify where to find the date in your file before importing data.'
+            message: "Please specify where to find the date in your file before importing data."
         },{
-            type: 'info',
+            type: "info",
             placement: {
                 from: "top",
                 align: "left"
             },
             animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
             }
         });
         return false;
     } else if (streams.length === 0) {
         $.notify({
-            message: 'Please add a datastream before importing data.'
+            message: "Please add a datastream before importing data."
         },{
-            type: 'info',
+            type: "info",
             placement: {
                 from: "top",
                 align: "left"
             },
             animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
             }
         });
         return false;
     } else {
 
         $.notify({
-            message: 'Import started'
+            message: "Import started"
         },{
-            type: 'info',
+            type: "info",
             allow_dismiss: true,
             placement: {
                 from: "top",
                 align: "left"
             },
             animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
             }
         });
         addToLog("Import of File " + name + " started.");
         document.getElementById("progress").value = 0;
         id = setInterval(progress, initial);
         $.ajax({
-            type: 'POST',
+            type: "POST",
             url: "importQueue",
             data: mydata,
             success: function (e) {
                 addToLog(e);
                 $.notify({
-                    message: 'Import finished'
+                    message: "Import finished"
                 },{
-                    type: 'success',
+                    type: "success",
                     allow_dismiss: true,
                     placement: {
                         from: "top",
                         align: "left"
                     },
                     animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp"
                     }
                 });
             },
             error: function (e) {
                 $.notify({
-                    message: 'Import failed. Check log for errors.'
+                    message: "Import failed. Check log for errors."
                 },{
-                    type: 'danger',
+                    type: "danger",
                     allow_dismiss: true,
                     placement: {
                         from: "top",
                         align: "left"
                     },
                     animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp"
                     }
                 });
                 addToLog(e.responseText);
@@ -994,7 +992,7 @@ function importData() {
 
 function progress() {
     $.ajax({
-        type: 'GET',
+        type: "GET",
         url: "progress",
         success: function (response) {
             var x = false;
@@ -1036,7 +1034,7 @@ function progress() {
 }
 
 function check(string, done) {
-    if (string === 'Finished' || string.startsWith("Upload Queued")) {
+    if (string === "Finished" || string.startsWith("Upload Queued")) {
         clearInterval(id);
         document.getElementById("progress").value = 100;
         done = true;
@@ -1070,7 +1068,7 @@ function urlconfirmed(fnSuccess) {
 	var message;
 	
     $.ajax({
-        type: 'GET',
+        type: "GET",
         url: "server-check",
         data: mydata,
         success: function (response) {
@@ -1114,65 +1112,9 @@ function urlconfirmed(fnSuccess) {
     });
 }
 
-/*
-function openurldialog() {
-	var url = document.querySelector("#frostserverurl").value;
-	var mydata = {
-		frostUrl: url
-	};
-	
-	var res;
-	var message;
-	
-    $.ajax({
-    	async: false,
-        type: 'GET',
-        url: "server-check",
-        data: mydata,
-        success: function (response) {
-        	message = response;
-        	if (response === "Server reachable") {  
-        		res = true;
-        	} else {
-        		res = false;
-        	}
-            
-        },
-        error: function (e) {
-            addToLog(e.responseText);
-            res = false;
-        }
-
-    });
-    var r;
-    if (res) {
-    	r = confirm('Server:\n"' + url + '"\nis reachable.\nDo you want to connect?');
-    	
-    	if (r) {
-    		document.getElementById("serverurlbox").innerText = url;
-            document.getElementById("serverurlbox").href = url;
-            
-            addToLog("FROST-Server: " + url);
-            
-            addToLog("Try to load things ...");
-        	getThings();
-    	} else {
-    		document.querySelector("#frostserverurl").value = document.getElementById("serverurlbox").innerText;
-    	}
-    }  else {
-    	r = confirm("Can't connect to: " + url  + "\nDetails: " + message);
-    	document.querySelector("#frostserverurl").value = document.getElementById("serverurlbox").innerText;
-    }
-    
-	
-}
-
-*/
-
-
 
 function pad2(number) {
-    return (number < 10 ? '0' : '') + number
+    return (number < 10 ? "0" : "") + number
 }
 
 
@@ -1217,47 +1159,21 @@ function addToLog(msg) {
  */
 function loadStreamCol(observations, div) {
     for (var i = 0; i < observations.length; i++) {
-        div.find('tbody tr').eq(i).find('td input').val(observations[i]);
+        div.find("tbody tr").eq(i).find("td input").val(observations[i]);
     }
 }
 
-/*
- * NOT NEEDED?
- * loads the streamdata from the server
- * @param dsid
- * @param multi
- * @param div
- * @param cfg
- 
-function loadStreamData(stream, div) {
-    $.ajax({
-        type: 'GET',
-        url: 'datastream/single',
-        data: {
-            id: parseInt(stream.dsID),
-            isMulti: stream.multiStream
-        },
-        success: function (result) {
-            loadStream(result, div);
-        },
-        error: function (e) {
-            addToLog(e.responseText);
-        }
-    });
-}
-
-*/
 
 function loadThing(id, streams, url) {
     $.ajax({
-        type: 'GET',
-        url: 'thing/single',
+        type: "GET",
+        url: "thing/single",
         data: {
             thingId: parseInt(id),
             frostUrlString: url
         },
         success: function (result) {
-            $('#things').val(result.name + " (" + result.frostId + ")").trigger('change');
+            $("#things").val(result.name + " (" + result.frostId + ")").trigger("change");
             getThingStreams(result.frostId, true, streams);
         },
         error: function (e) {
@@ -1269,17 +1185,17 @@ function loadThing(id, streams, url) {
 
 function loadStream(stream, div) {
     var rows = stream.units_of_measurement.length;
-    $(div).find('tbody').empty();
+    $(div).find("tbody").empty();
     for (var i = 0; i < rows; i++) {
-        $(div).find('tbody')
-            .append($('<tr>')
-                .append($('<td>')
+        $(div).find("tbody")
+            .append($("<tr>")
+                .append($("<td>")
                     .text(stream.units_of_measurement[i].symbol)
                 )
-                .append($('<td>')
-                    .append($('<input>')
-                        .attr('type', 'text')
-                        .attr('size', '5')
+                .append($("<td>")
+                    .append($("<input>")
+                        .attr("type", "text")
+                        .attr("size", "5")
                     )
                 )
             );
@@ -1287,7 +1203,7 @@ function loadStream(stream, div) {
 }
 
 function getThing() {
-    return JSON.parse($('#things option:selected').attr('data-value'));
+    return JSON.parse($("#things option:selected").attr("data-value"));
 
 }
 
@@ -1295,15 +1211,15 @@ function getThing() {
  * This function is called if a configuration is selected
  * @param e a config
  */
-$('#configs').on('select2:select', function (e) {
-    var json = JSON.parse($('#configs option:selected').attr('data-value'));
+$("#configs").on("select2:select", function (e) {
+    var json = JSON.parse($("#configs option:selected").attr("data-value"));
     if (json) {
         loadConfig(json.id);
     }
     openaccordion("currentConfigAcc");
 });
 
-$('#things').on('select2:select', function (e) {
+$("#things").on("select2:select", function (e) {
     var json = getThing();
     if (json) {
         getThingStreams(json.frostId);
@@ -1317,9 +1233,9 @@ $('#things').on('select2:select', function (e) {
 function fileConfirmed() {
     upload();
     optimzeforsource();
-    openaccordion('chooseConfigAcc');
+    openaccordion("chooseConfigAcc");
 }
 
 $(document).ready(function(){
-	  $('[data-toggle="tooltip"]').tooltip();   
+	  $("[data-toggle="tooltip"]").tooltip();   
 	});

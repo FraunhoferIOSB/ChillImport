@@ -13,19 +13,19 @@ function getCurrentFileName() {
  * checks the input file (must be .csv or .xlsx)
  */
 function checkinputfile() {
-    var name = $('#file').val().split(/(\\|\/)/g).pop();
+    var name = $("#file").val().split(/(\\|\/)/g).pop();
     if (name.match(".*\.csv$")) {
-        $('#oksource').attr('disabled', false);
+        $("#oksource").attr("disabled", false);
         isCsv = true;
         isExcel = false;
     } else if (name.match(".*\.xlsx?$")) {
-        $('#oksource').attr('disabled', false);
+        $("#oksource").attr("disabled", false);
         isCsv = false;
         isExcel = true;
     } else {
         isExcel = false;
         isCsv = false;
-        $('#oksource').attr('disabled', true);
+        $("#oksource").attr("disabled", true);
     }
 }
 
@@ -33,59 +33,59 @@ function checkinputfile() {
  * checks the url of the source
  */
 function checkinputurl() {
-    var url = $('#sourceinput').val().toString();
+    var url = $("#sourceinput").val().toString();
     var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
     if (pattern.test(url)) {
         isExcel = false;
         isCsv = false;
-        $('#oksource').attr('disabled', false);
+        $("#oksource").attr("disabled", false);
     } else {
         isExcel = false;
         isCsv = false;
-        $('#oksource').attr('disabled', true);
+        $("#oksource").attr("disabled", true);
     }
 }
 
 function sourcefile() {
     document.getElementById("sourcetext").innerText = "Choose sourcefile:";
-    $('#sourceinput').hide();
-    $('#file').show();
+    $("#sourceinput").hide();
+    $("#file").show();
     checkinputfile();
 
 }
 
 function sourcesite() {
     document.getElementById("sourcetext").innerText = "Choose website:";
-    $('#sourceinput').show();
-    $('#file').hide();
+    $("#sourceinput").show();
+    $("#file").hide();
     checkinputurl();
 }
 
 function sourceserver() {
     document.getElementById("sourcetext").innerText = "Choose server:";
-    $('#sourceinput').show();
-    $('#file').hide();
+    $("#sourceinput").show();
+    $("#file").hide();
 }
 
 function upload() {
-    $('#previewbutton').prop('disabled', true);
-    $('#importbutton').prop('disabled', true);
-    if ($('input[name=source]:eq(0)').is(':checked')) {
+    $("#previewbutton").prop("disabled", true);
+    $("#importbutton").prop("disabled", true);
+    if ($("input[name=source]:eq(0)").is(":checked")) {
         uploadFile();
-    } else if ($('input[name=source]:eq(1)').is(':checked')) {
+    } else if ($("input[name=source]:eq(1)").is(":checked")) {
         uploadUrl();
     }
 }
 
 function uploadFile() {
-    var form = $('#uploader')[0];
+    var form = $("#uploader")[0];
 
     var data = new FormData(form);
 
     $.ajax({
         type: "POST",
-        enctype: 'multipart/form-data',
+        enctype: "multipart/form-data",
         url: "upload",
         data: data,
         processData: false,
@@ -93,38 +93,38 @@ function uploadFile() {
         cache: false,
         success: function (e) {
             $.notify({
-                message: 'File has been uploaded'
+                message: "File has been uploaded"
             }, {
                 allow_dismiss: true,
-                type: 'success',
+                type: "success",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
             currentFileName = e;
-            $('#importbutton').prop('disabled', false);
+            $("#importbutton").prop("disabled", false);
             addToLog("Finished processing file. Ready for import.");
             preview();
         },
         error: function (e) {
             $.notify({
-                message: 'File could not be uploaded. Check Log for errors'
+                message: "File could not be uploaded. Check Log for errors"
             }, {
                 allow_dismiss: true,
-                type: 'danger',
+                type: "danger",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
@@ -139,40 +139,40 @@ function uploadUrl() {
     $.ajax({
         type: "POST",
         url: "uploadFromUrl",
-        data: {url: $('#sourceinput').val()},
+        data: {url: $("#sourceinput").val()},
         success: function (e) {
             $.notify({
-                message: 'File has been uploaded'
+                message: "File has been uploaded"
             }, {
                 allow_dismiss: true,
-                type: 'success',
+                type: "success",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
-                $('#importbutton').prop('disabled', false);
+                $("#importbutton").prop("disabled", false);
                 addToLog("Finished processing file. Ready for import.");
                 preview();
             },
         error: function(e) {
             $.notify({
-                message: 'File could not be uploaded. Check Log for errors'
+                message: "File could not be uploaded. Check Log for errors"
             }, {
                 allow_dismiss: true,
-                type: 'danger',
+                type: "danger",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
@@ -185,11 +185,11 @@ function uploadUrl() {
 
 
 function preview() {
-    $('#previewbutton').prop('disabled', true);
+    $("#previewbutton").prop("disabled", true);
 
     $.ajax({
-        type: 'GET',
-        url: 'preview',
+        type: "GET",
+        url: "preview",
         data: {
             filename: currentFileName,
             headerLines: currentHeaderLines,
@@ -197,38 +197,38 @@ function preview() {
         },
         success: function (result) {
             loadPreview(result);
-            $('#previewbutton').prop('disabled', false);
+            $("#previewbutton").prop("disabled", false);
         },
         error: function (e) {
             addToLog(e.responseText);
-            $('#previewbutton').prop('disabled', false);
+            $("#previewbutton").prop("disabled", false);
         }
     });
 }
 
 function loadPreview(values) {
-    var tablebody = $('#previewTable').find('tbody:eq(0)');
-    var tablehead = $('#previewTable').find('thead:eq(0)');
-    tablehead.empty().append($('<tr>'));
+    var tablebody = $("#previewTable").find("tbody:eq(0)");
+    var tablehead = $("#previewTable").find("thead:eq(0)");
+    tablehead.empty().append($("<tr>"));
     tablebody.empty();
     var rows = values.length;
     if (rows > 0) {
         var columns = values[0].length;
     }
     for (var i = 0; i < rows; i++) {
-        tablebody.append($('<tr>'));
-        var current = tablebody.find('tr').last();
+        tablebody.append($("<tr>"));
+        var current = tablebody.find("tr").last();
         for (var j = 0; j < columns; j++) {
-            current.append($('<td>')
+            current.append($("<td>")
                 .text(values[i][j])
             );
         }
     }
 
-    current = tablehead.find('tr').last();
+    current = tablehead.find("tr").last();
     for (var k = 0; k < columns; k++) {
-        current.append($('<th>')
-            .text('Column ' + k)
+        current.append($("<th>")
+            .text("Column " + k)
         );
     }
 
@@ -240,9 +240,9 @@ function loadPreview(values) {
 function excelconfig() {
     $("#delimiter").attr("disabled", true);
 
-    $('#timeTable').find('tbody tr').each(function () {
+    $("#timeTable").find("tbody tr").each(function () {
         var obj = {},
-            $td = $(this).find('td');
+            $td = $(this).find("td");
         obj["string"] = $td.eq(1).find("input").attr("disabled", true);
     });
 }
@@ -253,9 +253,9 @@ function excelconfig() {
 function csvconfig() {
     $("#delimiter").attr("disabled", false);
 
-    $('#timeTable').find('tbody tr').each(function () {
+    $("#timeTable").find("tbody tr").each(function () {
         var obj = {},
-            $td = $(this).find('td');
+            $td = $(this).find("td");
         obj["string"] = $td.eq(1).find("input").attr("disabled", false);
     });
 }

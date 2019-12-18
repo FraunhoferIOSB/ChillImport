@@ -1,26 +1,26 @@
 function initSensor() {
     var data = [
         {
-            id: '',
-            text: ''
+            id: "",
+            text: ""
         },
         {
-            id: 'application/pdf',
-            text: 'application/pdf'
+            id: "application/pdf",
+            text: "application/pdf"
         },
         {
-            id: 'application/json',
-            text: 'application/json'
+            id: "application/json",
+            text: "application/json"
         },
         {
-            id: 'text',
-            text: 'text'
+            id: "text",
+            text: "text"
         }];
 
-    $('#senEncTypes').select2({
+    $("#senEncTypes").select2({
         data: data,
-        placeholder: 'Choose an encoding type',
-        width: 'style',
+        placeholder: "Choose an encoding type",
+        width: "style",
         dropdownAutoWidth: true
     });
 }
@@ -32,8 +32,8 @@ function createSensor() {
     var name = $("#senname").val();
     var desc = $("#sendescription").val();
     var encType = $("#senEncTypes").val();
-    if (!encType || encType === '') {
-        alert('Choose an encryption type.');
+    if (!encType || encType === "") {
+        alert("Choose an encryption type.");
         return false;
     }
     var meta = $("#senmeta").val();
@@ -53,22 +53,22 @@ function createSensor() {
     $.ajax({
         type: "POST",
         url: "sensor/create",
-        datatype: 'json',
-        contentType: 'application/json',
+        datatype: "json",
+        contentType: "application/json",
         data: JSON.stringify(mydata),
         error: function (e) {
             $.notify({
-                message: 'Sensor could not be created, check the Log for errors'
+                message: "Sensor could not be created, check the Log for errors"
             }, {
                 allow_dismiss: true,
-                type: 'danger',
+                type: "danger",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
@@ -76,29 +76,29 @@ function createSensor() {
         },
         success: function (e) {
             $.notify({
-                message: 'Sensor created.'
+                message: "Sensor created."
             },{
                 allow_dismiss:true,
-                type: 'info',
+                type: "info",
                 placement: {
                     from: "top",
                     align: "left"
                 },
                 animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
+                    enter: "animated fadeInDown",
+                    exit: "animated fadeOutUp"
                 },
                 z_index: 9000
             });
-            addToLog('Sensor created.');
-            closeModal('dsdialog');
+            addToLog("Sensor created.");
+            closeModal("dsdialog");
 
-            var text = e.name + ' (' + e.frostId + ')';
+            var text = e.name + " (" + e.frostId + ")";
             var option = new Option(text, text, null, null);
-            option.setAttribute('data-value', JSON.stringify(e, null, 4));
+            option.setAttribute("data-value", JSON.stringify(e, null, 4));
 
-            var sensors = $('#streamsensors');
-            sensors.append(option).trigger('change');
+            var sensors = $("#streamsensors");
+            sensors.append(option).trigger("change");
             sensors.val(text);
         }
     });

@@ -5,9 +5,9 @@
 function changedDelimiter(del) {
     try {
         new RegExp(del);
-        currentDelimiter = (del === null || del === "") ? '\n' : del;
+        currentDelimiter = (del === null || del === "") ? "\n" : del;
     } catch(e) {
-        currentDelimiter = '\n';
+        currentDelimiter = "\n";
     }
     preview();
 }
@@ -54,7 +54,7 @@ function closeaccordion(accId) {
  *
  */
 function chooseConfig() {
-    $('#configs').val(null);
+    $("#configs").val(null);
     closeaccordion("currentConfigAcc");
     document.getElementById("chooseConfigDialog").style.display = "block";
     optimzeforsource();
@@ -76,7 +76,7 @@ function createConfig() {
  * opens the help page
  */
 function openHelp() {
-    window.open('help.html', '_blank');
+    window.open("help.html", "_blank");
 }
 
 /**
