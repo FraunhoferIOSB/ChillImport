@@ -1,3 +1,4 @@
+/*global modal, initSensor, addToLog, closeModal*/
 function initDatastream() {
     var thing = getThing();
     getSensors();

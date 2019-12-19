@@ -1,3 +1,5 @@
+/*global addToLog, closeModal*/
+
 function createLocation() {
 
     var name = $("#locname").val();

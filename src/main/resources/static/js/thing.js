@@ -1,3 +1,4 @@
+/*global addToLog, modal, closeModal*/
 function getLocations() {
 	var url = document.getElementById("serverurlbox").innerText;
 	
@@ -123,5 +124,5 @@ function showLocationModal() {
     var $modal = $("#thingfooter").find("button:eq(0)");
     $modal.attr("onclick", "createLocation()");
     $modal.html("Create Location");
-    modal("thingdialog", "location.html", null, "Create a Location")
+    modal("thingdialog", "location.html", null, "Create a Location");
 }

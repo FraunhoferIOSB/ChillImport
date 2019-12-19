@@ -225,7 +225,7 @@ function loadPreview(values) {
         }
     }
 
-    current = tablehead.find("tr").last();
+    var current = tablehead.find("tr").last();
     for (var k = 0; k < columns; k++) {
         current.append($("<th>")
             .text("Column " + k)
