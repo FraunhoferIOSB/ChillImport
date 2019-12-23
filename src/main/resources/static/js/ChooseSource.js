@@ -215,9 +215,10 @@ function loadPreview(values) {
     if (rows > 0) {
         var columns = values[0].length;
     }
+    var current;
     for (var i = 0; i < rows; i++) {
         tablebody.append($("<tr>"));
-        var current = tablebody.find("tr").last();
+        current = tablebody.find("tr").last();
         for (var j = 0; j < columns; j++) {
             current.append($("<td>")
                 .text(values[i][j])
@@ -225,7 +226,7 @@ function loadPreview(values) {
         }
     }
 
-    var current = tablehead.find("tr").last();
+    current = tablehead.find("tr").last();
     for (var k = 0; k < columns; k++) {
         current.append($("<th>")
             .text("Column " + k)

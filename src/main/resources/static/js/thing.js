@@ -20,18 +20,18 @@ function getLocations() {
 	            var list = $("#locations");
 	            list.empty().append(new Option("", "", null, null));
 	            for (var i = 0; i < jsonparsed.length; i++) {
-	                var option = new Option(jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")", jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")", null, null);
-	                option.setAttribute("data-value", JSON.stringify(jsonparsed[i], null, 4));
-	                list.append(option);
+	            	var option = new Option(jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")", jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")", null, null);
+	            	option.setAttribute("data-value", JSON.stringify(jsonparsed[i], null, 4));
+	            	list.append(option);
 	            }
 	            list.select2({
-	                placeholder: "Choose a location",
-	                width: "style",
-	                dropdownAutoWidth: true
+	            	placeholder: "Choose a location",
+	            	width: "style",
+	            	dropdownAutoWidth: true
 	            }).trigger("change");
 	        },
 	        error: function (e) {
-	            addToLog(e.responseText);
+	        	addToLog(e.responseText);
 	        }
 
 	    });

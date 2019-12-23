@@ -15,9 +15,9 @@ function createLocation() {
 		
 		var myloc = {
 				name: name,
-		        description: desc,
-		        encoding_TYPE: "application/vnd.geo+json",
-		        location: "{\"type\": \"Point\", \"coordinates\": " + loc + "}"
+				description: desc,
+				encoding_TYPE: "application/vnd.geo+json",
+				location: "{\"type\": \"Point\", \"coordinates\": " + loc + "}"
 		};
 
 			var mydata = {
@@ -26,20 +26,20 @@ function createLocation() {
 		    };
 
 		    $.ajax({
-		            type: "POST",
-		            url: "location/create",
-		            datatype: "json",
-		            contentType: "application/json",
-		            data: JSON.stringify(mydata),
-		            error: function (e) {
+		    		type: "POST",
+		    		url: "location/create",
+		    		datatype: "json",
+		    		contentType: "application/json",
+		    		data: JSON.stringify(mydata),
+		    		error: function (e) {
 		                $.notify({
 		                    message: "Location could not be created, check the Log for errors"
 		                }, {
-		                    allow_dismiss: true,
+		                	allow_dismiss: true,
 		                    type: "danger",
 		                    placement: {
-		                        from: "top",
-		                        align: "left"
+		                    	from: "top",
+		                    	align: "left"
 		                    },
 		                    animate: {
 		                        enter: "animated fadeInDown",
@@ -51,17 +51,17 @@ function createLocation() {
 		            },
 		            success: function (e) {
 		                $.notify({
-		                    message: "Location created."
+		                	message: "Location created."
 		                },{
-		                    allow_dismiss:true,
+		                	allow_dismiss:true,
 		                    type: "info",
 		                    placement: {
 		                        from: "top",
 		                        align: "left"
 		                    },
 		                    animate: {
-		                        enter: "animated fadeInDown",
-		                        exit: "animated fadeOutUp"
+		                    	enter: "animated fadeInDown",
+		                    	exit: "animated fadeOutUp"
 		                    },
 		                    z_index: 9000
 		                });

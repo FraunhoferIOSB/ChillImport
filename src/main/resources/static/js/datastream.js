@@ -65,11 +65,11 @@ function getOprops() {
             streamProperties.push(stream);
 
             for (var i = 0; i < jsonparsed.length; i++) {
-                stream = {};
-                stream["id"] = jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")";
-                stream["text"] = jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")";
-                stream["data-value"] = JSON.stringify(jsonparsed[i], null, 4);
-                streamProperties.push(stream);
+            	stream = {};
+            	stream["id"] = jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")";
+            	stream["text"] = jsonparsed[i].name + " (" + jsonparsed[i].frostId + ")";
+            	stream["data-value"] = JSON.stringify(jsonparsed[i], null, 4);
+            	streamProperties.push(stream);
             }
 
             $("#streamUnits tbody").empty();
