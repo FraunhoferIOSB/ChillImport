@@ -38,7 +38,6 @@ function getLocations() {
 			error : function(e) {
 				addToLog(e.responseText);
 			}
-
 		});
 	}
 
