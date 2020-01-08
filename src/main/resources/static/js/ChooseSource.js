@@ -1,3 +1,4 @@
+/*addToLog*/
 var isExcel = false;
 var isCsv = false;
 var currentFileName = "";
@@ -66,16 +67,6 @@ function sourceserver() {
     document.getElementById("sourcetext").innerText = "Choose server:";
     $("#sourceinput").show();
     $("#file").hide();
-}
-
-function upload() {
-    $("#previewbutton").prop("disabled", true);
-    $("#importbutton").prop("disabled", true);
-    if ($("input[name=source]:eq(0)").is(":checked")) {
-        uploadFile();
-    } else if ($("input[name=source]:eq(1)").is(":checked")) {
-        uploadUrl();
-    }
 }
 
 function uploadFile() {
@@ -183,6 +174,45 @@ function uploadUrl() {
     return false;
 }
 
+function upload() {
+    $("#previewbutton").prop("disabled", true);
+    $("#importbutton").prop("disabled", true);
+    if ($("input[name=source]:eq(0)").is(":checked")) {
+        uploadFile();
+    } else if ($("input[name=source]:eq(1)").is(":checked")) {
+        uploadUrl();
+    }
+}
+
+function loadPreview(values) {
+    var tablebody = $("#previewTable").find("tbody:eq(0)");
+    var tablehead = $("#previewTable").find("thead:eq(0)");
+    tablehead.empty().append($("<tr>"));
+    tablebody.empty();
+    var rows = values.length;
+    var columns;
+    if (rows > 0) {
+        columns = values[0].length;
+    }
+    var current;
+    for (var i = 0; i < rows; i++) {
+        tablebody.append($("<tr>"));
+        current = tablebody.find("tr").last();
+        for (var j = 0; j < columns; j++) {
+            current.append($("<td>")
+                .text(values[i][j])
+            );
+        }
+    }
+
+    current = tablehead.find("tr").last();
+    for (var k = 0; k < columns; k++) {
+        current.append($("<th>")
+            .text("Column " + k)
+        );
+    }
+
+}
 
 function preview() {
     $("#previewbutton").prop("disabled", true);
@@ -204,35 +234,6 @@ function preview() {
             $("#previewbutton").prop("disabled", false);
         }
     });
-}
-
-function loadPreview(values) {
-    var tablebody = $("#previewTable").find("tbody:eq(0)");
-    var tablehead = $("#previewTable").find("thead:eq(0)");
-    tablehead.empty().append($("<tr>"));
-    tablebody.empty();
-    var rows = values.length;
-    if (rows > 0) {
-        var columns = values[0].length;
-    }
-    var current;
-    for (var i = 0; i < rows; i++) {
-        tablebody.append($("<tr>"));
-        current = tablebody.find("tr").last();
-        for (var j = 0; j < columns; j++) {
-            current.append($("<td>")
-                .text(values[i][j])
-            );
-        }
-    }
-
-    current = tablehead.find("tr").last();
-    for (var k = 0; k < columns; k++) {
-        current.append($("<th>")
-            .text("Column " + k)
-        );
-    }
-
 }
 
 /**

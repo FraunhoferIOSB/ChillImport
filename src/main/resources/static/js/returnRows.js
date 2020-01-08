@@ -1,3 +1,4 @@
+/*global addToLog*/
 var path;
 
 function returnRows() {
@@ -35,7 +36,7 @@ function delFile() {
             addToLog("Deleted File");
             var selectobject = document.getElementById("select");
             for (var i = 0; i < selectobject.length; i++) {
-                if (selectobject.options[i].value == file) {
+                if (selectobject.options[i].value === file) {
                     selectobject.remove(i);
                     selectobject.selectedIndex = "0";
                     return;
