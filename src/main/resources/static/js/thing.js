@@ -21,14 +21,26 @@ function getLocations() {
 
 				var list = $("#locations");
 				list.empty().append(new Option("", "", null, null));
-				for (var i = 0; i < jsonparsed.length; i++) {
-					var option = new Option(jsonparsed[i].name + " ("
-							+ jsonparsed[i].frostId + ")", jsonparsed[i].name
-							+ " (" + jsonparsed[i].frostId + ")", null, null);
+				
+				jsonparsed.forEach(function(val) {
+					var option = new Option(val.name + " ("
+							+ val.frostId + ")", val.name
+							+ " (" + val.frostId + ")", null, null);
 					option.setAttribute("data-value", JSON.stringify(
-							jsonparsed[i], null, 4));
+							val, null, 4));
+					list.append(option);
+				});
+				/*
+				for (const val of jsonparsed) {
+					var option = new Option(val.name + " ("
+							+ val.frostId + ")", val.name
+							+ " (" + val.frostId + ")", null, null);
+					option.setAttribute("data-value", JSON.stringify(
+							val, null, 4));
 					list.append(option);
 				}
+				*/
+				
 				list.select2({
 					placeholder : "Choose a location",
 					width : "style",
@@ -53,7 +65,7 @@ function createThing() {
 
 	loc = $("#locations option:selected").attr("data-value");
 
-	if (loc == null) {
+	if (loc === null) {
 		addToLog("Invalid Location (Must exist on the server)");
 		alert("Invalid Location (Must exist on the server)");
 		return;

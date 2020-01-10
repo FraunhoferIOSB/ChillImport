@@ -137,7 +137,7 @@ function showmessagetag() {
 function shownext() {
 	if (document.getElementById("thingbox").style.display === "none") {
 		showstep2();
-	} else if (document.getElementById("thingbox").style.display = "block") {
+	} else if (document.getElementById("thingbox").style.display === "block") {
 		showstep3();
 	}
 }

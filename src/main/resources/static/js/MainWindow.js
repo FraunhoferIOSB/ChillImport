@@ -357,6 +357,7 @@ function saveConfig() {
 
 /**
  * loads the config with the id id
+ * 
  * @param id
  */
 function loadConfig(id) {
@@ -489,7 +490,8 @@ function resetConfig() {
     $("#configs").val(null).trigger("change");
     resetMapping();
 
-    optimzeforsource(); //disables the delimiter and time format if the source file is an excel file
+    optimzeforsource(); // disables the delimiter and time format if the source
+						// file is an excel file
     showstep1();
 
 }
@@ -548,7 +550,9 @@ var streamData = [];
 
 /**
  * gets all datastreams from the thing with id id
- * @param id id of a thing
+ * 
+ * @param id
+ *            id of a thing
  */
 function getThingStreams(id, cfg, streams) {
 	var url = document.getElementById("serverurlbox").innerText;
@@ -593,6 +597,7 @@ function getThingStreams(id, cfg, streams) {
 
 /**
  * deletes the stream "stream" from the stream-list in the config gui
+ * 
  * @param stream
  */
 function removeDatastream(stream) {
@@ -620,7 +625,7 @@ function addDatastream() {
                 .attr("class", "btn btn-secondary")
                 .attr("onclick", "removeDatastream(this.parentNode.parentNode)")
                 .attr("style", "width:auto; margin-left:10px")
-                .html("<span class="fas fa-minus" ></span>")
+                .html("<span class=\"fas fa-minus\" ></span>")
             )
         )
         .append($("<div>")
@@ -1052,11 +1057,13 @@ function main() {
 
 /**
  * loads the data from the frost-server
- * @param fnSucess Called after successfully confirmed URL
+ * 
+ * @param fnSucess
+ *            Called after successfully confirmed URL
  * @returns
  */
 function urlconfirmed(fnSuccess) {
-	//show loader
+	// show loader
 	document.getElementById("loader").style.display = "block";
 	
 	var url = document.querySelector("#frostserverurl").value;
@@ -1081,7 +1088,7 @@ function urlconfirmed(fnSuccess) {
                 
                 addToLog("Try to load things ...");
             	getThings(function() {
-            		//hide loader
+            		// hide loader
                 	document.getElementById("loader").style.display = "none";
                 	if (!(fnSuccess == null)) {
                 		fnSuccess(); 
@@ -1094,7 +1101,7 @@ function urlconfirmed(fnSuccess) {
             	document.querySelector("#frostserverurl").value = "";
             	document.getElementById("serverurlbox").innerText = "";
                 document.getElementById("serverurlbox").href = "";
-              //hide loader
+              // hide loader
             	document.getElementById("loader").style.display = "none";
         	}
         	
@@ -1105,7 +1112,7 @@ function urlconfirmed(fnSuccess) {
             document.querySelector("#frostserverurl").value = "";
             document.getElementById("serverurlbox").innerText = "";
             document.getElementById("serverurlbox").href = "";
-            //hide loader
+            // hide loader
         	document.getElementById("loader").style.display = "none";
         }
 
@@ -1134,7 +1141,9 @@ function toggleScroll() {
 
 /**
  * adds a message to the log
- * @param msg the message
+ * 
+ * @param msg
+ *            the message
  */
 function addToLog(msg) {
     var date = new Date();
@@ -1154,6 +1163,7 @@ function addToLog(msg) {
 
 /**
  * writes the observations in the gui
+ * 
  * @param observations
  * @param div
  */
@@ -1209,7 +1219,9 @@ function getThing() {
 
 /**
  * This function is called if a configuration is selected
- * @param e a config
+ * 
+ * @param e
+ *            a config
  */
 $("#configs").on("select2:select", function (e) {
     var json = JSON.parse($("#configs option:selected").attr("data-value"));
@@ -1228,7 +1240,9 @@ $("#things").on("select2:select", function (e) {
 
 
 /**
- * function performed after choosing a sourcefile. Uploads file (and triggers preview afterwards), and opens next part of the accordion (choice of configuration)
+ * function performed after choosing a sourcefile. Uploads file (and triggers
+ * preview afterwards), and opens next part of the accordion (choice of
+ * configuration)
  */
 function fileConfirmed() {
     upload();
