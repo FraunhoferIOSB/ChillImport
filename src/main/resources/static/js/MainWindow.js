@@ -1,5 +1,7 @@
-/*global optimizeforsource, mappingData, currentDelimiter, currentHeaderlines, preview, addRow, delLastRow,
- * resetMapping, showstep1, isExcel, getLocations, initDatastream, loadMapping, returnRows*/
+/*global optimizeforsource, mappingData, currentDelimiter, currentHeaderlines, preview, addRow, delLastRow, resetMapping, showstep1, isExcel, getLocations, initDatastream, loadMapping, returnRows, showmessagetag*/
+
+var scrollToBottom = false;
+
 /**
  * 
  * shows the popup to create a new Thing
@@ -42,6 +44,10 @@ function showReturnModal() {
 	modal("dialog", "returnRows.html", returnRows, "Skipped Rows");
 }
 
+function pad2(number) {
+	return (number < 10 ? "0" : "") + number
+}
+
 /**
  * adds a message to the log
  * 
@@ -51,9 +57,9 @@ function showReturnModal() {
 function addToLog(msg) {
 	var date = new Date();
 	var time;
-	hours = pad2(date.getHours());
-	minutes = pad2(date.getMinutes());
-	seconds = pad2(date.getSeconds());
+	var hours = pad2(date.getHours());
+	var minutes = pad2(date.getMinutes());
+	var seconds = pad2(date.getSeconds());
 	time = hours + ":" + minutes + ":" + seconds + "  ";
 	document.getElementById("log").value += time + msg + "\n";
 
@@ -69,29 +75,33 @@ function addToLog(msg) {
  * gets all configs from the backend
  */
 function loadConfigs() {
-	$.ajax({
-		type : "GET",
-		url : "config/all",
-		success : function(response) {
-			var json = JSON.stringify(response, null, 4);
-			var jsonparsed = JSON.parse(json);
+	$
+			.ajax({
+				type : "GET",
+				url : "config/all",
+				success : function(response) {
+					var json = JSON.stringify(response, null, 4);
+					var jsonparsed = JSON.parse(json);
 
-			var list = $("#configs");
-			list.empty().append(new Option("", "", null, null));
-			for (var i = 0; i < jsonparsed.length; i++) {
-				var option = new Option(jsonparsed[i].name, jsonparsed[i].name,
-						null, null);
-				option.setAttribute("data-value", JSON.stringify(jsonparsed[i],
-						null, 4));
-				list.append(option);
-			}
-			list.trigger("change");
-			addToLog("Loaded configurations");
-		},
-		error : function(e) {
-			addToLog(e.responseText);
-		}
-	});
+					var list = $("#configs");
+					list.empty().append(new Option("", "", null, null));
+
+					jsonparsed
+							.forEach(function(val) {
+								var option = new Option(val.name, val.name,
+										null, null);
+								option.setAttribute("data-value", JSON
+										.stringify(val, null, 4));
+								list.append(option);
+							});
+
+					list.trigger("change");
+					addToLog("Loaded configurations");
+				},
+				error : function(e) {
+					addToLog(e.responseText);
+				}
+			});
 }
 
 /**
@@ -259,7 +269,7 @@ function saveConfig() {
 
 											parsed = parseInt(currentInput, 10);
 
-											if (!(currentInput == parsed)
+											if (!(currentInput === parsed)
 													|| parsed < 0) {
 												$
 														.notify(
@@ -384,7 +394,7 @@ function saveConfig() {
 	var formData = {
 		name : cfgName,
 		delimiter : currentDelimiter,
-		numberOfHeaderlines : parseInt(currentHeaderLines),
+		numberOfHeaderlines : parseInt(currentHeaderLines, 10),
 		timezone : $("#selecttime option:selected").attr("data-value"),
 		dateTime : date,
 		streamData : streams,
@@ -530,12 +540,12 @@ function loadStreamConfig(stream, div) {
 }
 
 function fillStreams(streams) {
-	var child;
-	for (var i = 0; i < streams.length; i++) {
+	var child;	
+	streams.forEach(function(val) {
 		addDatastream();
 		child = $("#datastreams > div").last();
-		loadStreamConfig(streams[i], child);
-	}
+		loadStreamConfig(val, child);
+	});
 
 }
 
@@ -589,14 +599,15 @@ function getThings(fnSuccess) {
 
 			var list = $("#things");
 			list.empty().append(new Option("", "", null, null));
-			for (var i = 0; i < jsonparsed.length; i++) {
-				var option = new Option(jsonparsed[i].name + " ("
-						+ jsonparsed[i].frostId + ")", jsonparsed[i].name
-						+ " (" + jsonparsed[i].frostId + ")", null, null);
-				option.setAttribute("data-value", JSON.stringify(jsonparsed[i],
+			jsonparsed.forEach(function(val) {
+				var option = new Option(val.name + " ("
+						+ val.frostId + ")", val.name
+						+ " (" + val.frostId + ")", null, null);
+				option.setAttribute("data-value", JSON.stringify(val,
 						null, 4));
 				list.append(option);
-			}
+			});
+			
 			list.trigger("change");
 			addToLog("Things loaded.");
 
@@ -639,15 +650,15 @@ function getThingStreams(id, cfg, streams) {
 			stream["text"] = "";
 			streamData.push(stream);
 
-			for (var i = 0; i < jsonparsed.length; i++) {
+			jsonparsed.forEach(function(val) {
 				stream = {};
-				stream["id"] = jsonparsed[i].name + " ("
-						+ jsonparsed[i].frostId + ")";
-				stream["text"] = jsonparsed[i].name + " ("
-						+ jsonparsed[i].frostId + ")";
-				stream["data-value"] = JSON.stringify(jsonparsed[i], null, 4);
+				stream["id"] = val.name + " ("
+						+ val.frostId + ")";
+				stream["text"] = val.name + " ("
+						+ val.frostId + ")";
+				stream["data-value"] = JSON.stringify(val, null, 4);
 				streamData.push(stream);
-			}
+			});
 
 			$("#datastreams").empty();
 			if (cfg) {
@@ -743,8 +754,10 @@ function addDatastream() {
 					json = JSON.parse(sel.find("option:selected").attr(
 							"data-value"));
 				}
-				if (json)
+				if (json) {
 					loadStream(json, parent.find(".streamtable"));
+				}
+
 			});
 
 }
@@ -839,7 +852,7 @@ function importData() {
 							return false;
 						}
 						parsed = parseInt(currentInput, 10);
-						if (!(currentInput == parsed) || parsed < 0) {
+						if (!(currentInput === parsed) || parsed < 0) {
 							$
 									.notify(
 											{
@@ -996,7 +1009,7 @@ function importData() {
 		config : jsoncfg,
 		filename : getCurrentFileName()
 	};
-	if ($("#selecttime option:selected").attr("data-value") == null) {
+	if ($("#selecttime option:selected").attr("data-value") === null) {
 		$.notify({
 			message : "Please choose a time zone before importing data."
 		}, {
@@ -1116,8 +1129,8 @@ function progress() {
 					if (x) {
 						return;
 					}
-					if (response == "Import has not started yet"
-							|| response == "File has not been converted yet") {
+					if (response === "Import has not started yet"
+							|| response === "File has not been converted yet") {
 						initial = 2 * initial;
 						if (initial >= 16000) {
 							addToLog("It seems the Import will take quite a while. Stopping progress requests.");
@@ -1231,11 +1244,6 @@ function urlconfirmed(fnSuccess) {
 	});
 }
 
-function pad2(number) {
-	return (number < 10 ? "0" : "") + number
-}
-
-var scrollToBottom = false;
 
 function toggleScroll() {
 	if (scrollToBottom) {
