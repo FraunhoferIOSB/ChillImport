@@ -1216,7 +1216,7 @@ function urlconfirmed(fnSuccess) {
 				getThings(function() {
 					// hide loader
 					document.getElementById("loader").style.display = "none";
-					if (!(fnSuccess === null)) {
+					if (!(fnSuccess == null)) {
 						fnSuccess();
 					}
 				});
