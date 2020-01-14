@@ -1,4 +1,4 @@
-/*global optimizeforsource, mappingData, currentDelimiter, currentHeaderlines, preview, addRow, delLastRow, resetMapping, showstep1, isExcel, getLocations, initDatastream, loadMapping, returnRows, showmessagetag*/
+/*global optimizeforsource, mappingData, currentDelimiter, currentHeaderLines, preview, addRow, delLastRow, resetMapping, showstep1, isExcel, getLocations, initDatastream, loadMapping, returnRows, showmessagetag, getCurrentFileName, openaccordion, upload*/
 
 var scrollToBottom = false;
 
@@ -45,7 +45,7 @@ function showReturnModal() {
 }
 
 function pad2(number) {
-	return (number < 10 ? "0" : "") + number
+	return (number < 10 ? "0" : "") + number;
 }
 
 /**
@@ -181,7 +181,7 @@ function saveConfig() {
 						}
 						parsed = parseInt(currentInput, 10);
 
-						if (!(currentInput == parsed) || parsed < 0) {
+						if (!(currentInput === parsed) || parsed < 0) {
 							$
 									.notify(
 											{
@@ -324,7 +324,7 @@ function saveConfig() {
 		}
 	}
 
-	if ($("#selecttime option:selected").attr("data-value") == null) {
+	if ($("#selecttime option:selected").attr("data-value") === null) {
 		$
 				.notify(
 						{
@@ -565,7 +565,7 @@ function resetConfig() {
 	$("#configs").val(null).trigger("change");
 	resetMapping();
 
-	optimzeforsource(); // disables the delimiter and time format if the source
+	optimizeforsource(); // disables the delimiter and time format if the source
 	// file is an excel file
 	showstep1();
 
@@ -1141,7 +1141,7 @@ function progress() {
 						id = setInterval(progress, initial);
 						clearInterval(temp);
 					}
-					if (response != "Finished") {
+					if (response !== "Finished") {
 						addToLog(response);
 						var resp = response;
 						resp = resp.slice(-3);
@@ -1216,13 +1216,13 @@ function urlconfirmed(fnSuccess) {
 				getThings(function() {
 					// hide loader
 					document.getElementById("loader").style.display = "none";
-					if (!(fnSuccess == null)) {
+					if (!(fnSuccess === null)) {
 						fnSuccess();
 					}
 				});
 
 			} else {
-				r = confirm("Can't connect to: " + url + "\nDetails: "
+				var r = confirm("Can't connect to: " + url + "\nDetails: "
 						+ message);
 				document.querySelector("#frostserverurl").value = "";
 				document.getElementById("serverurlbox").innerText = "";
@@ -1335,7 +1335,7 @@ $("#things").on("select2:select", function(e) {
  */
 function fileConfirmed() {
 	upload();
-	optimzeforsource();
+	optimizeforsource();
 	openaccordion("chooseConfigAcc");
 }
 

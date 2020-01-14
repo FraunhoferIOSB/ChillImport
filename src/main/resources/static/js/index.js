@@ -1,4 +1,4 @@
-/*global currentDelimiter, currentHeaderLines, preview, optimzeforsource, resetConfig*/
+/*global currentDelimiter, currentHeaderLines, preview, optimizeforsource, resetConfig*/
 /**
  * Calls preview function after delimiter has been changed. Checks delimiter to
  * be a valid regular expression.
@@ -84,7 +84,7 @@ function chooseConfig() {
 	$("#configs").val(null);
 	closeaccordion("currentConfigAcc");
 	document.getElementById("chooseConfigDialog").style.display = "block";
-	optimzeforsource();
+	optimizeforsource();
 	showstep3();
 }
 

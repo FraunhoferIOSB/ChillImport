@@ -266,7 +266,7 @@ function csvconfig() {
  * adds "disabled" attribute to inputs (which are not needed for excel) if
  * source is a excel file removes "disabled" if source is a csv
  */
-function optimzeforsource() {
+function optimizeforsource() {
 	if (isCsv && isExcel) {
 		addToLog("Unexpected source");
 	} else if (isExcel && !isCsv) {
