@@ -5,13 +5,13 @@ Thats the perfect usecase for ChillImport. This software provides you an easy to
 
 First download and install the program.
 
-The excel-file you want to import is: Examplefile.xlsx
+The csv-file you want to import is: Examplefile.csv
 
 ### Step 1: 
 (Tip: Open the log. It might help)
 1. select "File"
-2. than select the "examplefile.csv" file 
-3. Click "ok"(every time u choose a new source you have to click ok)
+2. then select the "examplefile.csv" file 
+3. Click "ok" (every time u choose a new source you have to click ok)
 
 ### Step 2:
 Here you have 2 Options:
@@ -29,7 +29,7 @@ Tip: Open the preview (Click on "Toggle Preview")
 4. We skip the mapping for this file. We don´t want to map any measurements.
 5. Timezone: choose the timezone where the measurements were created  (eg. UTC+1).
     * The date and time in our file is stored in the first column (column 0) => "Column = 0"
-    * We don't need a format, because excel has its own, which will be used automatically.
+    * The format is: dd.MM.yyyy HH:mm 
     * Please click "Next".
 	
 
@@ -50,7 +50,7 @@ Tip: Open the preview (Click on "Toggle Preview")
     2. Description: eg "none"
     3. Create a Sensor. This is the sensor which created the measurements.
         1. Name: "TempAndSpeedSensor1"
-        2. Description: eg "A temperature and windspeed sensor" This a short description of the sensor.
+        2. Description: eg "A temperature and windspeed sensor" This is a short description of the sensor.
         3. Encoding Type: eg "application/pdf". This defines the file type of the Metadata.
         4. Metadata: "example/link/123.pdf" The detailed description of the Sensor.
         5. Click "Create Sensor"
@@ -70,7 +70,7 @@ Tip: Open the preview (Click on "Toggle Preview")
         3. Unit name is "Degree celsius"
         4. Unit symbol: "°C"
 		5. Unit definition: "https://en.wikipedia.org/wiki/Celsius"
-    7. click "+" and do the same (6.6) for the wind speed
+    7. click "+" and do the same (7.6) for the wind speed
 		1. select "speed"
 		2. Obseravtion Type: Integer
 		3. Unit name: "km/h"
