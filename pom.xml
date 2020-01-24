@@ -36,7 +36,7 @@
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
-        
+
         <commons-io.version>2.6</commons-io.version>
     </properties>
 
@@ -104,7 +104,7 @@
             <artifactId>jquery</artifactId>
             <version>${jquery.version}</version>
         </dependency>
-        
+
         <!-- Testcontainers -->
         <dependency>
     		<groupId>org.testcontainers</groupId>
@@ -112,7 +112,7 @@
     		<version>${testcontainers.version}</version>
     		<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>commons-io</groupId>
     		<artifactId>commons-io</artifactId>
