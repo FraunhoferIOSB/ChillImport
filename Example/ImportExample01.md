@@ -15,8 +15,11 @@ The csv-file you want to import is: Examplefile.csv
 
 ### Step 2
 Here you have 2 Options:
-	1.	Choose a configuration
-	2.	Create a new configuration
+
+1.	Choose a configuration
+
+2.	Create a new configuration
+
 We want to focus on option 2
 
 ### Step 3
@@ -36,6 +39,8 @@ Tip: Open the preview (Click on "Toggle Preview")
 	* The date and time in our file is stored in the first column (column 0) => Column = 0
 	* The format is: dd.MM.yyyy HH:mm 
 	* Please click "Next".
+
+![](step03_01.png)
 	
 6.	Now we create a thing. The thing is our object where our measurements were created. It can be a weather-station, a smart home or something else. 
 	1.	Click "Create Thing"
