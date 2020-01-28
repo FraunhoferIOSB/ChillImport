@@ -53,6 +53,8 @@ Tip: Open the preview (Click on "Toggle Preview")
 		* Click "Create Location"
 	5.	Click "Create Thing"
 	
+![](step03_02.png)
+	
 7.	Create a Datastream
 	1.	Name: "DS1"
 	2.	Description: eg "none"
@@ -85,6 +87,8 @@ Tip: Open the preview (Click on "Toggle Preview")
 		4.	Unit symbol: "km/h"
 		5.	Unit definition: <https://en.wikipedia.org/wiki/Kilometres_per_hour>
 	8.	Click "Create Datastream" This will create a new MultiDatastream on the FROST-Server. 
+	
+![](step03_03.png)
 	
 8.	Add a DS and select the new created 
 	1.	°C: Column = "3"
