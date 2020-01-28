@@ -116,7 +116,7 @@ function saveConfig() {
 
 	try {
 		new RegExp(currentDelimiter);
-		if (currentDelimiter === null || currentDelimiter === "") {
+		if (currentDelimiter == null || currentDelimiter == "") {
 			currentDelimiter = "\n";
 		}
 	} catch (e) {
@@ -134,8 +134,8 @@ function saveConfig() {
 					function() {
 						var obj = {}, $td = $(this).find("td");
 						currentInput = $td.eq(1).find("input").val();
-						if ((currentInput === null || currentInput === "")
-								&& isExcel === false) {
+						if ((currentInput == null || currentInput == "")
+								&& isExcel == false) {
 							$
 									.notify(
 											{
@@ -158,7 +158,7 @@ function saveConfig() {
 						}
 						obj["string"] = currentInput;
 						currentInput = $td.eq(0).find("input").val();
-						if (currentInput === null || currentInput === "") {
+						if (currentInput == null || currentInput == "") {
 							$
 									.notify(
 											{
@@ -181,7 +181,7 @@ function saveConfig() {
 						}
 						parsed = parseInt(currentInput, 10);
 
-						if (!(currentInput === parsed) || parsed < 0) {
+						if (!(currentInput == parsed) || parsed < 0) {
 							$
 									.notify(
 											{
@@ -206,7 +206,7 @@ function saveConfig() {
 						date.push(obj);
 					});
 
-	if (stop === true) {
+	if (stop == true) {
 		return false;
 	}
 
@@ -218,7 +218,7 @@ function saveConfig() {
 						var obj = {}, obs = [];
 						currentInput = $(this).find("select option:selected")
 								.val();
-						if (currentInput === null || currentInput === "") {
+						if (currentInput == null || currentInput == "") {
 							$.notify({
 								message : "Please leave no datastream empty."
 							}, {
@@ -244,8 +244,8 @@ function saveConfig() {
 										function() {
 											currentInput = $(this).find(
 													"td:eq(1) input").val();
-											if (currentInput === null
-													|| currentInput === "") {
+											if (currentInput == null
+													|| currentInput == "") {
 												$
 														.notify(
 																{
@@ -269,7 +269,7 @@ function saveConfig() {
 
 											parsed = parseInt(currentInput, 10);
 
-											if (!(currentInput === parsed)
+											if (!(currentInput == parsed)
 													|| parsed < 0) {
 												$
 														.notify(
@@ -293,7 +293,7 @@ function saveConfig() {
 											}
 											obs.push(parsed);
 										});
-						if (stop === true) {
+						if (stop == true) {
 							return false;
 						}
 
@@ -302,7 +302,7 @@ function saveConfig() {
 						streams.push(obj);
 					});
 
-	if (stop === true) {
+	if (stop == true) {
 		return false;
 	}
 
@@ -312,11 +312,11 @@ function saveConfig() {
 	} else if ($("input[name=source]:eq(1)").is(":checked")) {
 		filetype = $("#sourceinput").val();
 	}
-	if (!(filetype) || filetype === "") {
+	if (!(filetype) || filetype == "") {
 		addToLog("No File specified.");
 	} else {
 		filetype = filetype.split(".").pop().toUpperCase();
-		if (filetype === "XLSX" || filetype === "XLS") {
+		if (filetype == "XLSX" || filetype == "XLS") {
 			filetype = "EXCEL";
 		} else if (filetype !== "CSV") {
 			addToLog("Unknown file type.");
@@ -324,7 +324,7 @@ function saveConfig() {
 		}
 	}
 
-	if ($("#selecttime option:selected").attr("data-value") === null) {
+	if ($("#selecttime option:selected").attr("data-value") == null) {
 		$
 				.notify(
 						{
@@ -342,7 +342,7 @@ function saveConfig() {
 							}
 						});
 		return false;
-	} else if (date.length === 0) {
+	} else if (date.length == 0) {
 		$
 				.notify(
 						{
@@ -360,7 +360,7 @@ function saveConfig() {
 							}
 						});
 		return false;
-	} else if (streams.length === 0) {
+	} else if (streams.length == 0) {
 		$
 				.notify(
 						{
@@ -383,10 +383,10 @@ function saveConfig() {
 	var map = mappingData;
 
 	var cfgName = prompt("Name of Configuration:");
-	if (cfgName === null) {
+	if (cfgName == null) {
 		return false;
 	}
-	if (cfgName === "") {
+	if (cfgName == "") {
 		addToLog("A configuration needs a name");
 		return false;
 	}
@@ -852,7 +852,7 @@ function importData() {
 							return false;
 						}
 						parsed = parseInt(currentInput, 10);
-						if (!(currentInput === parsed) || parsed < 0) {
+						if (!(currentInput == parsed) || parsed < 0) {
 							$
 									.notify(
 											{
@@ -887,7 +887,7 @@ function importData() {
 						var obj = {}, obs = [];
 						currentInput = $(this).find("select option:selected")
 								.val();
-						if (currentInput === null || currentInput === "") {
+						if (currentInput == null || currentInput == "") {
 							$.notify({
 								message : "Please leave no datastream empty."
 							}, {
@@ -913,8 +913,8 @@ function importData() {
 										function() {
 											currentInput = $(this).find(
 													"td:eq(1) input").val();
-											if (currentInput === null
-													|| currentInput === "") {
+											if (currentInput == null
+													|| currentInput == "") {
 												$
 														.notify(
 																{
@@ -937,7 +937,7 @@ function importData() {
 
 											parsed = parseInt(currentInput, 10);
 
-											if (!(currentInput === parsed)
+											if (!(currentInput == parsed)
 													|| parsed < 0) {
 												$
 														.notify(
