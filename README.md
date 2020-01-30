@@ -28,4 +28,7 @@ If needed you can also create new entities on your FROST-Server, eg:
 
 This makes the use of ChillImport more convenient. \
 \
-For more information you can find example-imports here: [ChillImport example](https://github.com/FraunhoferIOSB/ChillImport/Example/ImportExample01.md)
+For more information you can find example-imports here: [ChillImport example](Example/ImportExample01.md)
+
+## Screenshot
+![](Example/screenshot.png)
