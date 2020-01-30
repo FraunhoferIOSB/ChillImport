@@ -11,7 +11,6 @@ import com.chillimport.server.utility.SensorThingsServiceFactory;
 import de.fraunhofer.iosb.ilt.sta.ServiceFailureException;
 import de.fraunhofer.iosb.ilt.sta.service.SensorThingsService;
 
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,6 +38,8 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
