@@ -11,7 +11,9 @@ you an userfriendly, web-based gui.
 The easiest way to obtain and run the software is docker:\
 <https://hub.docker.com/r/fraunhoferiosb/chillimport>
 
-If you've Docker installed, simply run `docker run -p 8000:8000 fraunhoferiosb/chillimport` and you can access ChillImport on [http://localhost:8000](http://localhost:8000).
+If you've Docker installed, simply run
+`docker run -p 8000:8000 fraunhoferiosb/chillimport` and you can access
+ChillImport on [http://localhost:8000](http://localhost:8000).
 
 ## Setup
 
