@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
     <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
@@ -66,7 +66,7 @@
                         <div id="chooseSource" class="topspace">
                             <div class="column" style="width: 80%">
                                 <label id="sourcetext"/>Choose sourcefile:</label><br>
-                                <input id="sourceinput" type='text' style="display:none" 
+                                <input id="sourceinput" type='text' style="display:none"
                                        onkeyup="checkinputurl()">
                                 <form id="uploader" method='post' enctype="multipart/form-data">
                                     <input type="file" name="file" id="file" onchange="checkinputfile()"/>
@@ -96,10 +96,10 @@
                 </div>
                 <div class="panel" style="height: 150px; padding-top: 10px">
                     <div class="panelpadding">
-                        <button class="btn btn-secondary" onclick="chooseConfig()" style="cursor: pointer; width: 48%; 
+                        <button class="btn btn-secondary" onclick="chooseConfig()" style="cursor: pointer; width: 48%;
                         height: 50px; float: left; padding-top: 0px">Choose Configuration</button>
                         <div class="column" style="width: 4%; height: 20px"></div>
-                        <button class="btn btn-secondary" onclick="createConfig()"  style="cursor: pointer; width: 48%; 
+                        <button class="btn btn-secondary" onclick="createConfig()"  style="cursor: pointer; width: 48%;
                         height: 50px; float: left; padding-top: 0px">Create Configuration</button>
                         <!--choose config dialog-->
 
@@ -154,51 +154,51 @@
                     </div>
                 </div>
                 <div class="row" style="margin-left: 8px; margin-top: 8px; width: 100%">
-                
-					
+
+
      	  	       		<label>1: Choose Frost-Server:</label>
-         	           
-       	                <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify 
+
+       	                <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify
        	                the url of the FROSTServer."></div>
            	            <br>
 
            	            <div style="width:100%">
            	            <div class="column" style="width: 70%">
-                 			<input type="text" id="frostserverurl" value="" style="margin-top: 2px; width: 95%" 
+                 			<input type="text" id="frostserverurl" value="" style="margin-top: 2px; width: 95%"
                  			placeholder="https://frost.server.de/v1.0/"></input>
                  		</div>
-                 		
+
                  		<div class="column" style="width: 30%">
                  			<div class="column" style="width: 45%">
                  				<button id="okurl" onclick="urlconfirmed()" class="btn btn-secondary"
                                         style="height: 35px;width: 100%;" >OK
-                 				</button> 
+                 				</button>
                  			</div>
                  			<div class="column" id="loader" style="width: 45%; display: none">
-                 				<div class="loader" style="margin: 5px"></div> 
+                 				<div class="loader" style="margin: 5px"></div>
                  			</div>
                  		</div>
                  		</div>
-             	        
-             	         
-                 	
+
+
+
                  </div>
-                 	
-                 	
-                 	
-                 	
-                 	
+
+
+
+
+
                  <div class="topspace" style="height: 20px"></div>
-					
-					<div class="row" style="margin-left: 8px; margin-top: 8px">            
-                
+
+					<div class="row" style="margin-left: 8px; margin-top: 8px">
+
                     <div class="column" style="width: 50%">
                         <!-- Delimiter-->
                         <div>
                             <label>2: Delimiter:</label>
-                            
-                            <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify 
-                            the character(s) seperating the columns in your file. Can be any alphanumeric character or valid 
+
+                            <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify
+                            the character(s) seperating the columns in your file. Can be any alphanumeric character or valid
                             regular expression. If field is empty or invalid, '\n' is used as delimiter."></div>
                             <br>
                             <input size="4" type="text" id="delimiter" name="delimiter" value=";" onkeyup="changedDelimiter(this.value)">
@@ -209,9 +209,9 @@
                         <!--headerlines-->
                         <div class="topspace">
                             <label>3: Number of header lines:</label>
-                         
-                            <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Number 
-                            of lines at the beginning of your file to be ignored. Can be any non-negative number up to 9999. 
+
+                            <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Number
+                            of lines at the beginning of your file to be ignored. Can be any non-negative number up to 9999.
                             If field is empty or contains invalid string, software uses 0."></div>
                             <br>
                             <input size="4" type="text" id="headerlines" name="headerlines" value="0" onkeyup="changedHeaderLines(this.value)">
@@ -221,7 +221,7 @@
 
                         <!-- current mapping-->
                         <div class="topspace">
-                            <label>4: Current mapping:</label> 
+                            <label>4: Current mapping:</label>
                             <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Here you can
                              save if a value should be replaced with an other
                                     value."></div>
@@ -345,16 +345,16 @@
                                         <thead>
                                         <tr>
                                             <th>
-                                                
-                                                <div>  
+
+                                                <div>
                                                     <label>
                                                     	Column
                                                     </label>
-                                                    
+
                                                     <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify the column/columns containing
                                                             the date and time of the observations.">
                                                     </div>
-                                                
+
 												</div>
                                             </th>
                                             <th style="min-width: 135px">
@@ -362,7 +362,7 @@
                                                     <label>
                                                         Format
                                                     </label>
-                                          
+
                                                     <div class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Specify the format of the date and time
                                                             in
                                                             this column as regular expression. (y - Year, M - Month, d -
@@ -392,7 +392,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            
+
                         </div>
 
                         <!-- END OF DATETIME -->
@@ -440,7 +440,7 @@
                     </div>
                 </div>
 
-               
+
 
             </div>  <!-- end of panelpadding -->
 
