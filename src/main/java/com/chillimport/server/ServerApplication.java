@@ -1,7 +1,9 @@
 package com.chillimport.server;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class ServerApplication {
 
   private static final String DEFAULT_CONFIG_PATH = "/data";
