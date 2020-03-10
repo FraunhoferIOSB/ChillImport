@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 docker run -d -p 8000:8000 fraunhoferiosb/chillimport:$TAG
 sleep 10
@@ -26,7 +27,7 @@ rm "$tmpfile"
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 
-if (success==false) then
+if [ "$success" == false ]; then
 	printf "exit \n"
 	exit 1
 fi
