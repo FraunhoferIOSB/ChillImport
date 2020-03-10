@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run -d -p 8000:8000 fraunhoferiosb/chillimport
+docker run -d -p 8000:8000 fraunhoferiosb/chillimport:$TAG
 sleep 10
 printf "Chillimport started \n"
 
