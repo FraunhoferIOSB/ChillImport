@@ -33,10 +33,8 @@ jobs:
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:push@push-version; fi'
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:push@push-hash; fi'
           - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn dockerfile:push@push-latest; fi'
-
-after_script:
-    - chmod +x ./docker_test.sh
-    - script: bash docker_test.sh
+          - chmod +x ./docker_test.sh
+          - ./docker_test.sh
 
 cache:
   directories:
