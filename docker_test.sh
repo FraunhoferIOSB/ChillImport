@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-docker run -d -p 8000:8000 fraunhoferiosb/chillimport:$TAG
+docker run -d -p 8000:8000 fraunhoferiosb/chillimport:"$TAG"
 sleep 10
 printf "Chillimport started \n"
 
 tmpfile=$(mktemp /tmp/docker_test_header_XXXXXX.txt)
 
 url=http://localhost:8000
-curl ${url} -I -o tmpfile -s
+curl "$url" -I -o tmpfile -s
 
 cat tmpfile
 
@@ -24,8 +24,8 @@ fi
 
 rm "$tmpfile"
 
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
+docker stop "$(docker ps -a -q)"
+docker rm "$(docker ps -a -q)"
 
 if [ "$success" == false ]; then
 	printf "exit \n"
