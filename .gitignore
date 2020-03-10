@@ -27,3 +27,4 @@ server/target/
 
 ### Test ###
 /src/test/TempFolder/
+/tmpfile
