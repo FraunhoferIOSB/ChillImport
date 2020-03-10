@@ -14,12 +14,12 @@ cat tmpfile
 
 success=false
 
-if grep -q 'HTTP/1.1 200' tmpfile; then 
-	printf "OK \n"
-	success=true
+if grep -q 'HTTP/1.1 200' tmpfile; then
+  printf "OK \n"
+  success=true
 else
-	printf "Cannot connect to Chillimport \n"
-	success=false
+  printf "Cannot connect to Chillimport \n"
+  success=false
 fi
 
 rm "$tmpfile"
@@ -28,6 +28,6 @@ docker stop "$(docker ps -a -q)"
 docker rm "$(docker ps -a -q)"
 
 if [ "$success" == false ]; then
-	printf "exit \n"
-	exit 1
+  printf "exit \n"
+  exit 1
 fi
