@@ -123,17 +123,10 @@ public class FileManager {
 
         try {
             URL website = new URL(url);
-
-            BufferedInputStream bis = new BufferedInputStream(website.openStream());
-            FileOutputStream fis = new FileOutputStream(file);
-            byte[] buffer = new byte[1024];
-            int count = 0;
-            while ((count = bis.read(buffer, 0, 1024)) != -1) {
-                fis.write(buffer, 0, count);
-            }
-
-            fis.close();
-            bis.close();
+            InputStream in= website.openStream();
+            Files.copy(in, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            in.close();
+            
         } catch (MalformedURLException e) {
             throw new FileStorageException("Could not store file -- Website path is malformed.");
         } catch (FileNotFoundException e) {

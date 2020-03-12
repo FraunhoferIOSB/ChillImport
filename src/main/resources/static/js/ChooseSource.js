@@ -201,6 +201,7 @@ function uploadUrl() {
 				},
 				z_index : 9000
 			});
+			currentFileName = e;
 			$("#importbutton").prop("disabled", false);
 			addToLog("Finished processing file. Ready for import.");
 			preview();
