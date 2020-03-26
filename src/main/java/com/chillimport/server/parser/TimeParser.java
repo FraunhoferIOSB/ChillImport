@@ -24,7 +24,10 @@ public class TimeParser {
      *
      * @return the ZonedDateTime
      */
-    public static ZonedDateTime toZonedDateTime(Configuration cfg, ArrayList<Cell> row) throws NullPointerException, DateTimeException {
+    public static ZonedDateTime toZonedDateTime(Configuration cfg, ArrayList<Cell> row) throws 
+    			NullPointerException, 
+    			DateTimeException, 
+    			IllegalArgumentException {
         if (cfg == null) {
             throw new NullPointerException("Configuration is null.");
         }

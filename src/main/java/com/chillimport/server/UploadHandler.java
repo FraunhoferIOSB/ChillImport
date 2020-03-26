@@ -243,7 +243,7 @@ public class UploadHandler {
             try {
                 converted = convertRow(row, newDataTypes, positions);
                 evaluateRow(service, cfg, converted, NEWTYPES);
-            } catch (ServiceFailureException | DateTimeException | ClassCastException | InvalidFormatException e) {
+            } catch (ServiceFailureException | DateTimeException | ClassCastException | InvalidFormatException | IllegalArgumentException e) {
                 errorHandler.addRows(current + displacement, e);
             }
             finally{
@@ -277,7 +277,8 @@ public class UploadHandler {
             DateTimeException,
             ServiceFailureException,
             InvalidFormatException,
-            NullPointerException {
+            NullPointerException,
+            IllegalArgumentException {
 
         ZonedDateTime zdt = TimeParser.toZonedDateTime(cfg, row);
 
