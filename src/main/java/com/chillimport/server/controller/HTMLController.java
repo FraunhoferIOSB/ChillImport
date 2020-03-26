@@ -80,21 +80,6 @@ public class HTMLController {
 		return ErrorHandler.getInstance().returnFiles();
 	}
 
-	/*
-	 * @RequestMapping(value = "/server-check", method = RequestMethod.GET)
-	 * 
-	 * @ResponseBody public boolean pingFROSTServer() { try { return
-	 * InetAddress.getByName(FileManager.getServerURL().getHost()).isReachable(6000)
-	 * ; } catch (UnknownHostException e) {
-	 * LogManager.getInstance().writeToLog("Server not reachable", true);
-	 * ErrorHandler.getInstance().addRows(-1,e); return false; } catch
-	 * (MalformedURLException e) {
-	 * LogManager.getInstance().writeToLog("Server address malformed", true);
-	 * ErrorHandler.getInstance().addRows(-1,e); return false; } catch (IOException
-	 * e) { LogManager.getInstance().writeToLog("Internet connection offline",
-	 * true); ErrorHandler.getInstance().addRows(-1,e); return false; } }
-	 */
-
 	@RequestMapping(value = "/server-check", method = RequestMethod.GET)
 	@ResponseBody
 	public String pingFROSTServer(@RequestParam String frostUrl) {
