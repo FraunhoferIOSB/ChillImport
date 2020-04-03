@@ -1,9 +1,9 @@
 [[1;34mINFO[m] Scanning for projects...
-[[1;34mINFO[m] 
+[[1;34mINFO[m]
 [[1;34mINFO[m] [1m-----------------------< [0;36mcom.chillimport:server[0;1m >-----------------------[m
 [[1;34mINFO[m] [1mBuilding server 0.0.1-SNAPSHOT[m
 [[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
-[[1;34mINFO[m] 
+[[1;34mINFO[m]
 [[1;34mINFO[m] [1m--- [0;32mmaven-dependency-plugin:3.1.2:tree[m [1m(default-cli)[m @ [36mserver[0;1m ---[m
 [[1;34mINFO[m] com.chillimport:server:jar:0.0.1-SNAPSHOT
 [[1;34mINFO[m] +- org.powermock:powermock-module-junit4:jar:2.0.7:test
