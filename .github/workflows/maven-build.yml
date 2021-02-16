@@ -38,6 +38,7 @@ jobs:
         export GIT_COMMIT_SHA=${GITHUB_SHA}
         mvn -B install
         mvn -B dockerfile:build
+        echo "Tagging ${GIT_COMMIT_SHA}"
         mvn dockerfile:tag@tag-hash
         source ./docker_test.sh
 
