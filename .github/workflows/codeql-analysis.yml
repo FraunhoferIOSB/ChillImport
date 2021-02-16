@@ -39,8 +39,8 @@ jobs:
       with:
         path: |
           ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-maven
+        key: ${{ runner.os }}-maven-${{ matrix.language }}
+        restore-keys: ${{ runner.os }}-maven-${{ matrix.language }}
 
     - name: Checkout repository
       uses: actions/checkout@v2
