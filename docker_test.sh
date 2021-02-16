@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-echo "Starting ChillImport using '${DOCKER_TAG}'..."
+echo "Starting ChillImport using '${GIT_COMMIT_SHA}'..."
 
-docker run -d -p 8000:8000 fraunhoferiosb/chillimport:"${DOCKER_TAG}"
+docker run -d -p 8000:8000 fraunhoferiosb/chillimport:"${GIT_COMMIT_SHA}"
 sleep 10
 printf "Chillimport started \n"
 
