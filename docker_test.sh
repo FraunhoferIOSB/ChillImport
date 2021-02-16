@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-docker run -d -p 8000:8000 fraunhoferiosb/chillimport:"$TAG"
+echo "Starting ChillImport using '${DOCKER_TAG}'..."
+
+docker run -d -p 8000:8000 fraunhoferiosb/chillimport:"${DOCKER_TAG}"
 sleep 10
 printf "Chillimport started \n"
 
