@@ -11,13 +11,13 @@ function createLocation() {
     notifier.alert('FROST-URL can\'t be empty');
   } else {
     var myloc = {
-      name: name,
-      description: desc,
-      encoding_TYPE: "application/vnd.geo+json",
-      location: '{"type": "Point", "coordinates": ' + loc + "}",
+      name : name,
+      description : desc,
+      encoding_TYPE : "application/vnd.geo+json",
+      location : '{"type": "Point", "coordinates": ' + loc + "}",
     };
 
-    var mydata = { entity: myloc, string: url };
+    var mydata = {entity : myloc, string : url};
 
     if (myloc.name == null || myloc.name == "") {
       notifier.alert('Location could not be created, Name is invalid');
@@ -28,16 +28,17 @@ function createLocation() {
       return false;
     }
     $.ajax({
-      type: "POST",
-      url: "location/create",
-      datatype: "json",
-      contentType: "application/json",
-      data: JSON.stringify(mydata),
-      error: function (e) {
-        notifier.alert('Location could not be created, check the Log for errors');
+      type : "POST",
+      url : "location/create",
+      datatype : "json",
+      contentType : "application/json",
+      data : JSON.stringify(mydata),
+      error : function(e) {
+        notifier.alert(
+            'Location could not be created, check the Log for errors');
         addToLog(e.responseText);
       },
-      success: function (e) {
+      success : function(e) {
         notifier.success('Location created.');
         addToLog("Location created.");
         closeModal("thingdialog");

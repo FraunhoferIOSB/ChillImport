@@ -7,23 +7,21 @@ var mappingData = []; // the current mapping is stored here
 function saveMapping() {
   var obj = [];
   valid = true;
-  $("#mappingTable")
-    .find("tbody tr")
-    .each(function () {
-      column = $(this).find("td:eq(0) input").val();
-      if (isNaN(column) || column < 0 || column == "") {
-        notifier.alert('At least one Column Number is invalid');
-        valid = false;
-        return false;
-      }
-      if (valid) {
-        obj.push({
-          column: $(this).find("td:eq(0) input").val(),
-          first: $(this).find("td:eq(1) input").val(),
-          second: $(this).find("td:eq(2) input").val(),
-        });
-      }
-    });
+  $("#mappingTable").find("tbody tr").each(function() {
+    column = $(this).find("td:eq(0) input").val();
+    if (isNaN(column) || column < 0 || column == "") {
+      notifier.alert('At least one Column Number is invalid');
+      valid = false;
+      return false;
+    }
+    if (valid) {
+      obj.push({
+        column : $(this).find("td:eq(0) input").val(),
+        first : $(this).find("td:eq(1) input").val(),
+        second : $(this).find("td:eq(2) input").val(),
+      });
+    }
+  });
   if (valid) {
     mappingData = Array.from(obj);
     notifier.success('Mapping saved.');
@@ -35,9 +33,7 @@ function saveMapping() {
 /**
  * deletes the current mapping data
  */
-function resetMapping() {
-  mappingData = [];
-}
+function resetMapping() { mappingData = []; }
 
 /**
  * adds a row to the mapping table
@@ -52,41 +48,25 @@ function resetMapping() {
  *            size of the 3rd column
  */
 function mapAddRow(tableId, size1, size2, size3) {
-  $(tableId)
-    .find("tbody")
-    .append(
+  $(tableId).find("tbody").append(
       $("<tr>")
-        .append(
-          $("<td>").append(
-            $("<input>")
-              .attr("size", size1)
-              .attr("type", "number")
-              .attr("min", "0")
-              .attr("oninput", 'validity.valid||(value="");')
-          )
-        )
-        .append(
-          $("<td>").append(
-            $("<input>").attr("size", size2).attr("type", "text")
-          )
-        )
-        .append(
-          $("<td>").append(
-            $("<input>").attr("size", size3).attr("type", "text")
-          )
-        )
-        .append(
-          $("<td>").append(
-            $("<button>")
-              .attr("class", "btn btn-secondary")
-              .attr("onclick", "removeMapping(this)")
-              .attr("style", "height: 100%; width:auto")
-              .html(
-                "<span class='fas fa-trash-alt' style='height: 100%; width:auto'></span>"
-              )
-          )
-        )
-    );
+          .append($("<td>").append(
+              $("<input>")
+                  .attr("size", size1)
+                  .attr("type", "number")
+                  .attr("min", "0")
+                  .attr("oninput", 'validity.valid||(value="");')))
+          .append($("<td>").append(
+              $("<input>").attr("size", size2).attr("type", "text")))
+          .append($("<td>").append(
+              $("<input>").attr("size", size3).attr("type", "text")))
+          .append($("<td>").append(
+              $("<button>")
+                  .attr("class", "btn btn-secondary")
+                  .attr("onclick", "removeMapping(this)")
+                  .attr("style", "height: 100%; width:auto")
+                  .html(
+                      "<span class='fas fa-trash-alt' style='height: 100%; width:auto'></span>"))));
 }
 
 /**
@@ -102,7 +82,7 @@ function loadMapping() {
     mapAddRow(table, "20", "20", "20");
   }
   var counter = 0;
-  table.find("tbody tr").each(function () {
+  table.find("tbody tr").each(function() {
     var tr = $(this);
     tr.find("td:eq(0) input").val(mappingData[counter].column);
     tr.find("td:eq(1) input").val(mappingData[counter].first);
@@ -119,6 +99,4 @@ function loadMapping() {
  * @param mapping
  *            the row of the mapping
  */
-function removeMapping(mapping) {
-  $(mapping).parents("tr").remove();
-}
+function removeMapping(mapping) { $(mapping).parents("tr").remove(); }

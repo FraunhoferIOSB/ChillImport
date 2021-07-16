@@ -5,18 +5,13 @@ var currentFileName = "";
 var currentDelimiter = ";";
 var currentHeaderLines = 0;
 
-function getCurrentFileName() {
-  return currentFileName;
-}
+function getCurrentFileName() { return currentFileName; }
 
 /**
  * checks the input file (must be .csv or .xlsx)
  */
 function checkinputfile() {
-  var name = $("#file")
-    .val()
-    .split(/(\\|\/)/g)
-    .pop();
+  var name = $("#file").val().split(/(\\|\/)/g).pop();
   if (name.match(".*.csv$")) {
     $("#oksource").attr("disabled", false);
     isCsv = true;
@@ -38,7 +33,7 @@ function checkinputfile() {
 function checkinputurl() {
   var url = $("#sourceinput").val().toString();
   var pattern =
-    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+      /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
   if (pattern.test(url)) {
     isExcel = false;
@@ -77,21 +72,21 @@ function uploadFile() {
   var data = new FormData(form);
 
   $.ajax({
-    type: "POST",
-    enctype: "multipart/form-data",
-    url: "upload",
-    data: data,
-    processData: false,
-    contentType: false,
-    cache: false,
-    success: function (e) {
+    type : "POST",
+    enctype : "multipart/form-data",
+    url : "upload",
+    data : data,
+    processData : false,
+    contentType : false,
+    cache : false,
+    success : function(e) {
       notifier.success('File has been uploaded');
       currentFileName = e;
       $("#importbutton").prop("disabled", false);
       addToLog("Finished processing file. Ready for import.");
       preview();
     },
-    error: function (e) {
+    error : function(e) {
       notifier.alert('File could not be uploaded. Check Log for errors');
       addToLog(e.responseText);
     },
@@ -115,12 +110,10 @@ function loadPreview(values) {
 
   var current;
 
-  values.forEach(function (entry) {
+  values.forEach(function(entry) {
     tablebody.append($("<tr>"));
     current = tablebody.find("tr").last();
-    entry.forEach(function (val) {
-      current.append($("<td>").text(val));
-    });
+    entry.forEach(function(val) { current.append($("<td>").text(val)); });
   });
 
   current = tablehead.find("tr").last();
@@ -133,18 +126,18 @@ function preview() {
   $("#previewbutton").prop("disabled", true);
 
   $.ajax({
-    type: "GET",
-    url: "preview",
-    data: {
-      filename: currentFileName,
-      headerLines: currentHeaderLines,
-      delimiter: currentDelimiter,
+    type : "GET",
+    url : "preview",
+    data : {
+      filename : currentFileName,
+      headerLines : currentHeaderLines,
+      delimiter : currentDelimiter,
     },
-    success: function (result) {
+    success : function(result) {
       loadPreview(result);
       $("#previewbutton").prop("disabled", false);
     },
-    error: function (e) {
+    error : function(e) {
       addToLog(e.responseText);
       $("#previewbutton").prop("disabled", false);
     },
@@ -153,17 +146,17 @@ function preview() {
 
 function uploadUrl() {
   $.ajax({
-    type: "POST",
-    url: "uploadFromUrl",
-    data: { url: $("#sourceinput").val() },
-    success: function (e) {
+    type : "POST",
+    url : "uploadFromUrl",
+    data : {url : $("#sourceinput").val()},
+    success : function(e) {
       notifier.success('File has been uploaded');
       currentFileName = e;
       $("#importbutton").prop("disabled", false);
       addToLog("Finished processing file. Ready for import.");
       preview();
     },
-    error: function (e) {
+    error : function(e) {
       notifier.alert('File could not be uploaded. Check Log for errors');
       addToLog(e.responseText);
     },
@@ -188,13 +181,10 @@ function upload() {
 function excelconfig() {
   $("#delimiter").attr("disabled", true);
 
-  $("#timeTable")
-    .find("tbody tr")
-    .each(function () {
-      var obj = {},
-        $td = $(this).find("td");
-      obj["string"] = $td.eq(1).find("input").attr("disabled", true);
-    });
+  $("#timeTable").find("tbody tr").each(function() {
+    var obj = {}, $td = $(this).find("td");
+    obj["string"] = $td.eq(1).find("input").attr("disabled", true);
+  });
 }
 
 /**
@@ -203,13 +193,10 @@ function excelconfig() {
 function csvconfig() {
   $("#delimiter").attr("disabled", false);
 
-  $("#timeTable")
-    .find("tbody tr")
-    .each(function () {
-      var obj = {},
-        $td = $(this).find("td");
-      obj["string"] = $td.eq(1).find("input").attr("disabled", false);
-    });
+  $("#timeTable").find("tbody tr").each(function() {
+    var obj = {}, $td = $(this).find("td");
+    obj["string"] = $td.eq(1).find("input").attr("disabled", false);
+  });
 }
 
 /**
