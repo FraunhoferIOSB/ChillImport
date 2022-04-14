@@ -34,7 +34,7 @@
         <jquery.version>3.6.0</jquery.version>
         <select2.version>4.0.13</select2.version>
         <fontawesome.version>5.15.4</fontawesome.version>
-        <material-icons.version>1.7.1</material-icons.version>
+        <material-icons.version>1.10.8</material-icons.version>
         <popper.version>2.9.3</popper.version>
         <awesome-notifications.version>3.1.1</awesome-notifications.version>
 
