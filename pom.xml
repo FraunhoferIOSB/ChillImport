@@ -31,7 +31,7 @@
 
         <webjars-locator.version>0.45</webjars-locator.version>
         <bootstrap.version>5.1.3</bootstrap.version>
-        <jquery.version>3.6.0</jquery.version>
+        <jquery.version>3.6.1</jquery.version>
         <select2.version>4.0.13</select2.version>
         <fontawesome.version>5.15.4</fontawesome.version>
         <material-icons.version>1.7.1</material-icons.version>
