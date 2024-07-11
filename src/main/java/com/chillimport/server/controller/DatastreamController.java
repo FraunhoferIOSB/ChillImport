@@ -192,17 +192,12 @@ public class DatastreamController {
     
     @RequestMapping(value = "/datastream/all", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(@RequestParam int thingId, @RequestParam String url) throws MalformedURLException {
-    	URL frostUrl = new URL(url);
-        EntityList<de.fraunhofer.iosb.ilt.sta.model.Datastream> frostDsList;
-        EntityList<MultiDatastream> frostMdsList;
+        URL frostUrl = new URL(url);
+        EntityList<de.fraunhofer.iosb.ilt.sta.model.Datastream> frostDsList = null;
+        EntityList<MultiDatastream> frostMdsList = null;
+        SensorThingsService service;
         try {
-            SensorThingsService service = sensorThingsServiceFactory.build(frostUrl);
-            frostDsList = service.things().find(thingId).datastreams().query().list();
-            frostMdsList = service.things().find(thingId).multiDatastreams().query().list();
-        } catch (ServiceFailureException e) {
-            LogManager.getInstance().writeToLog("Could not retrieve Datastreams  of Thing (Id: " + thingId + ").", true);
-            ErrorHandler.getInstance().addRows(-1, e);
-            return new ResponseEntity<>("Failed to find Datastreams of Thing (Id: " + thingId + ") on server.", HttpStatus.NOT_FOUND);
+            service = sensorThingsServiceFactory.build(frostUrl);
         } catch (MalformedURLException e) {
             LogManager.getInstance().writeToLog("Malformed URL for Frost-Server.", true);
             ErrorHandler.getInstance().addRows(-1, e);
@@ -212,26 +207,57 @@ public class DatastreamController {
             ErrorHandler.getInstance().addRows(-1, e);
             return new ResponseEntity<>("Wrong URI for Frost-Server.", HttpStatus.NOT_FOUND);
         }
+        frostDsList = getDatastreamForThing(service, thingId);
+        frostMdsList = getMultiDatastreamForThing(service, thingId);
+        if (frostDsList == null && frostMdsList == null) {
+            return new ResponseEntity<>("Failed to find Datastreams of Thing (Id: " + thingId + ") on server.", HttpStatus.NOT_FOUND);
+        }
         List<Datastream> datastreams = new ArrayList<>();
-        for (de.fraunhofer.iosb.ilt.sta.model.Datastream frostDs : frostDsList) {
-            try {
-                datastreams.add(new Datastream(frostDs));
-            } catch (ServiceFailureException e) {
-                LogManager.getInstance().writeToLog("A Datastream could not be converted to internal representation.", true);
-                ErrorHandler.getInstance().addRows(-1, e);
-                return new ResponseEntity<>("A Datastream could not be converted to internal representation.", HttpStatus.INTERNAL_SERVER_ERROR);
+        if (frostDsList != null && !frostDsList.isEmpty()) {
+            for (de.fraunhofer.iosb.ilt.sta.model.Datastream frostDs : frostDsList) {
+                try {
+                    datastreams.add(new Datastream(frostDs));
+                } catch (ServiceFailureException e) {
+                    LogManager.getInstance().writeToLog("A Datastream could not be converted to internal representation.", true);
+                    ErrorHandler.getInstance().addRows(-1, e);
+                    return new ResponseEntity<>("A Datastream could not be converted to internal representation.", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
             }
         }
-        for (MultiDatastream frostMds : frostMdsList) {
-            try {
-                datastreams.add(new Datastream(frostMds));
-            } catch (ServiceFailureException e) {
-                LogManager.getInstance().writeToLog("A MultiDatastream could not be converted to internal representation.", true);
-                ErrorHandler.getInstance().addRows(-1, e);
-                return new ResponseEntity<>("A MultiDatastream could not be converted to internal representation.", HttpStatus.INTERNAL_SERVER_ERROR);
+        if (frostMdsList != null && !frostMdsList.isEmpty()) {
+            for (MultiDatastream frostMds : frostMdsList) {
+                try {
+                    datastreams.add(new Datastream(frostMds));
+                } catch (ServiceFailureException e) {
+                    LogManager.getInstance().writeToLog("A MultiDatastream could not be converted to internal representation.", true);
+                    ErrorHandler.getInstance().addRows(-1, e);
+                    return new ResponseEntity<>("A MultiDatastream could not be converted to internal representation.", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
             }
         }
         return new ResponseEntity<>(datastreams, HttpStatus.OK);
+    }
+
+    private EntityList<de.fraunhofer.iosb.ilt.sta.model.Datastream> getDatastreamForThing(SensorThingsService service, int thingId) {
+        try {
+            EntityList<de.fraunhofer.iosb.ilt.sta.model.Datastream> frostDsList = service.things().find(thingId).datastreams().query().list();
+            return frostDsList;
+        } catch (ServiceFailureException e) {
+            LogManager.getInstance().writeToLog("Could not retrieve Datastreams of Thing (Id: " + thingId + ").", true);
+            ErrorHandler.getInstance().addRows(-1, e);
+        }
+        return null;
+    }
+
+    private EntityList<de.fraunhofer.iosb.ilt.sta.model.MultiDatastream> getMultiDatastreamForThing(SensorThingsService service, int thingId) {
+        try {
+            EntityList<de.fraunhofer.iosb.ilt.sta.model.MultiDatastream> frostMdsList = service.things().find(thingId).multiDatastreams().query().list();
+            return frostMdsList;
+        } catch (ServiceFailureException e) {
+            LogManager.getInstance().writeToLog("Could not retrieve MultiDatastreams of Thing (Id: " + thingId + ").", false);
+            ErrorHandler.getInstance().addRows(-1, e);
+        }
+        return null;
     }
 
 }
