@@ -35,7 +35,7 @@
         <select2.version>4.0.13</select2.version>
         <fontawesome.version>5.15.4</fontawesome.version>
         <material-icons.version>1.7.1</material-icons.version>
-        <popper.version>2.9.3</popper.version>
+        <popper.version>2.11.7</popper.version>
         <awesome-notifications.version>3.1.1</awesome-notifications.version>
 
         <powermock.version>2.0.9</powermock.version>
